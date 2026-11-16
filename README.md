@@ -15,7 +15,8 @@ I designed and built this project myself. I used artificial intelligence as a de
 - Wall and floor color palettes
 - Collision checks between furniture, walls, and openings
 - Locally persisted layouts
-- Responsive furniture and design-tool sidebar
+- Responsive desktop, tablet, and mobile interface
+- Asset-loading progress screen
 
 ## Technology
 

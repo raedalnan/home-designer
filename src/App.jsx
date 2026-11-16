@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import { useProgress } from "@react-three/drei";
 import Experience from "./components/Experience.jsx";
 import SideBar from "./UI/SideBar.jsx";
 import { DEPTH_CELLS, WIDTH_CELLS } from "./data/Constants.js";
@@ -41,6 +42,36 @@ function sanitizeWalls(objects, walls = []) {
   }
   return valid;
 }
+
+function LoadingScreen() {
+  const { active, progress } = useProgress();
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (active || progress < 100) {
+      setVisible(true);
+      return undefined;
+    }
+    const timeout = window.setTimeout(() => setVisible(false), 350);
+    return () => window.clearTimeout(timeout);
+  }, [active, progress]);
+
+  if (!visible) return null;
+  return (
+    <div className="absolute inset-0 z-50 grid place-items-center bg-[#f2f1ed] px-6 transition-opacity">
+      <div className="w-full max-w-xs text-center">
+        <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-slate-900 text-lg font-semibold text-white shadow-xl">H</div>
+        <h1 className="mt-5 text-xl font-semibold tracking-tight text-slate-900">Home Designer</h1>
+        <p className="mt-1 text-xs text-slate-500">Preparing your 3D workspace</p>
+        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-slate-200">
+          <div className="h-full rounded-full bg-slate-900 transition-[width] duration-300" style={{ width: `${Math.max(5, Math.round(progress))}%` }} />
+        </div>
+        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">{Math.round(progress)}%</p>
+      </div>
+    </div>
+  );
+}
+
 function loadSavedState() {
   try {
     const saved = JSON.parse(localStorage.getItem("home-designer-layout"));
@@ -147,24 +178,21 @@ export default function App() {
 
   const resizeRoom = (nextSize) => {
     setRoomSize(nextSize);
-    const nextObjects = objects.map((obj) => {
+    const nextObjects = objects.filter((obj) => {
       const footprint = getFootprint(obj.turns, obj.w, obj.d);
-      return {
-        ...obj,
-        cellX: Math.max(0, Math.min(obj.cellX, nextSize.width - footprint.w)),
-        cellZ: Math.max(0, Math.min(obj.cellZ, nextSize.depth - footprint.d)),
-      };
-    }).filter((obj) => {
-      const footprint = getFootprint(obj.turns, obj.w, obj.d);
-      return footprint.w <= nextSize.width && footprint.d <= nextSize.depth;
+      return obj.cellX >= 0
+        && obj.cellZ >= 0
+        && obj.cellX + footprint.w <= nextSize.width
+        && obj.cellZ + footprint.d <= nextSize.depth;
     });
-    const nextWalls = walls.map((wall) => ({
-      ...wall,
-      startX: Math.min(wall.startX, nextSize.width),
-      endX: Math.min(wall.endX, nextSize.width),
-      startZ: Math.min(wall.startZ, nextSize.depth),
-      endZ: Math.min(wall.endZ, nextSize.depth),
-    })).filter((wall) => wall.startX !== wall.endX || wall.startZ !== wall.endZ);
+    const nextWalls = walls.filter((wall) => wall.startX >= 0
+      && wall.endX >= 0
+      && wall.startZ >= 0
+      && wall.endZ >= 0
+      && wall.startX <= nextSize.width
+      && wall.endX <= nextSize.width
+      && wall.startZ <= nextSize.depth
+      && wall.endZ <= nextSize.depth);
     const validWalls = [];
     for (const wall of nextWalls) {
       if (!nextObjects.some((object) => wallConflictsWithObject(wall, object)) && !validWalls.some((existing) => wallsConflict(wall, existing))) {
@@ -185,11 +213,14 @@ export default function App() {
   };
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-[#f2f1ed]">
+    <main className="relative h-dvh w-screen overflow-hidden bg-[#f2f1ed]">
       <Canvas className="w-full h-full" camera={{ position: [10, 13, 14], fov: 48 }} dpr={[1, 1.5]} shadows={false}>
+        <Suspense fallback={null}>
         <Experience objects={objects} setObjects={setObjects} walls={walls} setWalls={setWalls} openings={openings} setOpenings={setOpenings} roomSize={roomSize} selectedId={selectedId} setSelectedId={setSelectedId} selectedWallId={selectedWallId} setSelectedWallId={setSelectedWallId} selectedOpeningId={selectedOpeningId} setSelectedOpeningId={setSelectedOpeningId} onDeleteSelected={deleteSelected} tool={tool} activeOpening={OPENING_CATALOG.find((item) => item.id === activeOpeningId)} wallColor={wallColor} floorColor={floorColor} />
+        </Suspense>
       </Canvas>
       <SideBar onAddObject={addObject} onDeleteSelected={deleteSelected} selectedId={selectedId ?? selectedWallId ?? selectedOpeningId} selectedName={selectedOpeningId != null ? openings.find((opening) => opening.id === selectedOpeningId)?.name : selectedWallId != null ? "Interior wall" : objects.find((obj) => obj.id === selectedId)?.name} selectedIsWall={selectedWallId != null || selectedOpeningId != null} onRoomSizeChange={resizeRoom} roomSize={roomSize} tool={tool} onToolChange={setTool} activeOpeningId={activeOpeningId} onOpeningChange={setActiveOpeningId} wallColor={wallColor} onWallColorChange={setWallColor} floorColor={floorColor} onFloorColorChange={setFloorColor} />
+      <LoadingScreen />
     </main>
   );
 }

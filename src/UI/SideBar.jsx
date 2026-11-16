@@ -137,16 +137,16 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
 
   return (
     <>
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between p-4 sm:p-5">
-        <div className="pointer-events-auto flex items-center gap-3 rounded-2xl border border-white/80 bg-white/85 px-3 py-2 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl">
-          <div className="grid size-9 place-items-center rounded-xl bg-slate-900 text-sm font-semibold text-white">H</div>
-          <div className="pr-2">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between p-3 sm:p-5">
+        <div className="pointer-events-auto flex items-center gap-2.5 rounded-2xl border border-white/80 bg-white/85 px-2.5 py-2 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl sm:gap-3 sm:px-3">
+          <div className="grid size-8 place-items-center rounded-xl bg-slate-900 text-xs font-semibold text-white sm:size-9 sm:text-sm">H</div>
+          <div className="pr-1 sm:pr-2">
             <p className="text-sm font-semibold tracking-tight text-slate-900">Home Designer</p>
-            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400">3D room planner</p>
+            <p className="hidden text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400 min-[380px]:block">3D room planner</p>
           </div>
         </div>
         <button
-          className="pointer-events-auto grid size-11 place-items-center rounded-2xl border border-white/80 bg-white/85 text-slate-600 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:text-slate-950"
+          className="pointer-events-auto grid size-10 place-items-center rounded-2xl border border-white/80 bg-white/85 text-slate-600 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:text-slate-950 sm:size-11"
           aria-label={leftOpen ? "Close model library" : "Open model library"}
           onClick={() => setLeftOpen((v) => !v)}
         >
@@ -154,8 +154,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
         </button>
       </div>
       {leftOpen && (
-        <aside className="absolute bottom-5 left-5 top-24 z-10 flex w-[320px] flex-col overflow-hidden rounded-[28px] border border-white/80 bg-white/88 shadow-[0_24px_80px_rgba(32,38,48,0.13)] backdrop-blur-2xl max-sm:bottom-3 max-sm:left-3 max-sm:right-3 max-sm:top-20 max-sm:w-auto">
-          <div className="border-b border-slate-200/70 px-5 pb-4 pt-5">
+        <aside className="absolute bottom-5 left-5 top-24 z-10 flex w-[320px] flex-col overflow-hidden rounded-[28px] border border-white/80 bg-white/88 shadow-[0_24px_80px_rgba(32,38,48,0.13)] backdrop-blur-2xl max-lg:w-[300px] max-sm:bottom-2 max-sm:left-2 max-sm:right-2 max-sm:top-auto max-sm:h-[62dvh] max-sm:w-auto max-sm:rounded-[24px]">
+          <div className="border-b border-slate-200/70 px-4 pb-3 pt-4 sm:px-5 sm:pb-4 sm:pt-5">
             <div className="flex items-end justify-between">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Design tools</p>
@@ -175,7 +175,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               />
             </div>}
           </div>
-          <div className="grid grid-cols-3 gap-1.5 border-b border-slate-200/70 px-5 py-3">
+          <div className="grid grid-cols-3 gap-1.5 border-b border-slate-200/70 px-4 py-2.5 sm:px-5 sm:py-3">
             <button onClick={() => onToolChange("furniture")} className={`flex h-10 items-center justify-center gap-2 rounded-xl text-xs font-semibold transition ${tool === "furniture" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-500 hover:text-slate-900"}`}>
               <Icon name="chair" /> Furniture
             </button>
@@ -186,7 +186,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               <Icon name="opening" /> Openings
             </button>
           </div>
-          <div className="space-y-3 border-b border-slate-200/70 px-5 py-4">
+          <div className="space-y-3 border-b border-slate-200/70 px-4 py-3 sm:px-5 sm:py-4">
             <label className="block">
               <span className="flex items-center justify-between text-[11px] font-medium text-slate-500">
                 <span>Room width</span>
@@ -219,7 +219,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
             </label>
           </div>
           {tool === "furniture" ? <>
-          <div className="flex gap-1 overflow-x-auto px-5 py-3 [scrollbar-width:none]">
+          <div className="flex gap-1 overflow-x-auto px-4 py-2.5 [scrollbar-width:none] sm:px-5 sm:py-3">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
@@ -234,7 +234,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               </button>
             ))}
           </div>
-          <div className="grid min-h-0 flex-1 auto-rows-max content-start grid-cols-1 gap-2 overflow-y-auto px-5 pb-5 pt-1 [scrollbar-color:#cbd5e1_transparent]">
+          <div className="grid min-h-0 flex-1 auto-rows-max content-start grid-cols-1 gap-2 overflow-y-auto px-4 pb-4 pt-1 [scrollbar-color:#cbd5e1_transparent] sm:px-5 sm:pb-5">
             {filteredLibrary.map((item) => (
               <button
                 key={item.id}
@@ -263,7 +263,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
             )}
           </div>
           </> : tool === "wall" ? (
-            <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
               <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
                 <p className="text-xs font-semibold text-blue-900">Draw an interior wall</p>
                 <p className="mt-1 text-[11px] leading-relaxed text-blue-700">Drag across the floor grid. Walls snap horizontally or vertically. Select a wall and press Delete to remove it.</p>
@@ -286,7 +286,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               </div>
             </div>
           ) : (
-            <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
               <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
                 <p className="text-xs font-semibold text-amber-900">Place an opening</p>
                 <p className="mt-1 text-[11px] leading-relaxed text-amber-700">Choose a variation, then click an interior or exterior wall. Openings keep a safe distance from edges and each other.</p>
@@ -319,7 +319,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
         </aside>
       )}
       {selectedId != null && (
-        <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 shadow-[0_14px_45px_rgba(30,35,45,0.14)] backdrop-blur-xl">
+        <div className={`absolute left-1/2 z-20 flex max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 shadow-[0_14px_45px_rgba(30,35,45,0.14)] backdrop-blur-xl ${leftOpen ? "bottom-5 max-sm:bottom-[calc(62dvh+0.75rem)]" : "bottom-5 max-sm:bottom-2"}`}>
           <span className="max-w-44 truncate px-3 text-xs font-semibold text-slate-700">{selectedName ?? "Selected item"}</span>
           <div className="h-6 w-px bg-slate-200" />
           {!selectedIsWall && <button className="flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950" onClick={() => window.dispatchEvent(new Event("home-designer-rotate"))}>
