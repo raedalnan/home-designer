@@ -9,10 +9,7 @@ import { buildGrid, canPlace, findFreeSpot, getFootprint } from "./logic/Grid.js
 import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "./logic/Walls.js";
 
 const INITIAL_OBJECTS = [
-  { id: 1, name: "Three-seater Sofa 03", node: "Three-seaterSofa03", w: 6, d: 4, turns: 0, cellX: 0, cellZ: 0, height: 2, source: "/furniture.glb" },
-  { id: 2, name: "Sofa Chair 01", node: "SofaChair01", w: 4, d: 4, turns: 0, cellX: 7, cellZ: 0, height: 2, source: "/furniture.glb" },
-  { id: 3, name: "TV Stand 01", node: "TVStand01", w: 6, d: 2, turns: 0, cellX: 0, cellZ: 5, height: 2, source: "/furniture.glb" },
-  { id: 4, name: "Double Bed 01", node: "doubleBed01", w: 6, d: 8, turns: 0, cellX: 7, cellZ: 2, height: 2, source: "/furniture.glb" },
+  { id: 1, name: "Double Bed 02", node: "doubleBed02", w: 4, d: 4, turns: 0, cellX: 5, cellZ: 3, height: 2, source: "/furniture.glb" },
 ];
 
 const LAYOUT_VERSION = 2;
