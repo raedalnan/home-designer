@@ -1,4 +1,4 @@
-import { CELL } from "../data/Constants";
+import { CELL } from "../data/Constants.js";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -23,7 +23,7 @@ export const cellToWorld = (cellX, cellZ, w, d, roomWidth, roomDepth) => ({
   z: -(roomDepth * CELL) / 2 + (cellZ + d / 2) * CELL,
 });
 
-export const createGrid = (roomWidth, roomDepth) =>
+const createGrid = (roomWidth, roomDepth) =>
   Array.from({ length: roomDepth }, () => Array(roomWidth).fill(0));
 
 export const canPlace = (grid, x, z, w, d, id, roomWidth, roomDepth) => {

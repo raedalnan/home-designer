@@ -3,23 +3,44 @@ import { Canvas } from "@react-three/fiber";
 import Experience from "./components/Experience.jsx";
 import SideBar from "./UI/SideBar.jsx";
 import { DEPTH_CELLS, WIDTH_CELLS } from "./data/Constants.js";
-import { buildGrid, findFreeSpot, getFootprint } from "./logic/Grid.js";
+import { OPENING_CATALOG } from "./data/OpeningCatalog.js";
+import { buildGrid, canPlace, findFreeSpot, getFootprint } from "./logic/Grid.js";
+import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "./logic/Walls.js";
 
 const INITIAL_OBJECTS = [
-  { id: 1, name: "Three-seater Sofa 03", node: "Three-seaterSofa03", w: 3, d: 2, turns: 0, cellX: 0, cellZ: 0, height: 1, source: "/furniture.glb" },
-  { id: 2, name: "Sofa Chair 01", node: "SofaChair01", w: 2, d: 2, turns: 0, cellX: 4, cellZ: 0, height: 1, source: "/furniture.glb" },
-  { id: 3, name: "TV Stand 01", node: "TVStand01", w: 3, d: 1, turns: 0, cellX: 0, cellZ: 3, height: 1, source: "/furniture.glb" },
-  { id: 4, name: "Double Bed 01", node: "doubleBed01", w: 3, d: 4, turns: 0, cellX: 5, cellZ: 3, height: 1, source: "/furniture.glb" },
+  { id: 1, name: "Three-seater Sofa 03", node: "Three-seaterSofa03", w: 6, d: 4, turns: 0, cellX: 0, cellZ: 0, height: 2, source: "/furniture.glb" },
+  { id: 2, name: "Sofa Chair 01", node: "SofaChair01", w: 4, d: 4, turns: 0, cellX: 7, cellZ: 0, height: 2, source: "/furniture.glb" },
+  { id: 3, name: "TV Stand 01", node: "TVStand01", w: 6, d: 2, turns: 0, cellX: 0, cellZ: 5, height: 2, source: "/furniture.glb" },
+  { id: 4, name: "Double Bed 01", node: "doubleBed01", w: 6, d: 8, turns: 0, cellX: 7, cellZ: 2, height: 2, source: "/furniture.glb" },
 ];
 
+const LAYOUT_VERSION = 2;
+const ITEM_SIZE_MULTIPLIER = 2;
 const DEFAULT_ROOM = { width: WIDTH_CELLS, depth: DEPTH_CELLS };
-const ROOM_PRESETS = [
-  { label: "Small · 10 × 8 m", width: 20, depth: 16 },
-  { label: "Medium · 15 × 10 m", width: 30, depth: 20 },
-  { label: "Large · 20 × 12.5 m", width: 40, depth: 25 },
-  { label: "XL · 25 × 15 m", width: 50, depth: 30 },
-];
+const DEFAULT_FINISHES = { wallColor: "#ded8cf", floorColor: "#e8e2d9" };
 
+function findFurnitureSpot(objects, walls, width, depth, w, d) {
+  const grid = buildGrid(objects, width, depth);
+  for (let z = 0; z <= depth - d; z++) {
+    for (let x = 0; x <= width - w; x++) {
+      const candidate = { cellX: x, cellZ: z, w, d, turns: 0 };
+      if (canPlace(grid, x, z, w, d, undefined, width, depth) && !objectConflictsWithWalls(candidate, walls)) {
+        return { cellX: x, cellZ: z };
+      }
+    }
+  }
+  return null;
+}
+
+function sanitizeWalls(objects, walls = []) {
+  const valid = [];
+  for (const wall of walls) {
+    if (!objects.some((object) => wallConflictsWithObject(wall, object)) && !valid.some((existing) => wallsConflict(wall, existing))) {
+      valid.push(wall);
+    }
+  }
+  return valid;
+}
 function loadSavedState() {
   try {
     const saved = JSON.parse(localStorage.getItem("home-designer-layout"));
@@ -32,17 +53,36 @@ function loadSavedState() {
         "Arc floor lamp": "lamp01",
         "Walnut sideboard": "SmallCabinet01",
       };
-      return {
-        ...saved,
-        objects: saved.objects.map((obj) => ({
+      const objects = saved.objects.map((obj) => ({
           ...obj,
           node: obj.node ?? legacyNodes[obj.name] ?? "SmallCabinet01",
           source: "/furniture.glb",
-        })),
-      };
+          ...(saved.layoutVersion === LAYOUT_VERSION ? {} : {
+            w: obj.w * ITEM_SIZE_MULTIPLIER,
+            d: obj.d * ITEM_SIZE_MULTIPLIER,
+            height: (obj.height ?? 1) * ITEM_SIZE_MULTIPLIER,
+          }),
+        }));
+
+      if (saved.layoutVersion !== LAYOUT_VERSION) {
+        const placed = [];
+        const largestFirst = [...objects].sort((a, b) => (b.w * b.d) - (a.w * a.d));
+        for (const obj of largestFirst) {
+          const footprint = getFootprint(obj.turns, obj.w, obj.d);
+          const spot = findFreeSpot(buildGrid(placed, saved.roomSize.width, saved.roomSize.depth), footprint.w, footprint.d, saved.roomSize.width, saved.roomSize.depth);
+          placed.push(spot ? { ...obj, ...spot } : {
+            ...obj,
+            cellX: Math.max(0, Math.min(obj.cellX, saved.roomSize.width - footprint.w)),
+            cellZ: Math.max(0, Math.min(obj.cellZ, saved.roomSize.depth - footprint.d)),
+          });
+        }
+        return { ...saved, layoutVersion: LAYOUT_VERSION, objects: placed, walls: sanitizeWalls(placed, saved.walls) };
+      }
+
+      return { ...saved, objects, walls: sanitizeWalls(objects, saved.walls) };
     }
   } catch { /* Start with the demo layout if saved data is unavailable. */ }
-  return { objects: INITIAL_OBJECTS, roomSize: DEFAULT_ROOM };
+  return { objects: INITIAL_OBJECTS, roomSize: DEFAULT_ROOM, walls: [], ...DEFAULT_FINISHES };
 }
 
 export default function App() {
@@ -50,16 +90,24 @@ export default function App() {
   const [objects, setObjects] = useState(saved.objects);
   const [roomSize, setRoomSize] = useState(saved.roomSize);
   const [selectedId, setSelectedId] = useState(null);
+  const [walls, setWalls] = useState(saved.walls ?? []);
+  const [selectedWallId, setSelectedWallId] = useState(null);
+  const [openings, setOpenings] = useState(saved.openings ?? []);
+  const [selectedOpeningId, setSelectedOpeningId] = useState(null);
+  const [activeOpeningId, setActiveOpeningId] = useState(OPENING_CATALOG[0].id);
+  const [tool, setTool] = useState("furniture");
+  const [wallColor, setWallColor] = useState(saved.wallColor ?? DEFAULT_FINISHES.wallColor);
+  const [floorColor, setFloorColor] = useState(saved.floorColor ?? DEFAULT_FINISHES.floorColor);
 
   useEffect(() => {
-    localStorage.setItem("home-designer-layout", JSON.stringify({ objects, roomSize }));
-  }, [objects, roomSize]);
+    localStorage.setItem("home-designer-layout", JSON.stringify({ layoutVersion: LAYOUT_VERSION, objects, roomSize, walls, openings, wallColor, floorColor }));
+  }, [objects, roomSize, walls, openings, wallColor, floorColor]);
 
   const addObject = useCallback((item) => {
-    const w = item.w ?? 2;
-    const d = item.d ?? 2;
+    const w = (item.w ?? 2) * ITEM_SIZE_MULTIPLIER;
+    const d = (item.d ?? 2) * ITEM_SIZE_MULTIPLIER;
     const footprint = getFootprint(0, w, d);
-    const spot = findFreeSpot(buildGrid(objects, roomSize.width, roomSize.depth), footprint.w, footprint.d, roomSize.width, roomSize.depth);
+    const spot = findFurnitureSpot(objects, walls, roomSize.width, roomSize.depth, footprint.w, footprint.d);
     if (!spot) return;
     const id = Math.max(0, ...objects.map((obj) => obj.id)) + 1;
     setObjects((current) => [...current, {
@@ -71,30 +119,77 @@ export default function App() {
         turns: 0,
         cellX: spot.cellX,
         cellZ: spot.cellZ,
-        height: item.height ?? 1,
+        height: (item.height ?? 1) * ITEM_SIZE_MULTIPLIER,
         source: "/furniture.glb",
       }]);
+    setSelectedWallId(null);
+    setSelectedOpeningId(null);
     setSelectedId(id);
-  }, [objects, roomSize]);
+  }, [objects, roomSize, walls]);
 
   const deleteSelected = useCallback(() => {
-    if (selectedId == null) return;
-    setObjects((current) => current.filter((obj) => obj.id !== selectedId));
-    setSelectedId(null);
-  }, [selectedId]);
+    if (selectedOpeningId != null) {
+      setOpenings((current) => current.filter((opening) => opening.id !== selectedOpeningId));
+      setSelectedOpeningId(null);
+      return;
+    }
+    if (selectedWallId != null) {
+      setWalls((current) => current.filter((wall) => wall.id !== selectedWallId));
+      setOpenings((current) => current.filter((opening) => opening.wallId !== selectedWallId));
+      setSelectedWallId(null);
+      return;
+    }
+    if (selectedId != null) {
+      setObjects((current) => current.filter((obj) => obj.id !== selectedId));
+      setSelectedId(null);
+    }
+  }, [selectedId, selectedOpeningId, selectedWallId]);
 
-  const resizeRoom = (preset) => {
-    setRoomSize({ width: preset.width, depth: preset.depth });
-    setObjects([]);
+  const resizeRoom = (nextSize) => {
+    setRoomSize(nextSize);
+    const nextObjects = objects.map((obj) => {
+      const footprint = getFootprint(obj.turns, obj.w, obj.d);
+      return {
+        ...obj,
+        cellX: Math.max(0, Math.min(obj.cellX, nextSize.width - footprint.w)),
+        cellZ: Math.max(0, Math.min(obj.cellZ, nextSize.depth - footprint.d)),
+      };
+    }).filter((obj) => {
+      const footprint = getFootprint(obj.turns, obj.w, obj.d);
+      return footprint.w <= nextSize.width && footprint.d <= nextSize.depth;
+    });
+    const nextWalls = walls.map((wall) => ({
+      ...wall,
+      startX: Math.min(wall.startX, nextSize.width),
+      endX: Math.min(wall.endX, nextSize.width),
+      startZ: Math.min(wall.startZ, nextSize.depth),
+      endZ: Math.min(wall.endZ, nextSize.depth),
+    })).filter((wall) => wall.startX !== wall.endX || wall.startZ !== wall.endZ);
+    const validWalls = [];
+    for (const wall of nextWalls) {
+      if (!nextObjects.some((object) => wallConflictsWithObject(wall, object)) && !validWalls.some((existing) => wallsConflict(wall, existing))) {
+        validWalls.push(wall);
+      }
+    }
+    setObjects(nextObjects.filter((object) => !objectConflictsWithWalls(object, validWalls)));
+    setWalls(validWalls);
+    const validWallIds = new Set(validWalls.map((wall) => wall.id));
+    setOpenings((current) => current.filter((opening) => {
+      if (opening.wallId.startsWith("outer-x")) return opening.offset + opening.width / 2 <= nextSize.depth * 0.5;
+      if (opening.wallId.startsWith("outer-z")) return opening.offset + opening.width / 2 <= nextSize.width * 0.5;
+      return validWallIds.has(opening.wallId);
+    }));
     setSelectedId(null);
+    setSelectedWallId(null);
+    setSelectedOpeningId(null);
   };
 
   return (
-    <div className="flex h-screen w-screen">
+    <main className="relative h-screen w-screen overflow-hidden bg-[#f2f1ed]">
       <Canvas className="w-full h-full" camera={{ position: [10, 13, 14], fov: 48 }} dpr={[1, 1.5]} shadows={false}>
-        <Experience objects={objects} setObjects={setObjects} roomSize={roomSize} selectedId={selectedId} setSelectedId={setSelectedId} onDeleteSelected={deleteSelected} />
+        <Experience objects={objects} setObjects={setObjects} walls={walls} setWalls={setWalls} openings={openings} setOpenings={setOpenings} roomSize={roomSize} selectedId={selectedId} setSelectedId={setSelectedId} selectedWallId={selectedWallId} setSelectedWallId={setSelectedWallId} selectedOpeningId={selectedOpeningId} setSelectedOpeningId={setSelectedOpeningId} onDeleteSelected={deleteSelected} tool={tool} activeOpening={OPENING_CATALOG.find((item) => item.id === activeOpeningId)} wallColor={wallColor} floorColor={floorColor} />
       </Canvas>
-      <SideBar onAddObject={addObject} onDeleteSelected={deleteSelected} selectedId={selectedId} selectedName={objects.find((obj) => obj.id === selectedId)?.name} roomPresets={ROOM_PRESETS} onRoomSizeChange={resizeRoom} roomSize={roomSize} />
-    </div>
+      <SideBar onAddObject={addObject} onDeleteSelected={deleteSelected} selectedId={selectedId ?? selectedWallId ?? selectedOpeningId} selectedName={selectedOpeningId != null ? openings.find((opening) => opening.id === selectedOpeningId)?.name : selectedWallId != null ? "Interior wall" : objects.find((obj) => obj.id === selectedId)?.name} selectedIsWall={selectedWallId != null || selectedOpeningId != null} onRoomSizeChange={resizeRoom} roomSize={roomSize} tool={tool} onToolChange={setTool} activeOpeningId={activeOpeningId} onOpeningChange={setActiveOpeningId} wallColor={wallColor} onWallColorChange={setWallColor} floorColor={floorColor} onFloorColorChange={setFloorColor} />
+    </main>
   );
 }

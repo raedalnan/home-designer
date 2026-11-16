@@ -1,10 +1,10 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { CELL } from "../data/Constants";
-import { cellToWorld, getFootprint } from "../logic/Grid";
+import { CELL } from "../data/Constants.js";
+import { cellToWorld, getFootprint } from "../logic/Grid.js";
 import { Clone, useGLTF } from "@react-three/drei";
 
-export default function Furniture({ obj, registerMesh, onDragStart, selected, roomSize }) {
+export default function Furniture({ obj, registerMesh, onDragStart, roomSize }) {
   const { id, w, d, cellX, cellZ, height, source } = obj;
   const meshRef = useRef();
   const { nodes } = useGLTF(source);
@@ -52,12 +52,6 @@ export default function Furniture({ obj, registerMesh, onDragStart, selected, ro
       <group scale={fit.scale}>
         <Clone object={normalizedNode} position={fit.position} />
       </group>
-      {selected && (
-        <mesh position={[0, 0.02, 0]} rotation-x={-Math.PI / 2}>
-          <planeGeometry args={[footprint.w * CELL, footprint.d * CELL]} />
-          <meshBasicMaterial color="#2563eb" transparent opacity={0.12} depthWrite={false} />
-        </mesh>
-      )}
     </group>
   );
 }

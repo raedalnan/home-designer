@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { CELL } from "../data/Constants";
+import { CELL } from "../data/Constants.js";
 import * as THREE from "three";
 
 export default function RoomGrid({ widthCells, depthCells, visible }) {
