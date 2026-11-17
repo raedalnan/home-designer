@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { CELL } from "../data/Constants.js";
+import { CELL, GRID_SUBDIVISIONS, GRID_SPACING } from "../data/Constants.js";
 import * as THREE from "three";
 
 export default function RoomGrid({ widthCells, depthCells, visible }) {
@@ -12,14 +12,14 @@ export default function RoomGrid({ widthCells, depthCells, visible }) {
     const y = 0.01;
     const points = [];
 
-    for (let i = 0; i <= widthCells; i++) {
-      const x = originX + i * CELL;
+    for (let i = 0; i <= widthCells * GRID_SUBDIVISIONS; i++) {
+      const x = originX + i * GRID_SPACING;
       points.push(new THREE.Vector3(x, y, originZ));
       points.push(new THREE.Vector3(x, y, originZ + depthM));
     }
 
-    for (let j = 0; j <= depthCells; j++) {
-      const z = originZ + j * CELL;
+    for (let j = 0; j <= depthCells * GRID_SUBDIVISIONS; j++) {
+      const z = originZ + j * GRID_SPACING;
       points.push(new THREE.Vector3(originX, y, z));
       points.push(new THREE.Vector3(originX + widthM, y, z));
     }

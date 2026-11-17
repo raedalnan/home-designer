@@ -1,0 +1,2713 @@
+// Generated original Blender models.
+export const EQUIPMENT_CATALOG = [
+  {
+    "id": "atelier-base-kitchen-cabinet",
+    "name": "Base kitchen cabinet",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-base-kitchen-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-base-kitchen-cabinet.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.635,
+        "depth": 0.677,
+        "height": 0.929
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-kitchen-cabinet",
+    "name": "Wall kitchen cabinet",
+    "category": "Kitchen",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-kitchen-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-wall-kitchen-cabinet.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.635,
+        "depth": 0.676,
+        "height": 0.779
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-tall-kitchen-cabinet",
+    "name": "Tall kitchen cabinet",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-tall-kitchen-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-tall-kitchen-cabinet.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.635,
+        "depth": 0.677,
+        "height": 2.129
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-corner-cabinet",
+    "name": "Corner cabinet",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-corner-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-corner-cabinet.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.935,
+        "depth": 0.876,
+        "height": 0.929
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-countertop",
+    "name": "Kitchen countertop",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-countertop.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-countertop.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.65,
+        "height": 0.07
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-sink",
+    "name": "Kitchen sink",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-sink.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-sink.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.5,
+        "depth": 0.5,
+        "height": 0.311
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-faucet",
+    "name": "Kitchen faucet",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-faucet.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-faucet.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.23,
+        "depth": 0.23,
+        "height": 0.361
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-refrigerator",
+    "name": "Refrigerator",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-refrigerator.glb",
+    "thumbnail": "/thumbnails/atelier-refrigerator.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.68,
+        "depth": 0.732,
+        "height": 1.85
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-mini-refrigerator",
+    "name": "Mini refrigerator",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-mini-refrigerator.glb",
+    "thumbnail": "/thumbnails/atelier-mini-refrigerator.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.68,
+        "depth": 0.732,
+        "height": 0.85
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-freezer",
+    "name": "Freezer",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-freezer.glb",
+    "thumbnail": "/thumbnails/atelier-freezer.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.68,
+        "depth": 0.732,
+        "height": 0.85
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-stove",
+    "name": "Stove",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-stove.glb",
+    "thumbnail": "/thumbnails/atelier-stove.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.632,
+        "height": 0.919
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-oven",
+    "name": "Oven",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-oven.glb",
+    "thumbnail": "/thumbnails/atelier-oven.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.632,
+        "height": 0.6
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-cooktop",
+    "name": "Cooktop",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-cooktop.glb",
+    "thumbnail": "/thumbnails/atelier-cooktop.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.58,
+        "height": 0.079
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-range-hood",
+    "name": "Range hood",
+    "category": "Kitchen",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-range-hood.glb",
+    "thumbnail": "/thumbnails/atelier-range-hood.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.58,
+        "height": 0.53
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-microwave",
+    "name": "Microwave",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-microwave.glb",
+    "thumbnail": "/thumbnails/atelier-microwave.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.632,
+        "height": 0.35
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dishwasher",
+    "name": "Dishwasher",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dishwasher.glb",
+    "thumbnail": "/thumbnails/atelier-dishwasher.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.612,
+        "height": 0.9
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-coffee-machine",
+    "name": "Coffee machine",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-coffee-machine.glb",
+    "thumbnail": "/thumbnails/atelier-coffee-machine.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.27,
+        "depth": 0.42,
+        "height": 0.4
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-espresso-machine",
+    "name": "Espresso machine",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-espresso-machine.glb",
+    "thumbnail": "/thumbnails/atelier-espresso-machine.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.27,
+        "depth": 0.42,
+        "height": 0.4
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kettle",
+    "name": "Kettle",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kettle.glb",
+    "thumbnail": "/thumbnails/atelier-kettle.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.427,
+        "depth": 0.24,
+        "height": 0.38
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toaster",
+    "name": "Toaster",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toaster.glb",
+    "thumbnail": "/thumbnails/atelier-toaster.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.26,
+        "depth": 0.17,
+        "height": 0.245
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-blender",
+    "name": "Blender",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-blender.glb",
+    "thumbnail": "/thumbnails/atelier-blender.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.33,
+        "depth": 0.24,
+        "height": 0.38
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-food-processor",
+    "name": "Food processor",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-food-processor.glb",
+    "thumbnail": "/thumbnails/atelier-food-processor.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.33,
+        "depth": 0.24,
+        "height": 0.38
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-scale",
+    "name": "Kitchen scale",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-scale.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-scale.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.204,
+        "height": 0.06
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dish-rack",
+    "name": "Dish rack",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dish-rack.glb",
+    "thumbnail": "/thumbnails/atelier-dish-rack.png",
+    "parts": {
+      "legs": "wood",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.22,
+        "height": 0.32
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-knife-block",
+    "name": "Knife block",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-knife-block.glb",
+    "thumbnail": "/thumbnails/atelier-knife-block.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.3,
+        "depth": 0.2,
+        "height": 0.35
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-cutting-board",
+    "name": "Cutting board",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-cutting-board.glb",
+    "thumbnail": "/thumbnails/atelier-cutting-board.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.3,
+        "depth": 0.2,
+        "height": 0.04
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-spice-rack",
+    "name": "Spice rack",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-spice-rack.glb",
+    "thumbnail": "/thumbnails/atelier-spice-rack.png",
+    "parts": {
+      "legs": "wood",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.22,
+        "height": 0.32
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pot-rack",
+    "name": "Pot rack",
+    "category": "Kitchen",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pot-rack.glb",
+    "thumbnail": "/thumbnails/atelier-pot-rack.png",
+    "parts": {
+      "legs": "wood",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.22,
+        "height": 0.32
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-cookware-set",
+    "name": "Cookware set",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-cookware-set.glb",
+    "thumbnail": "/thumbnails/atelier-cookware-set.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.67,
+        "depth": 0.38,
+        "height": 0.072
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dishware-set",
+    "name": "Dishware set",
+    "category": "Kitchen",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dishware-set.glb",
+    "thumbnail": "/thumbnails/atelier-dishware-set.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.67,
+        "depth": 0.26,
+        "height": 0.07
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-trash-bin",
+    "name": "Trash bin",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-trash-bin.glb",
+    "thumbnail": "/thumbnails/atelier-trash-bin.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.37,
+        "depth": 0.37,
+        "height": 0.59
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-recycling-bin",
+    "name": "Recycling bin",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-recycling-bin.glb",
+    "thumbnail": "/thumbnails/atelier-recycling-bin.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.37,
+        "depth": 0.37,
+        "height": 0.59
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bar-cart",
+    "name": "Bar cart",
+    "category": "Kitchen",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bar-cart.glb",
+    "thumbnail": "/thumbnails/atelier-bar-cart.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.76,
+        "depth": 0.45,
+        "height": 0.85
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toilet",
+    "name": "Toilet",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toilet.glb",
+    "thumbnail": "/thumbnails/atelier-toilet.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.58,
+        "height": 0.908
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-hung-toilet",
+    "name": "Wall-hung toilet",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-hung-toilet.glb",
+    "thumbnail": "/thumbnails/atelier-wall-hung-toilet.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.58,
+        "height": 0.558
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathroom-sink",
+    "name": "Bathroom sink",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathroom-sink.glb",
+    "thumbnail": "/thumbnails/atelier-bathroom-sink.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.48,
+        "depth": 0.336,
+        "height": 0.351
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pedestal-sink",
+    "name": "Pedestal sink",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pedestal-sink.glb",
+    "thumbnail": "/thumbnails/atelier-pedestal-sink.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.48,
+        "depth": 0.336,
+        "height": 1.131
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-vanity-sink",
+    "name": "Vanity sink",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-vanity-sink.glb",
+    "thumbnail": "/thumbnails/atelier-vanity-sink.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.685,
+        "depth": 0.527,
+        "height": 1.123
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-double-vanity",
+    "name": "Double vanity",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-double-vanity.glb",
+    "thumbnail": "/thumbnails/atelier-double-vanity.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.235,
+        "depth": 0.527,
+        "height": 1.123
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathtub",
+    "name": "Bathtub",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathtub.glb",
+    "thumbnail": "/thumbnails/atelier-bathtub.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.71,
+        "depth": 1.08,
+        "height": 0.71
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-freestanding-bathtub",
+    "name": "Freestanding bathtub",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-freestanding-bathtub.glb",
+    "thumbnail": "/thumbnails/atelier-freestanding-bathtub.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.71,
+        "depth": 1.08,
+        "height": 0.71
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-corner-bathtub",
+    "name": "Corner bathtub",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-corner-bathtub.glb",
+    "thumbnail": "/thumbnails/atelier-corner-bathtub.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.71,
+        "depth": 1.08,
+        "height": 0.71
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-shower-enclosure",
+    "name": "Shower enclosure",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-shower-enclosure.glb",
+    "thumbnail": "/thumbnails/atelier-shower-enclosure.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.95,
+        "depth": 0.95,
+        "height": 1.95
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-walk-in-shower",
+    "name": "Walk-in shower",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-walk-in-shower.glb",
+    "thumbnail": "/thumbnails/atelier-walk-in-shower.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.95,
+        "depth": 0.95,
+        "height": 1.95
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-shower-screen",
+    "name": "Shower screen",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-shower-screen.glb",
+    "thumbnail": "/thumbnails/atelier-shower-screen.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.95,
+        "depth": 0.95,
+        "height": 1.95
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-shower-fixture",
+    "name": "Shower fixture",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-shower-fixture.glb",
+    "thumbnail": "/thumbnails/atelier-shower-fixture.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.24,
+        "depth": 0.433,
+        "height": 1.113
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathroom-mirror",
+    "name": "Bathroom mirror",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathroom-mirror.glb",
+    "thumbnail": "/thumbnails/atelier-bathroom-mirror.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.7,
+        "depth": 0.069,
+        "height": 0.8
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-mirror-cabinet",
+    "name": "Mirror cabinet",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-mirror-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-mirror-cabinet.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.7,
+        "depth": 0.069,
+        "height": 0.8
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-towel-rack",
+    "name": "Towel rack",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-towel-rack.glb",
+    "thumbnail": "/thumbnails/atelier-towel-rack.png",
+    "parts": {
+      "fabric": "fabric",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.624,
+        "depth": 0.133,
+        "height": 0.312
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-towel-rail",
+    "name": "Towel rail",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-towel-rail.glb",
+    "thumbnail": "/thumbnails/atelier-towel-rail.png",
+    "parts": {
+      "fabric": "fabric",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.624,
+        "depth": 0.133,
+        "height": 0.312
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-towel-ring",
+    "name": "Towel ring",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-towel-ring.glb",
+    "thumbnail": "/thumbnails/atelier-towel-ring.png",
+    "parts": {
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.277,
+        "depth": 0.02,
+        "height": 0.277
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toilet-paper-holder",
+    "name": "Toilet paper holder",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toilet-paper-holder.glb",
+    "thumbnail": "/thumbnails/atelier-toilet-paper-holder.png",
+    "parts": {
+      "fabric": "fabric",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.624,
+        "depth": 0.133,
+        "height": 0.312
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-soap-dispenser",
+    "name": "Soap dispenser",
+    "category": "Bathroom",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-soap-dispenser.glb",
+    "thumbnail": "/thumbnails/atelier-soap-dispenser.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.14,
+        "depth": 0.14,
+        "height": 0.219
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toothbrush-holder",
+    "name": "Toothbrush holder",
+    "category": "Bathroom",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toothbrush-holder.glb",
+    "thumbnail": "/thumbnails/atelier-toothbrush-holder.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.14,
+        "depth": 0.14,
+        "height": 0.27
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-shower-shelf",
+    "name": "Shower shelf",
+    "category": "Bathroom",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-shower-shelf.glb",
+    "thumbnail": "/thumbnails/atelier-shower-shelf.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.18,
+        "height": 0.6
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathroom-storage-cabinet",
+    "name": "Bathroom storage cabinet",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathroom-storage-cabinet.glb",
+    "thumbnail": "/thumbnails/atelier-bathroom-storage-cabinet.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.635,
+        "depth": 0.426,
+        "height": 1.529
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathroom-stool",
+    "name": "Bathroom stool",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathroom-stool.glb",
+    "thumbnail": "/thumbnails/atelier-bathroom-stool.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.53,
+        "depth": 0.58,
+        "height": 0.702
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-laundry-basket",
+    "name": "Laundry basket",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-laundry-basket.glb",
+    "thumbnail": "/thumbnails/atelier-laundry-basket.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.407
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bathroom-plant",
+    "name": "Bathroom plant",
+    "category": "Bathroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bathroom-plant.glb",
+    "thumbnail": "/thumbnails/atelier-bathroom-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.298,
+        "depth": 0.295,
+        "height": 0.542
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-toiletries",
+    "name": "Decorative toiletries",
+    "category": "Bathroom",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-toiletries.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-toiletries.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.14,
+        "depth": 0.14,
+        "height": 0.27
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-executive-desk",
+    "name": "Executive desk",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-executive-desk.glb",
+    "thumbnail": "/thumbnails/atelier-executive-desk.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.716,
+        "height": 1.112
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-visitor-chair",
+    "name": "Visitor chair",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-visitor-chair.glb",
+    "thumbnail": "/thumbnails/atelier-visitor-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 0.61,
+        "height": 0.904
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-desktop-computer",
+    "name": "Desktop computer",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-desktop-computer.glb",
+    "thumbnail": "/thumbnails/atelier-desktop-computer.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.875,
+        "depth": 0.365,
+        "height": 0.55
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-laptop",
+    "name": "Laptop",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-laptop.glb",
+    "thumbnail": "/thumbnails/atelier-laptop.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.244,
+        "height": 0.243
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-computer-monitor",
+    "name": "Computer monitor",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-computer-monitor.glb",
+    "thumbnail": "/thumbnails/atelier-computer-monitor.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.55,
+        "depth": 0.18,
+        "height": 0.523
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-keyboard",
+    "name": "Keyboard",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-keyboard.glb",
+    "thumbnail": "/thumbnails/atelier-keyboard.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.44,
+        "depth": 0.15,
+        "height": 0.039
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-mouse",
+    "name": "Mouse",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-mouse.glb",
+    "thumbnail": "/thumbnails/atelier-mouse.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.06,
+        "depth": 0.11,
+        "height": 0.052
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-printer",
+    "name": "Printer",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-printer.glb",
+    "thumbnail": "/thumbnails/atelier-printer.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.305,
+        "height": 0.18
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-paper-tray",
+    "name": "Paper tray",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-paper-tray.glb",
+    "thumbnail": "/thumbnails/atelier-paper-tray.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pen-holder",
+    "name": "Pen holder",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pen-holder.glb",
+    "thumbnail": "/thumbnails/atelier-pen-holder.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-whiteboard",
+    "name": "Whiteboard",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-whiteboard.glb",
+    "thumbnail": "/thumbnails/atelier-whiteboard.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.4,
+        "depth": 0.055,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-corkboard",
+    "name": "Corkboard",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-corkboard.glb",
+    "thumbnail": "/thumbnails/atelier-corkboard.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.4,
+        "depth": 0.055,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-noticeboard",
+    "name": "Noticeboard",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-noticeboard.glb",
+    "thumbnail": "/thumbnails/atelier-noticeboard.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.4,
+        "depth": 0.055,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-calendar",
+    "name": "Wall calendar",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-calendar.glb",
+    "thumbnail": "/thumbnails/atelier-wall-calendar.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.4,
+        "depth": 0.055,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-book-stand",
+    "name": "Book stand",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-book-stand.glb",
+    "thumbnail": "/thumbnails/atelier-book-stand.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-office-plant",
+    "name": "Office plant",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-office-plant.glb",
+    "thumbnail": "/thumbnails/atelier-office-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.298,
+        "depth": 0.295,
+        "height": 0.542
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-office-clock",
+    "name": "Office clock",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-office-clock.glb",
+    "thumbnail": "/thumbnails/atelier-office-clock.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.615,
+        "depth": 0.079,
+        "height": 0.615
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wastebasket",
+    "name": "Wastebasket",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wastebasket.glb",
+    "thumbnail": "/thumbnails/atelier-wastebasket.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.351
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-flat-screen-television",
+    "name": "Flat-screen television",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-flat-screen-television.glb",
+    "thumbnail": "/thumbnails/atelier-flat-screen-television.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.18,
+        "height": 0.873
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-mounted-television",
+    "name": "Wall-mounted television",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-mounted-television.glb",
+    "thumbnail": "/thumbnails/atelier-wall-mounted-television.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.18,
+        "height": 0.873
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-tv-stand",
+    "name": "TV stand",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-tv-stand.glb",
+    "thumbnail": "/thumbnails/atelier-tv-stand.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.535,
+        "depth": 0.476,
+        "height": 0.529
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-projector",
+    "name": "Projector",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-projector.glb",
+    "thumbnail": "/thumbnails/atelier-projector.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.27,
+        "height": 0.16
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-projector-screen",
+    "name": "Projector screen",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-projector-screen.glb",
+    "thumbnail": "/thumbnails/atelier-projector-screen.png",
+    "parts": {
+      "ceramic": "ceramic",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.4,
+        "depth": 0.055,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-monitor",
+    "name": "Monitor",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-monitor.glb",
+    "thumbnail": "/thumbnails/atelier-monitor.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.55,
+        "depth": 0.18,
+        "height": 0.523
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-stereo-system",
+    "name": "Stereo system",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-stereo-system.glb",
+    "thumbnail": "/thumbnails/atelier-stereo-system.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.9,
+        "depth": 0.226,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-speaker",
+    "name": "Speaker",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-speaker.glb",
+    "thumbnail": "/thumbnails/atelier-speaker.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.226,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bookshelf-speaker",
+    "name": "Bookshelf speaker",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bookshelf-speaker.glb",
+    "thumbnail": "/thumbnails/atelier-bookshelf-speaker.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.226,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-floor-speaker",
+    "name": "Floor speaker",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-floor-speaker.glb",
+    "thumbnail": "/thumbnails/atelier-floor-speaker.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.226,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-radio",
+    "name": "Radio",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-radio.glb",
+    "thumbnail": "/thumbnails/atelier-radio.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.255,
+        "height": 0.16
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-record-player",
+    "name": "Record player",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-record-player.glb",
+    "thumbnail": "/thumbnails/atelier-record-player.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.4,
+        "depth": 0.3,
+        "height": 0.155
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-gaming-console",
+    "name": "Gaming console",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-gaming-console.glb",
+    "thumbnail": "/thumbnails/atelier-gaming-console.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.247,
+        "height": 0.08
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-gaming-controller",
+    "name": "Gaming controller",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-gaming-controller.glb",
+    "thumbnail": "/thumbnails/atelier-gaming-controller.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.24,
+        "depth": 0.14,
+        "height": 0.07
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-video-game-accessories",
+    "name": "Video game accessories",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-video-game-accessories.glb",
+    "thumbnail": "/thumbnails/atelier-video-game-accessories.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.24,
+        "depth": 0.14,
+        "height": 0.07
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-home-theater-system",
+    "name": "Home theater system",
+    "category": "Office and electronics",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-home-theater-system.glb",
+    "thumbnail": "/thumbnails/atelier-home-theater-system.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.9,
+        "depth": 0.226,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-smart-speaker",
+    "name": "Smart speaker",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-smart-speaker.glb",
+    "thumbnail": "/thumbnails/atelier-smart-speaker.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.226,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-alarm-clock",
+    "name": "Alarm clock",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-alarm-clock.glb",
+    "thumbnail": "/thumbnails/atelier-alarm-clock.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.615,
+        "depth": 0.079,
+        "height": 0.615
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-telephone",
+    "name": "Telephone",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-telephone.glb",
+    "thumbnail": "/thumbnails/atelier-telephone.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.24,
+        "depth": 0.16,
+        "height": 0.115
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-security-alarm",
+    "name": "Security alarm",
+    "category": "Office and electronics",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-security-alarm.glb",
+    "thumbnail": "/thumbnails/atelier-security-alarm.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.247,
+        "height": 0.16
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-camera",
+    "name": "Camera",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-camera.glb",
+    "thumbnail": "/thumbnails/atelier-camera.png",
+    "parts": {
+      "metal": "metal",
+      "steel": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.18,
+        "depth": 0.16,
+        "height": 0.14
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-router",
+    "name": "Router",
+    "category": "Office and electronics",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-router.glb",
+    "thumbnail": "/thumbnails/atelier-router.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.24,
+        "height": 0.3
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-nursery-dresser",
+    "name": "Nursery dresser",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-nursery-dresser.glb",
+    "thumbnail": "/thumbnails/atelier-nursery-dresser.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.135,
+        "depth": 0.581,
+        "height": 0.879
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toy-shelf",
+    "name": "Toy shelf",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toy-shelf.glb",
+    "thumbnail": "/thumbnails/atelier-toy-shelf.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.85,
+        "depth": 0.3,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-desk",
+    "name": "Children's desk",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-desk.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-desk.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.85,
+        "depth": 0.456,
+        "height": 0.728
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-chair",
+    "name": "Children's chair",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-chair.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.344,
+        "depth": 0.397,
+        "height": 0.587
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-high-chair",
+    "name": "High chair",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-high-chair.glb",
+    "thumbnail": "/thumbnails/atelier-high-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.58,
+        "depth": 0.74,
+        "height": 0.904
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-play-mat",
+    "name": "Play mat",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-play-mat.glb",
+    "thumbnail": "/thumbnails/atelier-play-mat.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-play-tent",
+    "name": "Play tent",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-play-tent.glb",
+    "thumbnail": "/thumbnails/atelier-play-tent.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.8,
+        "height": 0.742
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dollhouse",
+    "name": "Dollhouse",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dollhouse.glb",
+    "thumbnail": "/thumbnails/atelier-dollhouse.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.047,
+        "depth": 0.8,
+        "height": 0.742
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-teddy-bear",
+    "name": "Teddy bear",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-teddy-bear.glb",
+    "thumbnail": "/thumbnails/atelier-teddy-bear.png",
+    "parts": {
+      "metal": "metal",
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.44,
+        "depth": 0.235,
+        "height": 0.535
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-stuffed-animal",
+    "name": "Stuffed animal",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-stuffed-animal.glb",
+    "thumbnail": "/thumbnails/atelier-stuffed-animal.png",
+    "parts": {
+      "metal": "metal",
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.44,
+        "depth": 0.235,
+        "height": 0.535
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toy-blocks",
+    "name": "Toy blocks",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toy-blocks.glb",
+    "thumbnail": "/thumbnails/atelier-toy-blocks.png",
+    "parts": {},
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.34,
+        "depth": 0.22,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toy-car",
+    "name": "Toy car",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toy-car.glb",
+    "thumbnail": "/thumbnails/atelier-toy-car.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.23
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toy-train",
+    "name": "Toy train",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toy-train.glb",
+    "thumbnail": "/thumbnails/atelier-toy-train.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.28
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-bookshelf",
+    "name": "Children's bookshelf",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-bookshelf.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-bookshelf.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.85,
+        "depth": 0.3,
+        "height": 1.0
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-wall-art",
+    "name": "Children's wall art",
+    "category": "Nursery",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-wall-art.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-wall-art.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 0.073,
+        "height": 0.75
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-night-light",
+    "name": "Night light",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-night-light.glb",
+    "thumbnail": "/thumbnails/atelier-night-light.png",
+    "parts": {},
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.24,
+        "depth": 0.24,
+        "height": 0.24
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-mobile-decoration",
+    "name": "Mobile decoration",
+    "category": "Nursery",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-mobile-decoration.glb",
+    "thumbnail": "/thumbnails/atelier-mobile-decoration.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.448,
+        "depth": 0.43,
+        "height": 0.397
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-activity-table",
+    "name": "Activity table",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-activity-table.glb",
+    "thumbnail": "/thumbnails/atelier-activity-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.85,
+        "depth": 0.456,
+        "height": 0.728
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-rug",
+    "name": "Children's rug",
+    "category": "Nursery",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-rug.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  }
+];

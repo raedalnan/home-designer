@@ -17,6 +17,9 @@ I designed and built this project myself. I used artificial intelligence as a de
 - Locally persisted layouts
 - Responsive desktop, tablet, and mobile interface
 - Asset-loading progress screen
+- 480 original Blender catalog models with colored thumbnails, search and categories
+- Independent material finishes and authored bed/sofa size presets
+- Wall, ceiling, window-treatment and furniture-surface attachment placement
 
 ## Technology
 
@@ -59,6 +62,17 @@ npm run preview
 
 Layouts are stored in the browser's local storage.
 
+Choose a wall or ceiling item, then select its support in the scene. Surface decorations attach to compatible furniture; window treatments attach to an existing opening. Selected furniture exposes compatible finishes and available sizes.
+
+## Furniture assets and validation
+
+The replacement catalog uses original scripted Blender geometry and individually loaded compressed GLBs. Source scenes are excluded from web delivery. See [asset generation](assets-source/furniture/README.md) and [system notes and limitations](docs/FURNITURE_SYSTEM.md).
+
+```bash
+node --test tests/*.test.js
+npm run build
+```
+
 ## Asset credit
 
-The furniture models are based on [Low Poly Furnitures Full Bundle](https://skfb.ly/oLwUo) by Taha Kaya, licensed under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). The original pack was modified by splitting it into individual pieces and rescaling the models for this application.
+The 480 replacement catalog models are original generated Blender assets. No EA/The Sims assets are included. Legacy furniture remains for existing saved layouts and is based on [Low Poly Furnitures Full Bundle](https://skfb.ly/oLwUo) by Taha Kaya, licensed under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). That pack was split and rescaled for this application.

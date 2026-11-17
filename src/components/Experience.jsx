@@ -1,4 +1,5 @@
 import Room from "./Room.jsx";
+import PerformanceProbe from './PerformanceProbe.jsx';
 import { Environment, Lightformer } from '@react-three/drei';
 
 export default function Experience({
@@ -24,6 +25,7 @@ export default function Experience({
   return (
     <>
       <ambientLight intensity={3} />
+      {new URLSearchParams(window.location.search).has('benchmark') && <PerformanceProbe/>}
       <Environment resolution={128} frames={1}>
         <Lightformer intensity={3} position={[0,8,0]} rotation-x={Math.PI/2} scale={[12,12,1]} />
         <Lightformer intensity={2} position={[5,3,5]} scale={[3,5,1]} />

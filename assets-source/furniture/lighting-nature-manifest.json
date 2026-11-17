@@ -1,0 +1,2381 @@
+[
+  {
+    "id": "atelier-table-lamp",
+    "name": "Table lamp",
+    "category": "Lighting",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-table-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-table-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.297,
+        "depth": 0.297,
+        "height": 0.552
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-desk-lamp",
+    "name": "Desk lamp",
+    "category": "Lighting",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-desk-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-desk-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.361,
+        "depth": 0.297,
+        "height": 0.552
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-floor-lamp",
+    "name": "Floor lamp",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-floor-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-floor-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.437,
+        "depth": 0.437,
+        "height": 1.409
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-arc-floor-lamp",
+    "name": "Arc floor lamp",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-arc-floor-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-arc-floor-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.032,
+        "depth": 0.437,
+        "height": 1.699
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-tripod-floor-lamp",
+    "name": "Tripod floor lamp",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-tripod-floor-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-tripod-floor-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.543,
+        "depth": 0.568,
+        "height": 1.435
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bedside-lamp",
+    "name": "Bedside lamp",
+    "category": "Lighting",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bedside-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-bedside-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.297,
+        "depth": 0.297,
+        "height": 0.552
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pendant-light",
+    "name": "Pendant light",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pendant-light.glb",
+    "thumbnail": "/thumbnails/atelier-pendant-light.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.597,
+        "depth": 0.597,
+        "height": 1.01
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-chandelier",
+    "name": "Chandelier",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-chandelier.glb",
+    "thumbnail": "/thumbnails/atelier-chandelier.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.73,
+        "depth": 0.639,
+        "height": 0.862
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-ceiling-light",
+    "name": "Ceiling light",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-ceiling-light.glb",
+    "thumbnail": "/thumbnails/atelier-ceiling-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 0.115
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-flush-mount-ceiling-light",
+    "name": "Flush-mount ceiling light",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-flush-mount-ceiling-light.glb",
+    "thumbnail": "/thumbnails/atelier-flush-mount-ceiling-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.4,
+        "depth": 0.4,
+        "height": 0.115
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-recessed-downlight",
+    "name": "Recessed downlight",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-recessed-downlight.glb",
+    "thumbnail": "/thumbnails/atelier-recessed-downlight.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.36,
+        "depth": 0.36,
+        "height": 0.115
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-track-light",
+    "name": "Track light",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-track-light.glb",
+    "thumbnail": "/thumbnails/atelier-track-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.05,
+        "height": 0.143
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-sconce",
+    "name": "Wall sconce",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-sconce.glb",
+    "thumbnail": "/thumbnails/atelier-wall-sconce.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.237,
+        "depth": 0.272,
+        "height": 0.294
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-mounted-reading-lamp",
+    "name": "Wall-mounted reading lamp",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-mounted-reading-lamp.glb",
+    "thumbnail": "/thumbnails/atelier-wall-mounted-reading-lamp.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.237,
+        "depth": 0.272,
+        "height": 0.294
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-picture-light",
+    "name": "Picture light",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-picture-light.glb",
+    "thumbnail": "/thumbnails/atelier-picture-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.263,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-under-cabinet-light",
+    "name": "Under-cabinet light",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-under-cabinet-light.glb",
+    "thumbnail": "/thumbnails/atelier-under-cabinet-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.025,
+        "height": 0.016
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-led-strip",
+    "name": "LED strip",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-led-strip.glb",
+    "thumbnail": "/thumbnails/atelier-led-strip.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.025,
+        "height": 0.016
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-string-lights",
+    "name": "Decorative string lights",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-string-lights.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-string-lights.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.05,
+        "height": 0.143
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-lantern",
+    "name": "Lantern",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-lantern.glb",
+    "thumbnail": "/thumbnails/atelier-lantern.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.53
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-candle-holder",
+    "name": "Candle holder",
+    "category": "Lighting",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-candle-holder.glb",
+    "thumbnail": "/thumbnails/atelier-candle-holder.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.22,
+        "height": 0.675
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-standing-candle",
+    "name": "Standing candle",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-standing-candle.glb",
+    "thumbnail": "/thumbnails/atelier-standing-candle.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.22,
+        "height": 0.675
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-outdoor-wall-light",
+    "name": "Outdoor wall light",
+    "category": "Lighting",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-outdoor-wall-light.glb",
+    "thumbnail": "/thumbnails/atelier-outdoor-wall-light.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.53
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-garden-path-light",
+    "name": "Garden path light",
+    "category": "Lighting",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-garden-path-light.glb",
+    "thumbnail": "/thumbnails/atelier-garden-path-light.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.437,
+        "depth": 0.437,
+        "height": 1.409
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-hanging-outdoor-lantern",
+    "name": "Hanging outdoor lantern",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-hanging-outdoor-lantern.glb",
+    "thumbnail": "/thumbnails/atelier-hanging-outdoor-lantern.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.3,
+        "depth": 0.3,
+        "height": 0.53
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-ceiling-fan-with-light",
+    "name": "Ceiling fan with light",
+    "category": "Lighting",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-ceiling-fan-with-light.glb",
+    "thumbnail": "/thumbnails/atelier-ceiling-fan-with-light.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.165,
+        "depth": 1.223,
+        "height": 0.38
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-small-potted-plant",
+    "name": "Small potted plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-small-potted-plant.glb",
+    "thumbnail": "/thumbnails/atelier-small-potted-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.298,
+        "depth": 0.295,
+        "height": 0.542
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-medium-potted-plant",
+    "name": "Medium potted plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-medium-potted-plant.glb",
+    "thumbnail": "/thumbnails/atelier-medium-potted-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.595,
+        "depth": 0.589,
+        "height": 1.079
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-large-floor-plant",
+    "name": "Large floor plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-large-floor-plant.glb",
+    "thumbnail": "/thumbnails/atelier-large-floor-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.012,
+        "depth": 1.001,
+        "height": 1.833
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-indoor-tree",
+    "name": "Indoor tree",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-indoor-tree.glb",
+    "thumbnail": "/thumbnails/atelier-indoor-tree.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.012,
+        "depth": 1.001,
+        "height": 1.833
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-hanging-plant",
+    "name": "Hanging plant",
+    "category": "Plants",
+    "placementType": "ceiling",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-hanging-plant.glb",
+    "thumbnail": "/thumbnails/atelier-hanging-plant.png",
+    "parts": {
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.595,
+        "depth": 0.589,
+        "height": 1.201
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wall-mounted-planter",
+    "name": "Wall-mounted planter",
+    "category": "Plants",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wall-mounted-planter.glb",
+    "thumbnail": "/thumbnails/atelier-wall-mounted-planter.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.571,
+        "depth": 0.3,
+        "height": 0.65
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-succulent",
+    "name": "Succulent",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-succulent.glb",
+    "thumbnail": "/thumbnails/atelier-succulent.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.2,
+        "depth": 0.2,
+        "height": 0.541
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-cactus",
+    "name": "Cactus",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-cactus.glb",
+    "thumbnail": "/thumbnails/atelier-cactus.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.438,
+        "depth": 0.37,
+        "height": 1.025
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-fern",
+    "name": "Fern",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-fern.glb",
+    "thumbnail": "/thumbnails/atelier-fern.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.589,
+        "height": 1.096
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-palm",
+    "name": "Palm",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-palm.glb",
+    "thumbnail": "/thumbnails/atelier-palm.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.02,
+        "depth": 1.001,
+        "height": 1.861
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-monstera-style-plant",
+    "name": "Monstera-style plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-monstera-style-plant.glb",
+    "thumbnail": "/thumbnails/atelier-monstera-style-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.589,
+        "height": 1.096
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-snake-plant",
+    "name": "Snake plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-snake-plant.glb",
+    "thumbnail": "/thumbnails/atelier-snake-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.37,
+        "depth": 0.37,
+        "height": 0.95
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-flowering-plant",
+    "name": "Flowering plant",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-flowering-plant.glb",
+    "thumbnail": "/thumbnails/atelier-flowering-plant.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.711,
+        "depth": 0.686,
+        "height": 1.098
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bonsai",
+    "name": "Bonsai",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bonsai.glb",
+    "thumbnail": "/thumbnails/atelier-bonsai.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.697,
+        "depth": 0.654,
+        "height": 0.895
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-flower-bouquet",
+    "name": "Flower bouquet",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-flower-bouquet.glb",
+    "thumbnail": "/thumbnails/atelier-flower-bouquet.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.711,
+        "depth": 0.686,
+        "height": 1.098
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-branches",
+    "name": "Decorative branches",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-branches.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-branches.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.595,
+        "depth": 0.589,
+        "height": 1.079
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-vase-with-flowers",
+    "name": "Vase with flowers",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-vase-with-flowers.glb",
+    "thumbnail": "/thumbnails/atelier-vase-with-flowers.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.711,
+        "depth": 0.686,
+        "height": 1.098
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-herb-planter",
+    "name": "Herb planter",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-herb-planter.glb",
+    "thumbnail": "/thumbnails/atelier-herb-planter.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.298,
+        "depth": 0.295,
+        "height": 0.542
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-plant-stand",
+    "name": "Plant stand",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-plant-stand.glb",
+    "thumbnail": "/thumbnails/atelier-plant-stand.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 0.3,
+        "height": 1.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-plant-shelf",
+    "name": "Plant shelf",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-plant-shelf.glb",
+    "thumbnail": "/thumbnails/atelier-plant-shelf.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 0.3,
+        "height": 1.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-terrarium",
+    "name": "Terrarium",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-terrarium.glb",
+    "thumbnail": "/thumbnails/atelier-terrarium.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.595,
+        "depth": 0.589,
+        "height": 1.079
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-vertical-plant-wall",
+    "name": "Vertical plant wall",
+    "category": "Plants",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-vertical-plant-wall.glb",
+    "thumbnail": "/thumbnails/atelier-vertical-plant-wall.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.0,
+        "depth": 0.3,
+        "height": 0.65
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-outdoor-planter",
+    "name": "Outdoor planter",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-outdoor-planter.glb",
+    "thumbnail": "/thumbnails/atelier-outdoor-planter.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.0,
+        "depth": 0.3,
+        "height": 0.65
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-window-planter",
+    "name": "Window planter",
+    "category": "Plants",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-window-planter.glb",
+    "thumbnail": "/thumbnails/atelier-window-planter.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.0,
+        "depth": 0.3,
+        "height": 0.65
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-garden-shrub",
+    "name": "Garden shrub",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-garden-shrub.glb",
+    "thumbnail": "/thumbnails/atelier-garden-shrub.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.697,
+        "depth": 0.654,
+        "height": 0.895
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-topiary",
+    "name": "Decorative topiary",
+    "category": "Plants",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-topiary.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-topiary.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.608,
+        "depth": 0.608,
+        "height": 1.935
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-area-rug",
+    "name": "Area rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-area-rug.glb",
+    "thumbnail": "/thumbnails/atelier-area-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-round-rug",
+    "name": "Round rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-round-rug.glb",
+    "thumbnail": "/thumbnails/atelier-round-rug.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.8,
+        "height": 0.016
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-runner-rug",
+    "name": "Runner rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-runner-rug.glb",
+    "thumbnail": "/thumbnails/atelier-runner-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.65,
+        "depth": 2.4,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-small-accent-rug",
+    "name": "Small accent rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-small-accent-rug.glb",
+    "thumbnail": "/thumbnails/atelier-small-accent-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-large-living-room-rug",
+    "name": "Large living-room rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-large-living-room-rug.glb",
+    "thumbnail": "/thumbnails/atelier-large-living-room-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.6,
+        "depth": 1.8,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-patterned-rug",
+    "name": "Patterned rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-patterned-rug.glb",
+    "thumbnail": "/thumbnails/atelier-patterned-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-shag-rug",
+    "name": "Shag rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-shag-rug.glb",
+    "thumbnail": "/thumbnails/atelier-shag-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.807,
+        "depth": 1.307,
+        "height": 0.057
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-woven-rug",
+    "name": "Woven rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-woven-rug.glb",
+    "thumbnail": "/thumbnails/atelier-woven-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-outdoor-rug",
+    "name": "Outdoor rug",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-outdoor-rug.glb",
+    "thumbnail": "/thumbnails/atelier-outdoor-rug.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.3,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-doormat",
+    "name": "Doormat",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-doormat.glb",
+    "thumbnail": "/thumbnails/atelier-doormat.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.75,
+        "depth": 0.5,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bath-mat",
+    "name": "Bath mat",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bath-mat.glb",
+    "thumbnail": "/thumbnails/atelier-bath-mat.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.75,
+        "depth": 0.5,
+        "height": 0.03
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-cushion",
+    "name": "Decorative cushion",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-cushion.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-cushion.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.45,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-throw-pillow",
+    "name": "Throw pillow",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-throw-pillow.glb",
+    "thumbnail": "/thumbnails/atelier-throw-pillow.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.45,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-floor-cushion",
+    "name": "Floor cushion",
+    "category": "Textiles",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-floor-cushion.glb",
+    "thumbnail": "/thumbnails/atelier-floor-cushion.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.45,
+        "depth": 0.45,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-throw-blanket",
+    "name": "Throw blanket",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-throw-blanket.glb",
+    "thumbnail": "/thumbnails/atelier-throw-blanket.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 1.4,
+        "height": 0.036
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bedspread",
+    "name": "Bedspread",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bedspread.glb",
+    "thumbnail": "/thumbnails/atelier-bedspread.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 2.0,
+        "height": 0.036
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-duvet",
+    "name": "Duvet",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-duvet.glb",
+    "thumbnail": "/thumbnails/atelier-duvet.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 2.0,
+        "height": 0.08
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-bedding",
+    "name": "Decorative bedding",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-bedding.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-bedding.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 2.0,
+        "height": 0.036
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-table-runner",
+    "name": "Table runner",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-table-runner.glb",
+    "thumbnail": "/thumbnails/atelier-table-runner.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.4,
+        "depth": 1.5,
+        "height": 0.036
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-tablecloth",
+    "name": "Tablecloth",
+    "category": "Textiles",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-tablecloth.glb",
+    "thumbnail": "/thumbnails/atelier-tablecloth.png",
+    "parts": {
+      "accent": "fabric",
+      "bedding": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 1.4,
+        "height": 0.036
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-fabric-wall-hanging",
+    "name": "Fabric wall hanging",
+    "category": "Textiles",
+    "placementType": "wall",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-fabric-wall-hanging.glb",
+    "thumbnail": "/thumbnails/atelier-fabric-wall-hanging.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.9,
+        "depth": 0.053,
+        "height": 1.212
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-vase",
+    "name": "Decorative vase",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-vase.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-vase.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.27,
+        "depth": 0.27,
+        "height": 0.477
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-ceramic-bowl",
+    "name": "Ceramic bowl",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-ceramic-bowl.glb",
+    "thumbnail": "/thumbnails/atelier-ceramic-bowl.png",
+    "parts": {
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.42,
+        "depth": 0.42,
+        "height": 0.119
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-plate",
+    "name": "Decorative plate",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-plate.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-plate.png",
+    "parts": {
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.42,
+        "depth": 0.42,
+        "height": 0.119
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-sculpture",
+    "name": "Sculpture",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-sculpture.glb",
+    "thumbnail": "/thumbnails/atelier-sculpture.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.18,
+        "height": 0.44
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-figurine",
+    "name": "Figurine",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-figurine.glb",
+    "thumbnail": "/thumbnails/atelier-figurine.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.18,
+        "height": 0.44
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-abstract-statue",
+    "name": "Abstract statue",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-abstract-statue.glb",
+    "thumbnail": "/thumbnails/atelier-abstract-statue.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.235,
+        "depth": 0.18,
+        "height": 0.537
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bust-sculpture",
+    "name": "Bust sculpture",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bust-sculpture.glb",
+    "thumbnail": "/thumbnails/atelier-bust-sculpture.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.18,
+        "height": 0.44
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-candlestick",
+    "name": "Candlestick",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-candlestick.glb",
+    "thumbnail": "/thumbnails/atelier-candlestick.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.28,
+        "depth": 0.28,
+        "height": 0.4
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-candle",
+    "name": "Candle",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-candle.glb",
+    "thumbnail": "/thumbnails/atelier-candle.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.07,
+        "depth": 0.07,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-candle-tray",
+    "name": "Candle tray",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-candle-tray.glb",
+    "thumbnail": "/thumbnails/atelier-candle-tray.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.28,
+        "depth": 0.28,
+        "height": 0.26
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-books",
+    "name": "Decorative books",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-books.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-books.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.29,
+        "depth": 0.18,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-stacked-books",
+    "name": "Stacked books",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-stacked-books.glb",
+    "thumbnail": "/thumbnails/atelier-stacked-books.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.29,
+        "depth": 0.18,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bookends",
+    "name": "Bookends",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bookends.glb",
+    "thumbnail": "/thumbnails/atelier-bookends.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.385,
+        "depth": 0.2,
+        "height": 0.24
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-box",
+    "name": "Decorative box",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-box.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-box.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.34,
+        "depth": 0.253,
+        "height": 0.15
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-jewelry-box",
+    "name": "Jewelry box",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-jewelry-box.glb",
+    "thumbnail": "/thumbnails/atelier-jewelry-box.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.34,
+        "depth": 0.253,
+        "height": 0.15
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-picture-frame",
+    "name": "Picture frame",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-picture-frame.glb",
+    "thumbnail": "/thumbnails/atelier-picture-frame.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 0.073,
+        "height": 0.75
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-photo-album",
+    "name": "Photo album",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-photo-album.glb",
+    "thumbnail": "/thumbnails/atelier-photo-album.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.25,
+        "depth": 0.18,
+        "height": 0.04
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-globe",
+    "name": "Globe",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-globe.glb",
+    "thumbnail": "/thumbnails/atelier-globe.png",
+    "parts": {
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.33,
+        "depth": 0.28,
+        "height": 0.485
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-hourglass",
+    "name": "Hourglass",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-hourglass.glb",
+    "thumbnail": "/thumbnails/atelier-hourglass.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.16,
+        "depth": 0.16,
+        "height": 0.3
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-desk-organizer",
+    "name": "Desk organizer",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-desk-organizer.glb",
+    "thumbnail": "/thumbnails/atelier-desk-organizer.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-tray",
+    "name": "Decorative tray",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-tray.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-tray.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.14
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-fruit-bowl",
+    "name": "Fruit bowl",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-fruit-bowl.glb",
+    "thumbnail": "/thumbnails/atelier-fruit-bowl.png",
+    "parts": {
+      "accent": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.42,
+        "depth": 0.42,
+        "height": 0.2
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-magazine-rack",
+    "name": "Magazine rack",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-magazine-rack.glb",
+    "thumbnail": "/thumbnails/atelier-magazine-rack.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.407
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-magazine-stack",
+    "name": "Magazine stack",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-magazine-stack.glb",
+    "thumbnail": "/thumbnails/atelier-magazine-stack.png",
+    "parts": {
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.29,
+        "depth": 0.18,
+        "height": 0.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-basket",
+    "name": "Basket",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-basket.glb",
+    "thumbnail": "/thumbnails/atelier-basket.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.407
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-woven-basket",
+    "name": "Woven basket",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-woven-basket.glb",
+    "thumbnail": "/thumbnails/atelier-woven-basket.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.407
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-umbrella-stand",
+    "name": "Umbrella stand",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-umbrella-stand.glb",
+    "thumbnail": "/thumbnails/atelier-umbrella-stand.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.35,
+        "depth": 0.35,
+        "height": 0.707
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-decorative-bottle",
+    "name": "Decorative bottle",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-decorative-bottle.glb",
+    "thumbnail": "/thumbnails/atelier-decorative-bottle.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.27,
+        "depth": 0.27,
+        "height": 0.477
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-perfume-bottles",
+    "name": "Perfume bottles",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-perfume-bottles.glb",
+    "thumbnail": "/thumbnails/atelier-perfume-bottles.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.27,
+        "depth": 0.27,
+        "height": 0.477
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-clock",
+    "name": "Clock",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-clock.glb",
+    "thumbnail": "/thumbnails/atelier-clock.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.615,
+        "depth": 0.079,
+        "height": 0.615
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-tissue-box",
+    "name": "Tissue box",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-tissue-box.glb",
+    "thumbnail": "/thumbnails/atelier-tissue-box.png",
+    "parts": {
+      "legs": "wood",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.32,
+        "depth": 0.22,
+        "height": 0.26
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-small-tabletop-ornament",
+    "name": "Small tabletop ornament",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-small-tabletop-ornament.glb",
+    "thumbnail": "/thumbnails/atelier-small-tabletop-ornament.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.18,
+        "height": 0.44
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-collectible-display",
+    "name": "Collectible display",
+    "category": "Decorations",
+    "placementType": "surface",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-collectible-display.glb",
+    "thumbnail": "/thumbnails/atelier-collectible-display.png",
+    "parts": {
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.22,
+        "depth": 0.18,
+        "height": 0.44
+      }
+    ],
+    "defaultSizeId": "standard"
+  }
+]

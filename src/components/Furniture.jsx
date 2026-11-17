@@ -1,10 +1,17 @@
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { Suspense, lazy, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { CELL } from "../data/Constants.js";
 import { cellToWorld, getFootprint } from "../logic/Grid.js";
 import { Clone, useGLTF } from "@react-three/drei";
 
-export default function Furniture({ obj, registerMesh, onDragStart, roomSize, ghost = false }) {
+const StudioFurniture=lazy(()=>import('./StudioFurniture.jsx'));
+const BlenderFurniture=lazy(()=>import('./BlenderFurniture.jsx'));
+export default function Furniture(props) {
+  if(props.obj.source?.startsWith('/furniture-v2/'))return <Suspense fallback={null}><BlenderFurniture {...props}/></Suspense>;
+  if(props.obj.definitionId) return <Suspense fallback={null}><StudioFurniture {...props}/></Suspense>;
+  return <LegacyFurniture {...props}/>;
+}
+function LegacyFurniture({ obj, registerMesh, onDragStart, roomSize, ghost = false }) {
   const { id, w, d, cellX, cellZ, height, source } = obj;
   const meshRef = useRef();
   const { nodes } = useGLTF(source);

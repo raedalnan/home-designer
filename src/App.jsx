@@ -3,26 +3,30 @@ import { Canvas } from "@react-three/fiber";
 import { useProgress } from "@react-three/drei";
 import Experience from "./components/Experience.jsx";
 import SideBar from "./UI/SideBar.jsx";
-import { DEPTH_CELLS, WIDTH_CELLS } from "./data/Constants.js";
+import { CELL, DEPTH_CELLS, WIDTH_CELLS, GRID_SUBDIVISIONS } from "./data/Constants.js";
 import { OPENING_CATALOG } from "./data/OpeningCatalog.js";
+import {configureInstance,definitionOf} from './data/FurnitureRegistry.js';
+import {readLayout} from './logic/LayoutPersistence.js';
+import {removeWithDependents} from './logic/Attachments.js';
 import { buildGrid, canPlace, findFreeSpot, getFootprint } from "./logic/Grid.js";
 import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "./logic/Walls.js";
 
 const INITIAL_OBJECTS = [
-  { id: 1, name: "Double Bed 02", node: "doubleBed02", w: 4, d: 4, turns: 0, cellX: 5, cellZ: 3, height: 2, source: "/furniture.glb" },
+  configureInstance(definitionOf({id:'atelier-double-bed'}),'standard',{id:1,cellX:5,cellZ:2,turns:0}),
 ];
 
-const LAYOUT_VERSION = 2;
+const LAYOUT_VERSION = 3;
 const ITEM_SIZE_MULTIPLIER = 2;
 const DEFAULT_ROOM = { width: WIDTH_CELLS, depth: DEPTH_CELLS };
 const DEFAULT_FINISHES = { wallColor: "#ded8cf", floorColor: "#e8e2d9" };
 
-function findFurnitureSpot(objects, walls, width, depth, w, d) {
+function findFurnitureSpot(objects, walls, width, depth, w, d, allowOverlap=false) {
   const grid = buildGrid(objects, width, depth);
-  for (let z = 0; z <= depth - d; z++) {
-    for (let x = 0; x <= width - w; x++) {
+  for (let row = 0; row <= Math.round((depth - d) * GRID_SUBDIVISIONS); row++) {
+    for (let col = 0; col <= Math.round((width - w) * GRID_SUBDIVISIONS); col++) {
+      const x = col / GRID_SUBDIVISIONS, z = row / GRID_SUBDIVISIONS;
       const candidate = { cellX: x, cellZ: z, w, d, turns: 0 };
-      if (canPlace(grid, x, z, w, d, undefined, width, depth) && !objectConflictsWithWalls(candidate, walls)) {
+      if ((allowOverlap||canPlace(grid, x, z, w, d, undefined, width, depth)) && !objectConflictsWithWalls(candidate, walls)) {
         return { cellX: x, cellZ: z };
       }
     }
@@ -72,44 +76,8 @@ function LoadingScreen() {
 
 function loadSavedState() {
   try {
-    const saved = JSON.parse(localStorage.getItem("home-designer-layout"));
-    if (Array.isArray(saved?.objects) && Number.isInteger(saved?.roomSize?.width) && Number.isInteger(saved?.roomSize?.depth)) {
-      const legacyNodes = {
-        "Linen sofa": "Three-seaterSofa03",
-        "Oak lounge chair": "SofaChair01",
-        "Round coffee table": "TVStand01",
-        "Platform bed": "doubleBed01",
-        "Arc floor lamp": "lamp01",
-        "Walnut sideboard": "SmallCabinet01",
-      };
-      const objects = saved.objects.map((obj) => ({
-          ...obj,
-          node: obj.node ?? legacyNodes[obj.name] ?? "SmallCabinet01",
-          source: "/furniture.glb",
-          ...(saved.layoutVersion === LAYOUT_VERSION ? {} : {
-            w: obj.w * ITEM_SIZE_MULTIPLIER,
-            d: obj.d * ITEM_SIZE_MULTIPLIER,
-            height: (obj.height ?? 1) * ITEM_SIZE_MULTIPLIER,
-          }),
-        }));
-
-      if (saved.layoutVersion !== LAYOUT_VERSION) {
-        const placed = [];
-        const largestFirst = [...objects].sort((a, b) => (b.w * b.d) - (a.w * a.d));
-        for (const obj of largestFirst) {
-          const footprint = getFootprint(obj.turns, obj.w, obj.d);
-          const spot = findFreeSpot(buildGrid(placed, saved.roomSize.width, saved.roomSize.depth), footprint.w, footprint.d, saved.roomSize.width, saved.roomSize.depth);
-          placed.push(spot ? { ...obj, ...spot } : {
-            ...obj,
-            cellX: Math.max(0, Math.min(obj.cellX, saved.roomSize.width - footprint.w)),
-            cellZ: Math.max(0, Math.min(obj.cellZ, saved.roomSize.depth - footprint.d)),
-          });
-        }
-        return { ...saved, layoutVersion: LAYOUT_VERSION, objects: placed, walls: sanitizeWalls(placed, saved.walls) };
-      }
-
-      return { ...saved, objects, walls: sanitizeWalls(objects, saved.walls) };
-    }
+    const saved=readLayout(localStorage);
+    if(saved)return saved;
   } catch { /* Start with the demo layout if saved data is unavailable. */ }
   return { objects: INITIAL_OBJECTS, roomSize: DEFAULT_ROOM, walls: [], ...DEFAULT_FINISHES };
 }
@@ -133,10 +101,16 @@ export default function App() {
   }, [objects, roomSize, walls, openings, wallColor, floorColor]);
 
   const addObject = useCallback((item) => {
-    const w = (item.w ?? 2) * ITEM_SIZE_MULTIPLIER;
-    const d = (item.d ?? 2) * ITEM_SIZE_MULTIPLIER;
+    const definition=definitionOf(item);
+    if(definition?.placementType==='opening'){setActiveOpeningId(definition.id);setTool('openings');return;}
+    if(definition && definition.placementType!=='floor'){
+      setTool('furniture');window.dispatchEvent(new CustomEvent('home-designer-place-attached',{detail:definition}));return;
+    }
+    const configured=definition?configureInstance(definition,definition.defaultSizeId):null;
+    const w = configured?.w ?? (item.w ?? 2) * ITEM_SIZE_MULTIPLIER;
+    const d = configured?.d ?? (item.d ?? 2) * ITEM_SIZE_MULTIPLIER;
     const footprint = getFootprint(0, w, d);
-    const spot = findFurnitureSpot(objects, walls, roomSize.width, roomSize.depth, footprint.w, footprint.d);
+    const spot = findFurnitureSpot(objects, walls, roomSize.width, roomSize.depth, footprint.w, footprint.d,configured?.collisionLayer==='rug');
     if (!spot) return;
     const id = Math.max(0, ...objects.map((obj) => obj.id)) + 1;
     setObjects((current) => [...current, {
@@ -150,6 +124,7 @@ export default function App() {
         cellZ: spot.cellZ,
         height: (item.height ?? 1) * ITEM_SIZE_MULTIPLIER,
         source: "/furniture.glb",
+        ...configured,
       }]);
     setSelectedWallId(null);
     setSelectedOpeningId(null);
@@ -159,24 +134,28 @@ export default function App() {
   const deleteSelected = useCallback(() => {
     if (selectedOpeningId != null) {
       setOpenings((current) => current.filter((opening) => opening.id !== selectedOpeningId));
+      setObjects((current)=>removeWithDependents(current,current.filter((item)=>item.anchor?.openingId===selectedOpeningId).map((item)=>item.id)));
       setSelectedOpeningId(null);
       return;
     }
     if (selectedWallId != null) {
       setWalls((current) => current.filter((wall) => wall.id !== selectedWallId));
       setOpenings((current) => current.filter((opening) => opening.wallId !== selectedWallId));
+      const openingIds=new Set(openings.filter((opening)=>opening.wallId===selectedWallId).map((opening)=>opening.id));
+      setObjects((current)=>removeWithDependents(current,current.filter((item)=>item.anchor?.wallId===selectedWallId||openingIds.has(item.anchor?.openingId)).map((item)=>item.id)));
       setSelectedWallId(null);
       return;
     }
     if (selectedId != null) {
-      setObjects((current) => current.filter((obj) => obj.id !== selectedId));
+      setObjects((current) => removeWithDependents(current,[selectedId]));
       setSelectedId(null);
     }
-  }, [selectedId, selectedOpeningId, selectedWallId]);
+  }, [selectedId, selectedOpeningId, selectedWallId,openings]);
 
   const resizeRoom = (nextSize) => {
     setRoomSize(nextSize);
     const nextObjects = objects.filter((obj) => {
+      if(obj.anchor)return true;
       const footprint = getFootprint(obj.turns, obj.w, obj.d);
       return obj.cellX >= 0
         && obj.cellZ >= 0
@@ -197,14 +176,30 @@ export default function App() {
         validWalls.push(wall);
       }
     }
-    setObjects(nextObjects.filter((object) => !objectConflictsWithWalls(object, validWalls)));
     setWalls(validWalls);
     const validWallIds = new Set(validWalls.map((wall) => wall.id));
-    setOpenings((current) => current.filter((opening) => {
+    const nextOpenings=openings.filter((opening) => {
       if (opening.wallId.startsWith("outer-x")) return opening.offset + opening.width / 2 <= nextSize.depth * 0.5;
       if (opening.wallId.startsWith("outer-z")) return opening.offset + opening.width / 2 <= nextSize.width * 0.5;
       return validWallIds.has(opening.wallId);
-    }));
+    });
+    setOpenings(nextOpenings);
+    const openingIds=new Set(nextOpenings.map((opening)=>opening.id));
+    const candidates=nextObjects.filter((object)=>{
+      if(objectConflictsWithWalls(object,validWalls))return false;
+      const anchor=object.anchor;if(!anchor)return true;
+      if(anchor.openingId)return openingIds.has(anchor.openingId);
+      if(anchor.type==='ceiling')return anchor.x>=0 && anchor.z>=0 && anchor.x<=nextSize.width*CELL && anchor.z<=nextSize.depth*CELL;
+      if(anchor.type==='wall'){
+        const wall=validWalls.find((entry)=>entry.id===anchor.wallId);
+        const length=wall?Math.hypot(wall.endX-wall.startX,wall.endZ-wall.startZ)*CELL:anchor.wallId?.startsWith('outer-x')?nextSize.depth*CELL:anchor.wallId?.startsWith('outer-z')?nextSize.width*CELL:0;
+        const width=definitionOf(object)?.sizes.find((size)=>size.id===object.sizeId)?.width??object.w*CELL;
+        return anchor.offset-width/2>=0 && anchor.offset+width/2<=length;
+      }
+      return true;
+    });
+    const kept=new Set(candidates.map((item)=>item.id));
+    setObjects(removeWithDependents(candidates,objects.filter((item)=>!kept.has(item.id)).map((item)=>item.id)));
     setSelectedId(null);
     setSelectedWallId(null);
     setSelectedOpeningId(null);

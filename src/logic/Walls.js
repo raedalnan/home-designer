@@ -1,7 +1,9 @@
 import { getFootprint } from "./Grid.js";
 
-const betweenStrict = (value, a, b) => value > Math.min(a, b) && value < Math.max(a, b);
-const rangesOverlap = (a1, a2, b1, b2) => Math.max(Math.min(a1, a2), Math.min(b1, b2)) < Math.min(Math.max(a1, a2), Math.max(b1, b2));
+// Third-cell coordinates can differ by machine precision at touching edges.
+const EPSILON = 1e-9;
+const betweenStrict = (value, a, b) => value > Math.min(a, b) + EPSILON && value < Math.max(a, b) - EPSILON;
+const rangesOverlap = (a1, a2, b1, b2) => Math.max(Math.min(a1, a2), Math.min(b1, b2)) < Math.min(Math.max(a1, a2), Math.max(b1, b2)) - EPSILON;
 
 export function wallsConflict(a, b) {
   const aHorizontal = a.startZ === a.endZ;
@@ -22,6 +24,7 @@ export function wallsConflict(a, b) {
 }
 
 export function wallConflictsWithObject(wall, object) {
+  if(object.placementType && object.placementType!=='floor')return false;
   const footprint = getFootprint(object.turns, object.w, object.d);
   const left = object.cellX;
   const right = object.cellX + footprint.w;
@@ -38,5 +41,6 @@ export function wallConflictsWithObject(wall, object) {
 }
 
 export function objectConflictsWithWalls(object, walls) {
+  if(object.placementType && object.placementType!=='floor')return false;
   return walls.some((wall) => wallConflictsWithObject(wall, object));
 }

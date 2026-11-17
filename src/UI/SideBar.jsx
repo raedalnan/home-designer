@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
-import { FURNITURE_CATALOG, FURNITURE_MATERIALS } from "../data/FurnitureCatalog.js";
+import { useState, useMemo, useEffect } from "react";
+import {FURNITURE_REGISTRY} from '../data/FurnitureRegistry.js';
+const FURNITURE_CATALOG=FURNITURE_REGISTRY;
 import { OPENING_CATALOG } from "../data/OpeningCatalog.js";
 import { COLOR_PALETTE } from "../data/ColorPalette.js";
 import { Palette } from './ColorPicker.jsx';
@@ -11,6 +12,9 @@ const CATEGORIES = [
   "Storage",
   "Lighting",
   "Bathroom",
+  "Dining",
+  "Plants",
+  "Seating",
 ];
 
 const WALL_COLORS = COLOR_PALETTE.map(({hex})=>hex);
@@ -124,6 +128,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
   const [leftOpen, setLeftOpen] = useState(() => window.innerWidth >= 768);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All");
+  const [visibleCount,setVisibleCount]=useState(24);
+  useEffect(()=>setVisibleCount(24),[filter,query]);
 
   const filteredLibrary = useMemo(
     () =>
@@ -135,7 +141,6 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
     [filter, query],
   );
 
-  const matOf = (id) => FURNITURE_MATERIALS.find((m) => m.id === id);
 
   return (
     <>
@@ -221,8 +226,10 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
             </label>
           </div>
           {tool === "furniture" ? <>
-          <div className="flex gap-1 overflow-x-auto px-4 py-2.5 [scrollbar-width:none] sm:px-5 sm:py-3">
-            {CATEGORIES.map((c) => (
+          <div className="catalog-filter px-4 py-2">
+            <label className="sr-only" htmlFor="furniture-category">Furniture category</label>
+            <select id="furniture-category" aria-label="Furniture category" value={filter} onChange={(event)=>setFilter(event.target.value)} className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm">{['All',...new Set(FURNITURE_CATALOG.map((item)=>item.category))].map((category)=><option key={category} value={category}>{category==='All'?'All collections':category}</option>)}</select>
+            {CATEGORIES.slice(0,0).map((c) => (
               <button
                 key={c}
                 onClick={() => setFilter(c)}
@@ -236,8 +243,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               </button>
             ))}
           </div>
-          <div className="grid min-h-0 flex-1 auto-rows-max content-start grid-cols-1 gap-2 overflow-y-auto px-4 pb-4 pt-1 [scrollbar-color:#cbd5e1_transparent] sm:px-5 sm:pb-5">
-            {filteredLibrary.map((item) => (
+          <div className="catalog-grid grid min-h-0 flex-1 auto-rows-max content-start grid-cols-2 gap-2 overflow-y-auto px-4 pb-4 pt-1 [scrollbar-color:#cbd5e1_transparent] sm:px-5 sm:pb-5">
+            {filteredLibrary.slice(0,visibleCount).map((item) => (
               <button
                 key={item.id}
                 draggable
@@ -251,10 +258,10 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                 onDragEnd={() => window.dispatchEvent(new CustomEvent("home-designer-library-drag", { detail: null }))}
                 onClick={() => { onAddObject(item); if (window.innerWidth < 768) setLeftOpen(false); }}
                 title={`Add ${item.name}`}
-                className="group flex min-h-[76px] items-center gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-2 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_25px_rgba(50,55,65,0.09)]"
+                className="catalog-card group flex flex-col min-h-[156px] items-stretch gap-2 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-2 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_25px_rgba(50,55,65,0.09)]"
               >
                 <div className="h-[60px] w-[76px] shrink-0 rounded-xl bg-[#f5f4f1] p-2 transition-colors group-hover:bg-[#f0efeb]">
-                  <img src={`/thumbnails/${item.node}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
+                  <img src={item.thumbnail??`/thumbnails/${item.node ?? ({sofa:'Three-seaterSofa03',bed:'doubleBed02',table:'TVStand01',cabinet:'SmallCabinet01',lamp:'lamp01',plant:'lamp02'}[item.family])}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
                 </div>
                 <div className="min-w-0 flex-1 pr-2">
                   <div className="truncate text-[13px] font-semibold leading-5 text-slate-800">
@@ -262,11 +269,13 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                   </div>
                   <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.12em] text-slate-400">
                     {item.category}
+                    {item.family && !item.thumbnail && ' · Family preview'}
                   </span>
                 </div>
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-slate-50 text-base font-light text-slate-400 transition group-hover:bg-slate-900 group-hover:text-white" aria-hidden="true">+</span>
+                <span className="catalog-add" aria-hidden="true">+</span>
               </button>
             ))}
+            {visibleCount<filteredLibrary.length && <button className="col-span-2 rounded-xl border border-slate-200 p-3 text-sm text-slate-600" onClick={()=>setVisibleCount((count)=>count+24)}>Show 24 more · {filteredLibrary.length-visibleCount} remaining</button>}
             {filteredLibrary.length === 0 && (
               <p className="col-span-2 py-6 text-center text-sm text-slate-500">
                 No objects match. Try another category or clear the search.
@@ -306,16 +315,16 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                   <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</p>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {items.map((item) => (
-                      <button key={item.id} onClick={() => onOpeningChange(item.id)} className={`rounded-2xl border p-2 text-left transition ${activeOpeningId === item.id ? "border-slate-900 bg-slate-900 text-white shadow-md" : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"}`}>
-                        <div className={`grid h-16 place-items-center rounded-xl ${activeOpeningId === item.id ? "bg-white/10" : "bg-[#f5f4f1]"}`}>
-                          <img src={`/thumbnails/${item.id}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
+                      <button key={item.id} onClick={() => onOpeningChange(item.id)} className={`opening-card flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border p-2 text-left transition ${activeOpeningId === item.id ? "border-slate-900 bg-slate-900 text-white shadow-md" : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"}`}>
+                        <div className={`flex h-24 w-full min-w-0 shrink-0 items-center justify-center overflow-hidden rounded-xl p-2 ${activeOpeningId === item.id ? "bg-white/10" : "bg-[#f5f4f1]"}`}>
+                          <img src={item.thumbnail??`/thumbnails/${item.id}.png`} alt={item.name} width="192" height="192" className="block h-full max-h-full w-full min-w-0 max-w-full object-contain" loading="lazy" />
                           {false && (item.type === "door" ? (
                             <div className="relative h-12 w-8 rounded-t-sm border-2 border-current" style={{ backgroundColor: item.color }}><span className="absolute right-1.5 top-1/2 size-1 rounded-full bg-current" /></div>
                           ) : (
                             <div className="grid h-9 w-14 grid-cols-2 border-[3px] border-current bg-sky-100/70"><span className="border-r border-current" /><span /></div>
                           ))}
                         </div>
-                        <p className="mt-2 truncate text-[11px] font-semibold">{item.name}</p>
+                        <p className="mt-2 w-full truncate text-[11px] font-semibold">{item.name}</p>
                         <p className={`mt-0.5 text-[9px] ${activeOpeningId === item.id ? "text-white/55" : "text-slate-400"}`}>{item.width} × {item.height} m</p>
                       </button>
                     ))}

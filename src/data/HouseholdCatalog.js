@@ -1,0 +1,1307 @@
+// Generated original Blender models.
+export const HOUSEHOLD_CATALOG = [
+  {
+    "id": "atelier-single-bed",
+    "name": "Single bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-single-bed.glb",
+    "thumbnail": "/thumbnails/atelier-single-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.0,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-double-bed",
+    "name": "Double bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-double-bed.glb",
+    "thumbnail": "/thumbnails/atelier-double-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.45,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-queen-bed",
+    "name": "Queen bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-queen-bed.glb",
+    "thumbnail": "/thumbnails/atelier-queen-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-king-bed",
+    "name": "King bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-king-bed.glb",
+    "thumbnail": "/thumbnails/atelier-king-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.85,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bunk-bed",
+    "name": "Bunk bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bunk-bed.glb",
+    "thumbnail": "/thumbnails/atelier-bunk-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.01,
+        "depth": 2.405,
+        "height": 2.023
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-loft-bed",
+    "name": "Loft bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-loft-bed.glb",
+    "thumbnail": "/thumbnails/atelier-loft-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.01,
+        "depth": 2.405,
+        "height": 2.453
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toddler-bed",
+    "name": "Toddler bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toddler-bed.glb",
+    "thumbnail": "/thumbnails/atelier-toddler-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.75,
+        "depth": 1.821,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-children-s-bed",
+    "name": "Children's bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-children-s-bed.glb",
+    "thumbnail": "/thumbnails/atelier-children-s-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.0,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-crib",
+    "name": "Crib",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-crib.glb",
+    "thumbnail": "/thumbnails/atelier-crib.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.75,
+        "depth": 1.821,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bassinet",
+    "name": "Bassinet",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bassinet.glb",
+    "thumbnail": "/thumbnails/atelier-bassinet.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.75,
+        "depth": 1.821,
+        "height": 1.222
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-canopy-bed",
+    "name": "Canopy bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-canopy-bed.glb",
+    "thumbnail": "/thumbnails/atelier-canopy-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.754,
+        "depth": 2.12,
+        "height": 2.225
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-four-poster-bed",
+    "name": "Four-poster bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-four-poster-bed.glb",
+    "thumbnail": "/thumbnails/atelier-four-poster-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.67,
+        "depth": 2.12,
+        "height": 2.225
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-murphy-bed",
+    "name": "Murphy bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-murphy-bed.glb",
+    "thumbnail": "/thumbnails/atelier-murphy-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.82,
+        "depth": 2.095,
+        "height": 2.22
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-platform-bed",
+    "name": "Platform bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-platform-bed.glb",
+    "thumbnail": "/thumbnails/atelier-platform-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 2.07,
+        "height": 0.854
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-upholstered-bed",
+    "name": "Upholstered bed",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-upholstered-bed.glb",
+    "thumbnail": "/thumbnails/atelier-upholstered-bed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "bedding": "fabric",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bed-frame",
+    "name": "Bed frame",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bed-frame.glb",
+    "thumbnail": "/thumbnails/atelier-bed-frame.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 2.07,
+        "height": 1.204
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-headboard",
+    "name": "Headboard",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-headboard.glb",
+    "thumbnail": "/thumbnails/atelier-headboard.png",
+    "parts": {
+      "fabric": "fabric",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 0.108,
+        "height": 1.3
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bedside-table",
+    "name": "Bedside table",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bedside-table.glb",
+    "thumbnail": "/thumbnails/atelier-bedside-table.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.535,
+        "depth": 0.531,
+        "height": 0.579
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-nightstand",
+    "name": "Nightstand",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-nightstand.glb",
+    "thumbnail": "/thumbnails/atelier-nightstand.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.535,
+        "depth": 0.531,
+        "height": 0.579
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dresser",
+    "name": "Dresser",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dresser.glb",
+    "thumbnail": "/thumbnails/atelier-dresser.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.435,
+        "depth": 0.561,
+        "height": 0.879
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-chest-of-drawers",
+    "name": "Chest of drawers",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-chest-of-drawers.glb",
+    "thumbnail": "/thumbnails/atelier-chest-of-drawers.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.735,
+        "depth": 0.561,
+        "height": 1.329
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-wardrobe",
+    "name": "Wardrobe",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-wardrobe.glb",
+    "thumbnail": "/thumbnails/atelier-wardrobe.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.435,
+        "depth": 0.656,
+        "height": 2.079
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-armoire",
+    "name": "Armoire",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-armoire.glb",
+    "thumbnail": "/thumbnails/atelier-armoire.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.679,
+        "height": 2.172
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-vanity-table",
+    "name": "Vanity table",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-vanity-table.glb",
+    "thumbnail": "/thumbnails/atelier-vanity-table.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.1,
+        "depth": 0.548,
+        "height": 1.592
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dressing-stool",
+    "name": "Dressing stool",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dressing-stool.glb",
+    "thumbnail": "/thumbnails/atelier-dressing-stool.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.5,
+        "depth": 0.45,
+        "height": 0.509
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bedroom-bench",
+    "name": "Bedroom bench",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bedroom-bench.glb",
+    "thumbnail": "/thumbnails/atelier-bedroom-bench.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.2,
+        "depth": 0.45,
+        "height": 0.509
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-clothes-rack",
+    "name": "Clothes rack",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-clothes-rack.glb",
+    "thumbnail": "/thumbnails/atelier-clothes-rack.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.15,
+        "depth": 0.5,
+        "height": 1.675
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-laundry-hamper",
+    "name": "Laundry hamper",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-laundry-hamper.glb",
+    "thumbnail": "/thumbnails/atelier-laundry-hamper.png",
+    "parts": {
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.5,
+        "depth": 0.42,
+        "height": 0.727
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-changing-table",
+    "name": "Changing table",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-changing-table.glb",
+    "thumbnail": "/thumbnails/atelier-changing-table.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.95,
+        "depth": 0.55,
+        "height": 1.09
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-toy-chest",
+    "name": "Toy chest",
+    "category": "Bedroom",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-toy-chest.glb",
+    "thumbnail": "/thumbnails/atelier-toy-chest.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.9,
+        "depth": 0.583,
+        "height": 0.579
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-coffee-table",
+    "name": "Coffee table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-coffee-table.glb",
+    "thumbnail": "/thumbnails/atelier-coffee-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.1,
+        "depth": 0.406,
+        "height": 0.624
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-side-table",
+    "name": "Side table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-side-table.glb",
+    "thumbnail": "/thumbnails/atelier-side-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.406,
+        "height": 0.753
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-end-table",
+    "name": "End table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-end-table.glb",
+    "thumbnail": "/thumbnails/atelier-end-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.406,
+        "height": 0.753
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-accent-table",
+    "name": "Accent table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-accent-table.glb",
+    "thumbnail": "/thumbnails/atelier-accent-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.6,
+        "height": 0.533
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-console-table",
+    "name": "Console table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-console-table.glb",
+    "thumbnail": "/thumbnails/atelier-console-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.47,
+        "height": 0.977
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dining-table",
+    "name": "Dining table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dining-table.glb",
+    "thumbnail": "/thumbnails/atelier-dining-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-round-dining-table",
+    "name": "Round dining table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-round-dining-table.glb",
+    "thumbnail": "/thumbnails/atelier-round-dining-table.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.8,
+        "height": 0.735
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-rectangular-dining-table",
+    "name": "Rectangular dining table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-rectangular-dining-table.glb",
+    "thumbnail": "/thumbnails/atelier-rectangular-dining-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-extendable-dining-table",
+    "name": "Extendable dining table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-extendable-dining-table.glb",
+    "thumbnail": "/thumbnails/atelier-extendable-dining-table.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.8,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-table",
+    "name": "Kitchen table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-table.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-kitchen-island",
+    "name": "Kitchen island",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-kitchen-island.glb",
+    "thumbnail": "/thumbnails/atelier-kitchen-island.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal",
+      "ceramic": "ceramic"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.75,
+        "depth": 0.95,
+        "height": 0.944
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-breakfast-bar",
+    "name": "Breakfast bar",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-breakfast-bar.glb",
+    "thumbnail": "/thumbnails/atelier-breakfast-bar.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.456,
+        "height": 1.276
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bar-counter",
+    "name": "Bar counter",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bar-counter.glb",
+    "thumbnail": "/thumbnails/atelier-bar-counter.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.478,
+        "height": 1.276
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-desk",
+    "name": "Desk",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-desk.glb",
+    "thumbnail": "/thumbnails/atelier-desk.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.716,
+        "height": 1.112
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-computer-desk",
+    "name": "Computer desk",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-computer-desk.glb",
+    "thumbnail": "/thumbnails/atelier-computer-desk.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.716,
+        "height": 1.112
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-writing-desk",
+    "name": "Writing desk",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-writing-desk.glb",
+    "thumbnail": "/thumbnails/atelier-writing-desk.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.716,
+        "height": 1.112
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-standing-desk",
+    "name": "Standing desk",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-standing-desk.glb",
+    "thumbnail": "/thumbnails/atelier-standing-desk.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.706,
+        "height": 1.41
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-craft-table",
+    "name": "Craft table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-craft-table.glb",
+    "thumbnail": "/thumbnails/atelier-craft-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-workbench",
+    "name": "Workbench",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-workbench.glb",
+    "thumbnail": "/thumbnails/atelier-workbench.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.6,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-display-table",
+    "name": "Display table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-display-table.glb",
+    "thumbnail": "/thumbnails/atelier-display-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 0.706,
+        "height": 1.102
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pedestal-table",
+    "name": "Pedestal table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pedestal-table.glb",
+    "thumbnail": "/thumbnails/atelier-pedestal-table.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.8,
+        "height": 0.735
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-nesting-tables",
+    "name": "Nesting tables",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-nesting-tables.glb",
+    "thumbnail": "/thumbnails/atelier-nesting-tables.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.25,
+        "depth": 0.406,
+        "height": 0.756
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-picnic-table",
+    "name": "Picnic table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-picnic-table.glb",
+    "thumbnail": "/thumbnails/atelier-picnic-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.55,
+        "height": 1.15
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-outdoor-dining-table",
+    "name": "Outdoor dining table",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-outdoor-dining-table.glb",
+    "thumbnail": "/thumbnails/atelier-outdoor-dining-table.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.8,
+        "depth": 1.55,
+        "height": 1.15
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bedside-tray",
+    "name": "Bedside tray",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bedside-tray.glb",
+    "thumbnail": "/thumbnails/atelier-bedside-tray.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.6,
+        "depth": 0.36,
+        "height": 0.32
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-serving-trolley",
+    "name": "Serving trolley",
+    "category": "Tables",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-serving-trolley.glb",
+    "thumbnail": "/thumbnails/atelier-serving-trolley.png",
+    "parts": {
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.76,
+        "depth": 0.45,
+        "height": 0.85
+      }
+    ],
+    "defaultSizeId": "standard"
+  }
+];

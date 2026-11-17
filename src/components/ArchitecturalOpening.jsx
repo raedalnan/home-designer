@@ -5,7 +5,7 @@ import { MathUtils, Quaternion, Vector3, MeshPhysicalMaterial } from 'three';
 
 export default function ArchitecturalOpening({ opening, position, alongX, onSelect, materialSet }) {
   const variant = opening.variantId ?? (opening.type === 'door' ? 'door-single' : 'window-standard');
-  const { scene } = useGLTF(`/openings/${variant}.glb?v=3`);
+  const { scene } = useGLTF(opening.modelSource??`/openings/${variant}.glb?v=3`);
   const model = useMemo(() => {
     const copy = scene.clone(true);
     copy.traverse((node) => {

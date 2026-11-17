@@ -2,20 +2,27 @@ import { Suspense, createContext, useContext, useCallback, useEffect, useRef, us
 import { Edges, Html, OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { MathUtils, Plane, Raycaster, Vector2, Vector3 } from "three";
-import { FURNITURE_CATALOG } from "../data/FurnitureCatalog.js";
+import {FURNITURE_REGISTRY,FINISHES,configureInstance,definitionOf} from '../data/FurnitureRegistry.js';
+const FURNITURE_CATALOG=FURNITURE_REGISTRY;
 import { CELL } from "../data/Constants.js";
-import { snap, cellToWorld, buildGrid, placeObject, removeObject, canPlace, getFootprint } from "../logic/Grid.js";
+import { snap, snapCoordinate, cellToWorld, buildGrid, placeObject, removeObject, canPlace, getFootprint } from "../logic/Grid.js";
 import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "../logic/Walls.js";
 import Furniture from "./Furniture.jsx";
 import RoomGrid from "./RoomGrid.jsx";
 import ArchitecturalOpening from "./ArchitecturalOpening.jsx";
 import ColorPicker from "../UI/ColorPicker.jsx";
+import {resizeFurniture} from '../logic/FurnitureCommands.js';
+import {resolveAttachment,isFloor} from '../logic/Attachments.js';
 
 const WALL_HEIGHT = 2.5;
 const WALL_THICKNESS = 0.1;
 const WallFinishContext = createContext({});
 const FADED_OPACITY = 0.001;
 const ignoreRaycast = () => {};
+function menuPosition(object,camera,size){
+  const point=new Vector3().setFromMatrixPosition(object.matrixWorld).project(camera);
+  return [MathUtils.clamp((point.x+1)*size.width/2,32,Math.max(32,size.width-360)),MathUtils.clamp((1-point.y)*size.height/2,160,Math.max(160,size.height-320))];
+}
 
 function setSurfacePicking(group, enabled) {
   group.traverse((object) => {
@@ -334,6 +341,22 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
   const [isDragging, setIsDragging] = useState(false);
   const [libraryGhost, setLibraryGhost] = useState(null);
   const [doorNotice, setDoorNotice] = useState('');
+  const [furnitureNotice,setFurnitureNotice]=useState('');
+  const [pendingPlacement,setPendingPlacement]=useState(null);
+  const [placementNotice,setPlacementNotice]=useState('');
+  useEffect(()=>{
+    const request=(event)=>{setPendingPlacement(event.detail);setPlacementNotice(`Choose ${event.detail.placementType==='surface'?'a table, shelf, cabinet, bed or sofa':event.detail.placementType==='window'?'a window':event.detail.placementType==='ceiling'?'a point on the floor below the ceiling':'a wall'} for ${event.detail.name}.`);};
+    window.addEventListener('home-designer-place-attached',request);
+    return()=>window.removeEventListener('home-designer-place-attached',request);
+  },[]);
+  const placeAttached=(anchor)=>{
+    if(!pendingPlacement)return;
+    const definition=definitionOf(pendingPlacement);
+    const base=pendingPlacement.relocateId?objects.find((entry)=>entry.id===pendingPlacement.relocateId):null;
+    const instance=configureInstance(definition,base?.sizeId??definition.defaultSizeId,{...base,id:base?.id??Math.max(0,...objects.map((entry)=>entry.id))+1,cellX:0,cellZ:0,turns:base?.turns??0,anchor});
+    setObjects((current)=>base?current.map((entry)=>entry.id===base.id?instance:entry):[...current,instance]);
+    setSelectedId(instance.id);setSelectedWallId(null);setSelectedOpeningId(null);setPendingPlacement(null);setPlacementNotice('');
+  };
   const [surface,setSurface]=useState(null);
   const [wallFinishes,setWallFinishes]=useState(()=>{try{return JSON.parse(localStorage.getItem('home-designer-wall-finishes'))??{};}catch{return {};}});
   useEffect(()=>{localStorage.setItem('home-designer-wall-finishes',JSON.stringify(wallFinishes));},[wallFinishes]);
@@ -357,26 +380,33 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
       ray.setFromCamera(new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
       const point = ray.ray.intersectPlane(new Plane(new Vector3(0, 1, 0), 0), new Vector3());
       if (!point) return clear();
-      const w = item.w * 2, d = item.d * 2;
-      setLibraryGhost({ ...item, id: "preview", w, d, height: 2, source: "/furniture.glb", turns: 0,
-        cellX: Math.round((point.x + roomSize.width * CELL / 2) / CELL - w / 2),
-        cellZ: Math.round((point.z + roomSize.depth * CELL / 2) / CELL - d / 2) });
+      const definition=definitionOf(item),configured=definition?configureInstance(definition,definition.defaultSizeId):null;
+      const w = configured?.w ?? item.w * 2, d = configured?.d ?? item.d * 2;
+      setLibraryGhost({ ...item, ...configured, id: "preview", w, d, height: configured?.height??2, source: configured?.source??"/furniture.glb", turns: 0,
+        cellX: snapCoordinate((point.x + roomSize.width * CELL / 2) / CELL - w / 2),
+        cellZ: snapCoordinate((point.z + roomSize.depth * CELL / 2) / CELL - d / 2) });
     };
     const drop = (event) => {
       event.preventDefault();
       clear();
       const item = FURNITURE_CATALOG.find((entry) => entry.id === event.dataTransfer.getData("application/home-designer"));
       if (!item) return;
+      const dropDefinition=definitionOf(item);
+      if(dropDefinition?.placementType==='opening'){setPlacementNotice('Choose this opening in the catalog, then tap a wall.');return;}
+      if(dropDefinition && dropDefinition.placementType!=='floor'){
+        window.dispatchEvent(new CustomEvent('home-designer-place-attached',{detail:dropDefinition}));return;
+      }
       const rect = canvas.getBoundingClientRect();
       const ray = new Raycaster();
       ray.setFromCamera(new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
       const point = ray.ray.intersectPlane(new Plane(new Vector3(0, 1, 0), 0), new Vector3());
       if (!point) return;
-      const w = item.w * 2, d = item.d * 2;
-      const cellX = Math.round((point.x + roomSize.width * CELL / 2) / CELL - w / 2);
-      const cellZ = Math.round((point.z + roomSize.depth * CELL / 2) / CELL - d / 2);
-      const candidate = { ...item, id: Math.max(0, ...objects.map((object) => object.id)) + 1, w, d, cellX, cellZ, turns: 0, height: 2, source: "/furniture.glb" };
-      if (!canPlace(buildGrid(objects, roomSize.width, roomSize.depth), cellX, cellZ, w, d, undefined, roomSize.width, roomSize.depth) || objectConflictsWithWalls(candidate, walls)) return;
+      const definition=definitionOf(item),configured=definition?configureInstance(definition,definition.defaultSizeId):null;
+      const w = configured?.w ?? item.w * 2, d = configured?.d ?? item.d * 2;
+      const cellX = snapCoordinate((point.x + roomSize.width * CELL / 2) / CELL - w / 2);
+      const cellZ = snapCoordinate((point.z + roomSize.depth * CELL / 2) / CELL - d / 2);
+      const candidate = { ...item,...configured, id: Math.max(0, ...objects.map((object) => object.id)) + 1, w, d, cellX, cellZ, turns: 0, height: configured?.height??2, source: configured?.source??"/furniture.glb" };
+      if (cellX<0||cellZ<0||cellX+w>roomSize.width||cellZ+d>roomSize.depth|| (candidate.collisionLayer!=='rug'&&!canPlace(buildGrid(objects, roomSize.width, roomSize.depth), cellX, cellZ, w, d, undefined, roomSize.width, roomSize.depth)) || objectConflictsWithWalls(candidate, walls)) return;
       setObjects((current) => [...current, candidate]);
       setSelectedId(candidate.id);
       setSelectedWallId(null);
@@ -433,6 +463,22 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
     if (tool !== "furniture" || dragRef.current) return;
     const obj = objectsRef.current.find((o) => o.id === id);
     if (!obj) return;
+    if(pendingPlacement?.placementType==='ceiling'){
+      if(pendingPlacement.sizes[0].height>WALL_HEIGHT){setPlacementNotice('This ceiling fixture is taller than the room.');return;}
+      placeAttached({type:'ceiling',x:point.x+roomSize.width*CELL/2,z:point.z+roomSize.depth*CELL/2});return;
+    }
+    if(pendingPlacement && pendingPlacement.placementType!=='surface'){setPlacementNotice('Choose the requested wall or window.');return;}
+    if(pendingPlacement?.placementType==='surface'){
+      const parentDefinition=definitionOf(obj);
+      if(!parentDefinition?.supportsSurface && !/table|desk|cabinet|bed|sofa|shelf|console/i.test(obj.name)){setPlacementNotice('Choose a compatible furniture surface.');return;}
+      const base=resolveAttachment(obj,objects,walls,openings,roomSize);if(!base)return;
+      const childDefinition=definitionOf(pendingPlacement),child=childDefinition.sizes[0],parent=parentDefinition?.sizes.find((size)=>size.id===obj.sizeId)??{width:obj.w*CELL,depth:obj.d*CELL};
+      const dx=point.x-base.x,dz=point.z-base.z,a=-base.rotation;
+      const x=dx*Math.cos(a)+dz*Math.sin(a),z=-dx*Math.sin(a)+dz*Math.cos(a);
+      if(Math.abs(x)+child.width/2>parent.width/2 || Math.abs(z)+child.depth/2>parent.depth/2){setPlacementNotice('This decoration does not fit at that position. Choose a larger surface or a point nearer its center.');return;}
+      placeAttached({type:'surface',parentId:id,x,z});return;
+    }
+    if(!isFloor(obj)){setSelectedId(id);setSelectedWallId(null);setSelectedOpeningId(null);return;}
     removeObject(gridRef.current, id);
     const footprint = getFootprint(obj.turns, obj.w, obj.d);
     const { x, z } = cellToWorld(obj.cellX, obj.cellZ, footprint.w, footprint.d, sizeRef.current.width, sizeRef.current.depth);
@@ -450,7 +496,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
     setSelectedId(id);
     setIsDragging(true);
     setPreview({ x, z, footprint, valid: true });
-  }, [setSelectedId, setSelectedOpeningId, setSelectedWallId, tool]);
+  }, [setSelectedId, setSelectedOpeningId, setSelectedWallId, tool,pendingPlacement,objects,walls,openings,roomSize]);
 
   const endDrag = useCallback(() => {
     const drag = dragRef.current;
@@ -484,8 +530,8 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
     const cornerX = -(sizeRef.current.width * CELL) / 2;
     const cornerZ = -(sizeRef.current.depth * CELL) / 2;
     return {
-      x: Math.max(0, Math.min(sizeRef.current.width, Math.round((point.x - cornerX) / CELL))),
-      z: Math.max(0, Math.min(sizeRef.current.depth, Math.round((point.z - cornerZ) / CELL))),
+      x: Math.max(0, Math.min(sizeRef.current.width, snapCoordinate((point.x - cornerX) / CELL))),
+      z: Math.max(0, Math.min(sizeRef.current.depth, snapCoordinate((point.z - cornerZ) / CELL))),
     };
   }, []);
 
@@ -517,12 +563,29 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
   }, [setSelectedId, setSelectedWallId, setWalls]);
 
   const selectOpening = useCallback((id) => {
+    if(pendingPlacement?.placementType==='window'){
+      const opening=openings.find((entry)=>entry.id===id);
+      if(opening?.type!=='window'){setPlacementNotice('Choose a window for this treatment.');return;}
+      const wall=connectedWalls.find((entry)=>entry.id===opening.wallId);
+      const horizontal=wall?.startZ===wall?.endZ;
+      const fixed=wall?(horizontal?wall.startZ*CELL-roomSize.depth*CELL/2:wall.startX*CELL-roomSize.width*CELL/2):0;
+      const side=(horizontal?camera.position.z:camera.position.x)>=fixed?1:-1;
+      placeAttached({type:'wall',openingId:id,height:Math.max(0,opening.sillHeight+opening.height-pendingPlacement.sizes[0].height),side});return;
+    }
     setSelectedId(null);
     setSelectedWallId(null);
     setSelectedOpeningId(id);
-  }, [setSelectedId, setSelectedOpeningId, setSelectedWallId]);
+  }, [setSelectedId, setSelectedOpeningId, setSelectedWallId,pendingPlacement,openings]);
 
   const handleWallPointerDown = useCallback((wall, event) => {
+    if(pendingPlacement && ['wall','window'].includes(pendingPlacement.placementType)){
+      if(pendingPlacement.placementType==='window'){setPlacementNotice('Tap the window frame, not the wall.');return;}
+      const info=wallParts(wall,roomSize,[]),preset=pendingPlacement.sizes[0];
+      const raw=(info.alongX?event.point.x:event.point.z)-info.startWorld;
+      if(preset.width>info.length || preset.height>WALL_HEIGHT){setPlacementNotice('This item is too large for this wall.');return;}
+      const side=(info.alongX?event.face?.normal.z:event.face?.normal.x)>=0?1:-1;
+      placeAttached({type:'wall',wallId:wall.id,offset:Math.max(preset.width/2,Math.min(info.length-preset.width/2,raw)),height:Math.max(0,Math.min(WALL_HEIGHT-preset.height,event.point.y-preset.height/2)),side});return;
+    }
     if (tool === "openings" && activeOpening) {
       const info = wallParts(wall, sizeRef.current, []);
       if (activeOpening.sillHeight + activeOpening.height > WALL_HEIGHT || info.length < activeOpening.width + 0.3) return;
@@ -551,7 +614,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
       setSelectedOpeningId(null);
       setSelectedWallId(wall.id);
     }
-  }, [activeOpening, selectOpening, setOpenings, setSelectedId, setSelectedOpeningId, setSelectedWallId, tool]);
+  }, [activeOpening, selectOpening, setOpenings, setSelectedId, setSelectedOpeningId, setSelectedWallId, tool,pendingPlacement,roomSize]);
 
   useEffect(() => {
     const finishPointerAction = () => {
@@ -579,7 +642,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
     const { x, z, cellX, cellZ } = snap(e.point.x, e.point.z, w, d, sizeRef.current.width, sizeRef.current.depth);
     const draggedObject = objectsRef.current.find((object) => object.id === drag.id);
     const candidate = draggedObject ? { ...draggedObject, cellX, cellZ } : null;
-    const valid = canPlace(gridRef.current, cellX, cellZ, w, d, drag.id, sizeRef.current.width, sizeRef.current.depth)
+    const valid = (candidate?.collisionLayer==='rug'||canPlace(gridRef.current, cellX, cellZ, w, d, drag.id, sizeRef.current.width, sizeRef.current.depth))
       && candidate != null
       && !objectConflictsWithWalls(candidate, wallsRef.current);
     drag.valid = valid;
@@ -605,6 +668,10 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
       if ((event.type !== "home-designer-rotate" && event.key?.toLowerCase() !== "r") || selectedId == null) return;
       const obj = objectsRef.current.find((item) => item.id === selectedId);
       if (!obj) return;
+      if(!isFloor(obj)){
+        if(obj.anchor?.type!=='wall')setObjects((current)=>current.map((entry)=>entry.id===obj.id?{...entry,turns:((entry.turns??0)+1)%4}:entry));
+        return;
+      }
       const drag = dragRef.current;
       if (!drag) removeObject(gridRef.current, obj.id);
       const nextTurns = ((obj.turns ?? 0) + 1) % 4;
@@ -649,6 +716,13 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
 
   const handleFloorPointerDown = (event) => {
     if (event.object !== event.eventObject) return;
+    if(pendingPlacement){
+      if(pendingPlacement.placementType==='ceiling'){
+        if(pendingPlacement.sizes[0].height>WALL_HEIGHT){setPlacementNotice('This ceiling fixture is taller than the room.');return;}
+        placeAttached({type:'ceiling',x:event.point.x+roomSize.width*CELL/2,z:event.point.z+roomSize.depth*CELL/2});
+      }else setPlacementNotice('Choose the requested wall, window or furniture surface.');
+      return;
+    }
     if (tool === "wall") {
       event.stopPropagation();
       const start = gridPoint(event.point);
@@ -669,6 +743,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
     <WallFinishContext.Provider value={{finishes:wallFinishes,selectSurface:(key,position)=>setSurface({key,position})}}>
       <OrbitControls enabled={!isDragging && !isDrawingWall} minDistance={3} maxDistance={24} maxPolarAngle={Math.PI / 2 - 0.03} />
       <CameraAwareRoof roomSize={roomSize} color={wallColor} />
+      {placementNotice && <Html fullscreen style={{pointerEvents:'none'}}><div className="placement-notice">{placementNotice}<button onClick={()=>{setPendingPlacement(null);setPlacementNotice('');}}>Cancel</button></div></Html>}
       {(selectedWallId != null || selectedOpeningId != null) && (() => {
         const opening = openings.find((entry) => entry.id === selectedOpeningId);
         const wall = connectedWalls.find((entry) => entry.id === (opening?.wallId ?? selectedWallId));
@@ -676,7 +751,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
         const info = wallParts(wall, roomSize, []);
         const along = info.startWorld + (opening ? opening.offset : info.length / 2);
         const position = info.alongX ? [along, opening ? opening.sillHeight + opening.height / 2 : WALL_HEIGHT / 2, info.fixedWorld] : [info.fixedWorld, opening ? opening.sillHeight + opening.height / 2 : WALL_HEIGHT / 2, along];
-        return <Html position={!opening && surface ? surface.position : position} zIndexRange={[30, 20]}>
+        return <Html position={!opening && surface ? surface.position : position} calculatePosition={menuPosition} zIndexRange={[30, 20]}>
           <div className="selection-arc" onPointerDown={(event) => event.stopPropagation()}>
             <span>{opening?.name ?? "Interior wall"}<small>Selected</small></span>
             {!opening && surface && <ColorPicker value={wallFinishes[surface.key] ?? wallColor} onChange={(color)=>setWallFinishes((current)=>({...current,[surface.key]:color}))} />}
@@ -691,6 +766,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
               const flipped=opening.swingDirection===-1;
               const bounds = info.alongX ? { x: base + min / CELL, z: fixed + (flipped?0:-depth/CELL), w: (max-min)/CELL, d: depth/CELL + .2 } : { x: fixed + (flipped?-depth/CELL:0), z: base + min / CELL, w: depth/CELL + .2, d: (max-min)/CELL };
               const blocked = objects.some((object) => {
+                if(!isFloor(object)||object.collisionLayer==='rug')return false;
                 const size = getFootprint(object.turns, object.w, object.d);
                 return object.cellX < bounds.x+bounds.w && object.cellX+size.w > bounds.x && object.cellZ < bounds.z+bounds.d && object.cellZ+size.d > bounds.z;
               }) || walls.some((other) => other.id !== wall.id && wallConflictsWithObject(other, {cellX:bounds.x,cellZ:bounds.z,w:bounds.w,d:bounds.d,turns:0}));
@@ -709,9 +785,21 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
         if (!item) return null;
         const footprint = getFootprint(item.turns, item.w, item.d);
         const point = cellToWorld(item.cellX, item.cellZ, footprint.w, footprint.d, roomSize.width, roomSize.depth);
-        return <Html position={[point.x + footprint.w * CELL / 2, 0.8, point.z]} zIndexRange={[30, 20]}>
+        const attached=resolveAttachment(item,objects,walls,openings,roomSize);
+        return <Html position={item.anchor&&attached?[attached.x,attached.y+.35,attached.z]:[point.x + footprint.w * CELL / 2, 0.8, point.z]} calculatePosition={menuPosition} zIndexRange={[30, 20]}>
           <div className="selection-arc" onPointerDown={(event) => event.stopPropagation()}>
             <span>{item.name}<small>Selected</small></span>
+            {definitionOf(item) && <div className="furniture-settings" onPointerDown={(event)=>event.stopPropagation()}>
+              <label>Size<select aria-label="Furniture size" value={item.sizeId} onChange={(event)=>{
+                const result=resizeFurniture(item,event.target.value,objects,walls,roomSize);
+                if(!result.ok){setFurnitureNotice(result.message);return;}
+                setFurnitureNotice('');setObjects((current)=>current.map((entry)=>entry.id===item.id?result.item:entry));
+              }}>{definitionOf(item).sizes.map((preset)=><option key={preset.id} value={preset.id}>{preset.label}</option>)}</select></label>
+              {item.anchor && <button className="attachment-move" onClick={()=>window.dispatchEvent(new CustomEvent('home-designer-place-attached',{detail:{...definitionOf(item),relocateId:item.id}}))}>Move to another support</button>}
+              {item.anchor?.type==='wall' && <label>Mounting height<input type="range" min="0" max={Math.max(0,2.5-item.height)} step="0.05" value={item.anchor.height??.8} onChange={(event)=>{const height=Number(event.target.value);setObjects((current)=>current.map((entry)=>entry.id===item.id?{...entry,anchor:{...entry.anchor,height}}:entry));}}/></label>}
+              {Object.entries(definitionOf(item).parts).map(([part,group])=><fieldset key={part}><legend>{part==='legs'?'Wood / frame':part}</legend><div>{[...(definitionOf(item).defaultFinishes?.[part]?[['Original',definitionOf(item).defaultFinishes[part]]]:[]),...FINISHES[group]].map(([name,color])=><button key={name} title={name} aria-label={`${part}: ${name}`} aria-pressed={item.finishes?.[part]===color} style={{background:color}} onClick={()=>setObjects((current)=>current.map((entry)=>entry.id===item.id?{...entry,finishes:{...entry.finishes,[part]:color}}:entry))}/>)}</div></fieldset>)}
+              {furnitureNotice&&<p role="status">{furnitureNotice}</p>}
+            </div>}
             <button aria-label="Rotate selected furniture" onClick={() => window.dispatchEvent(new Event("home-designer-rotate"))}>↻</button>
             <button aria-label="Delete selected furniture" onClick={onDeleteSelected}>×</button>
           </div>
@@ -783,6 +871,9 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
           registerMesh={registerMesh}
           onDragStart={startDrag}
           roomSize={roomSize}
+          objects={objects}
+          walls={walls}
+          openings={openings}
         />
       ))}
     </WallFinishContext.Provider>

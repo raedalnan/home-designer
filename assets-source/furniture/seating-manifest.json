@@ -1,0 +1,633 @@
+[
+  {
+    "id": "atelier-standard-sofa",
+    "name": "Standard sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-standard-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-standard-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.1,
+        "depth": 0.905,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-two-seat-sofa-loveseat",
+    "name": "Two-seat sofa / loveseat",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-two-seat-sofa-loveseat.glb",
+    "thumbnail": "/thumbnails/atelier-two-seat-sofa-loveseat.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.65,
+        "depth": 0.905,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-three-seat-sofa",
+    "name": "Three-seat sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-three-seat-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-three-seat-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.4,
+        "depth": 0.905,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-sectional-sofa",
+    "name": "Sectional sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-sectional-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-sectional-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.4,
+        "depth": 1.58,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-l-shaped-sofa",
+    "name": "L-shaped sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-l-shaped-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-l-shaped-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.4,
+        "depth": 1.55,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-modular-sofa",
+    "name": "Modular sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-modular-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-modular-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.4,
+        "depth": 0.905,
+        "height": 1.018
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-corner-sofa",
+    "name": "Corner sofa",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-corner-sofa.glb",
+    "thumbnail": "/thumbnails/atelier-corner-sofa.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 2.4,
+        "depth": 1.78,
+        "height": 1.031
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-chaise-lounge",
+    "name": "Chaise lounge",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-chaise-lounge.glb",
+    "thumbnail": "/thumbnails/atelier-chaise-lounge.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 1.9,
+        "height": 0.925
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-armchair",
+    "name": "Armchair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-armchair.glb",
+    "thumbnail": "/thumbnails/atelier-armchair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 0.61,
+        "height": 0.904
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-accent-chair",
+    "name": "Accent chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-accent-chair.glb",
+    "thumbnail": "/thumbnails/atelier-accent-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 0.61,
+        "height": 0.904
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-recliner",
+    "name": "Recliner",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-recliner.glb",
+    "thumbnail": "/thumbnails/atelier-recliner.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 1.033,
+        "height": 1.113
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-rocking-chair",
+    "name": "Rocking chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-rocking-chair.glb",
+    "thumbnail": "/thumbnails/atelier-rocking-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 1.014,
+        "height": 0.923
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-dining-chair",
+    "name": "Dining chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-dining-chair.glb",
+    "thumbnail": "/thumbnails/atelier-dining-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.53,
+        "depth": 0.61,
+        "height": 0.904
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-office-chair",
+    "name": "Office chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-office-chair.glb",
+    "thumbnail": "/thumbnails/atelier-office-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 0.697,
+        "height": 0.91
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-gaming-chair",
+    "name": "Gaming chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-gaming-chair.glb",
+    "thumbnail": "/thumbnails/atelier-gaming-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "metal": "metal",
+      "accent": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.776,
+        "depth": 0.697,
+        "height": 1.119
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bar-stool",
+    "name": "Bar stool",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bar-stool.glb",
+    "thumbnail": "/thumbnails/atelier-bar-stool.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.53,
+        "depth": 0.58,
+        "height": 0.812
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-counter-stool",
+    "name": "Counter stool",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-counter-stool.glb",
+    "thumbnail": "/thumbnails/atelier-counter-stool.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.53,
+        "depth": 0.58,
+        "height": 0.702
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-ottoman",
+    "name": "Ottoman",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-ottoman.glb",
+    "thumbnail": "/thumbnails/atelier-ottoman.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 0.8,
+        "height": 0.432
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-pouf",
+    "name": "Pouf",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-pouf.glb",
+    "thumbnail": "/thumbnails/atelier-pouf.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.84,
+        "depth": 0.84,
+        "height": 0.48
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-footstool",
+    "name": "Footstool",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-footstool.glb",
+    "thumbnail": "/thumbnails/atelier-footstool.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.56,
+        "depth": 0.56,
+        "height": 0.303
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-bench",
+    "name": "Bench",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-bench.glb",
+    "thumbnail": "/thumbnails/atelier-bench.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.48,
+        "height": 0.568
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-window-seat",
+    "name": "Window seat",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-window-seat.glb",
+    "thumbnail": "/thumbnails/atelier-window-seat.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.509,
+        "height": 0.568
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-outdoor-lounge-chair",
+    "name": "Outdoor lounge chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-outdoor-lounge-chair.glb",
+    "thumbnail": "/thumbnails/atelier-outdoor-lounge-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.8,
+        "depth": 1.9,
+        "height": 0.925
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-hanging-chair",
+    "name": "Hanging chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-hanging-chair.glb",
+    "thumbnail": "/thumbnails/atelier-hanging-chair.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood",
+      "metal": "metal"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.03,
+        "depth": 0.663,
+        "height": 2.101
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-beanbag-chair",
+    "name": "Beanbag chair",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-beanbag-chair.glb",
+    "thumbnail": "/thumbnails/atelier-beanbag-chair.png",
+    "parts": {
+      "fabric": "fabric"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.96,
+        "depth": 0.96,
+        "height": 0.93
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-daybed",
+    "name": "Daybed",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-daybed.glb",
+    "thumbnail": "/thumbnails/atelier-daybed.png",
+    "parts": {
+      "fabric": "fabric",
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 0.87,
+        "depth": 1.9,
+        "height": 0.925
+      }
+    ],
+    "defaultSizeId": "standard"
+  },
+  {
+    "id": "atelier-garden-bench",
+    "name": "Garden bench",
+    "category": "Seating",
+    "placementType": "floor",
+    "family": "blender",
+    "modelSource": "/furniture-v2/atelier-garden-bench.glb",
+    "thumbnail": "/thumbnails/atelier-garden-bench.png",
+    "parts": {
+      "legs": "wood"
+    },
+    "sizes": [
+      {
+        "id": "standard",
+        "label": "Standard",
+        "width": 1.5,
+        "depth": 0.485,
+        "height": 0.943
+      }
+    ],
+    "defaultSizeId": "standard"
+  }
+]
