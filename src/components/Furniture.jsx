@@ -4,7 +4,7 @@ import { CELL } from "../data/Constants.js";
 import { cellToWorld, getFootprint } from "../logic/Grid.js";
 import { Clone, useGLTF } from "@react-three/drei";
 
-export default function Furniture({ obj, registerMesh, onDragStart, roomSize }) {
+export default function Furniture({ obj, registerMesh, onDragStart, roomSize, ghost = false }) {
   const { id, w, d, cellX, cellZ, height, source } = obj;
   const meshRef = useRef();
   const { nodes } = useGLTF(source);
@@ -12,11 +12,17 @@ export default function Furniture({ obj, registerMesh, onDragStart, roomSize }) 
   const footprint = getFootprint(obj.turns, w, d);
   const normalizedNode = useMemo(() => {
     const clone = sourceNode.clone(true);
+    if (ghost) clone.traverse((child) => {
+      if (!child.isMesh) return;
+      const fade = (material) => { const copy = material.clone(); copy.transparent = true; copy.opacity = 0.35; copy.depthWrite = false; return copy; };
+      child.material = Array.isArray(child.material) ? child.material.map(fade) : fade(child.material);
+      child.raycast = () => {};
+    });
     clone.position.set(0, 0, 0);
     clone.updateMatrix();
     clone.updateMatrixWorld(true);
     return clone;
-  }, [sourceNode]);
+  }, [sourceNode, ghost]);
 
   // Ignore the node's original pack layout position, then fit its own bounds.
   const fit = useMemo(() => {
@@ -37,14 +43,16 @@ export default function Furniture({ obj, registerMesh, onDragStart, roomSize }) 
   }, [cellX, cellZ, footprint.w, footprint.d, roomSize, obj.turns, height]);
 
   useLayoutEffect(() => {
+    if (ghost) return;
     registerMesh(id, meshRef.current);
     return () => registerMesh(id, null);
-  }, [id, registerMesh]);
+  }, [id, registerMesh, ghost]);
 
   return (
     <group
       ref={meshRef}
       onPointerDown={(e) => {
+        if (ghost) return;
         e.stopPropagation();
         onDragStart(id, e.point);
       }}

@@ -45,13 +45,14 @@ function LoadingScreen() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    if (!visible) return undefined;
     if (active || progress < 100) {
       setVisible(true);
       return undefined;
     }
     const timeout = window.setTimeout(() => setVisible(false), 350);
     return () => window.clearTimeout(timeout);
-  }, [active, progress]);
+  }, [active, progress, visible]);
 
   if (!visible) return null;
   return (

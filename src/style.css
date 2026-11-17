@@ -1,4 +1,39 @@
 @import "tailwindcss";
+.selection-arc { position: relative; width: 84px; height: 132px; border-right: 2px solid #64748b80; border-radius: 0 100% 100% 0; margin-left: 12px; }
+.selection-arc button { position: absolute; right: -22px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #0f172a; box-shadow: 0 4px 20px #0f172a26; font-size: 24px; cursor: pointer; }
+.selection-arc button:nth-of-type(1) { top: 20px; }
+.selection-arc button:nth-of-type(2) { bottom: 12px; color: #dc2626; }
+.selection-arc span { position: absolute; bottom: 140px; left: -40px; width: 155px; padding: 8px 12px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px #0f172a20; font-size: 12px; font-weight: 600; }
+.selection-arc small { display: block; color: #64748b; font-size: 10px; }
+.selection-arc { width:76px; height:156px; border-color:#94a3b8; }
+.selection-arc > button { top:auto; bottom:0; right:0; font-size:22px; }
+.selection-arc > button:first-of-type { top:0; right:0; bottom:auto; }
+.selection-arc > button:last-of-type { top:auto; bottom:0; right:0; color:#dc2626; }
+.selection-arc > button.arc-open { top:0; bottom:auto; right:0; font-size:12px; font-weight:600; }
+.selection-arc .arc-color { position:absolute; right:-22px; top:56px; width:44px; height:44px; }
+.selection-arc .arc-color-trigger { position:static; width:44px; height:44px; display:grid; place-items:center; }
+.arc-color-trigger i { width:24px; height:24px; border:1px solid #94a3b8; border-radius:50%; }
+.selection-arc .arc-palette { position:absolute; right:52px; top:-44px; width:190px; padding:12px; border-radius:16px; background:white; box-shadow:0 8px 32px #0f172a30; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.selection-arc .arc-palette button { position:static; width:34px; height:34px; border:1px solid #cbd5e1; box-shadow:none; }
+.selection-arc .arc-palette button[aria-pressed=true] { outline:2px solid #0f172a; outline-offset:2px; }
+.selection-arc button:focus-visible { outline:3px solid #64748b; outline-offset:3px; }
+.selection-arc { margin-left:64px; width:54px; height:132px; pointer-events:none; }
+.selection-arc button,.selection-arc .arc-color,.selection-arc .arc-palette { pointer-events:auto; }
+.selection-arc > button,.selection-arc .arc-color-trigger { width:36px; height:36px; font-size:18px; }
+.selection-arc .arc-color { top:48px; right:-18px; width:36px; height:36px; }
+.selection-arc > button.arc-open { font-size:10px; }
+.selection-arc > button.arc-flip { top:88px; right:-14px; bottom:auto; color:#334155; }
+.selection-arc > button:last-child:not(.arc-open):not(.arc-flip) { bottom:-28px; right:12px; }
+.selection-arc > span { bottom:140px; left:-26px; width:140px; padding:6px 10px; font-size:11px; }
+.selection-arc .arc-palette { display:block; top:-60px; right:46px; width:250px; padding:12px; max-height:340px; overflow:auto; }
+.finish-browser { width:100%; min-width:0; }
+.finish-browser input,.finish-browser select { width:100%; height:34px; padding:5px 8px; border:1px solid #cbd5e1; border-radius:8px; background:white; font-size:12px; margin-bottom:8px; }
+.finish-swatches { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; max-height:190px; overflow:auto; padding:3px; }
+.finish-swatches button,.selection-arc .finish-swatches button { position:static; width:32px; height:32px; min-height:32px; border-radius:50%; border:1px solid #94a3b8; box-shadow:none; }
+.finish-swatches button[aria-pressed=true] { outline:2px solid #0f172a; outline-offset:2px; }
+.finish-browser p { font-size:10px; color:#64748b; margin-top:6px; }
+.selection-arc .arc-palette .palette-close { position:static; width:26px; height:26px; margin:0 0 6px auto; display:block; font-size:18px; }
+@media(pointer:coarse) { .selection-arc > button,.selection-arc .arc-color-trigger { width:44px; height:44px; } }
 html,
 body,
 #root {
@@ -15,7 +50,36 @@ body,
 button,
 select,
 input {
-  font: inherit;
+  font-family: inherit;
+}
+
+aside button { min-height: 44px; }
+aside button svg { flex-shrink: 0; }
+aside button[draggable] { min-height: 92px; cursor: grab; }
+aside button[draggable] > div:first-child { width: 92px; height: 72px; }
+.room-dimensions input { min-height: 24px; margin-top: 2px; }
+@media (min-width: 1024px) {
+  aside { width: 380px !important; }
+}
+@media (max-width: 767px) {
+  main:has(aside) > div:first-child { height: 54dvh !important; }
+  main aside {
+    inset: auto 0 0 !important;
+    height: 46dvh !important;
+    width: 100% !important;
+    border-radius: 22px 22px 0 0 !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  aside > div:first-child { padding: 8px 12px; }
+  aside > div:first-child h1 { font-size: 16px; margin-top: 0; }
+  aside > div:first-child p { display: none; }
+  aside > div:first-child > div.relative { margin-top: 6px; }
+  aside > div:first-child input { height: 36px; }
+  aside > div:nth-child(2) { padding: 4px 12px; }
+  .room-dimensions { padding: 4px 12px; gap: 16px; }
+  aside button[draggable] { min-height: 80px; }
+  aside button[draggable] > div:first-child { width: 76px; height: 60px; }
+  main:has(aside) > div:last-of-type:not(:first-child) { bottom: calc(46dvh + 8px); }
 }
 
 button:focus-visible,

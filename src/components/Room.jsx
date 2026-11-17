@@ -1,15 +1,47 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { OrbitControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { MathUtils } from "three";
+import { Suspense, createContext, useContext, useCallback, useEffect, useRef, useState } from "react";
+import { Edges, Html, OrbitControls } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { MathUtils, Plane, Raycaster, Vector2, Vector3 } from "three";
+import { FURNITURE_CATALOG } from "../data/FurnitureCatalog.js";
 import { CELL } from "../data/Constants.js";
 import { snap, cellToWorld, buildGrid, placeObject, removeObject, canPlace, getFootprint } from "../logic/Grid.js";
 import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "../logic/Walls.js";
 import Furniture from "./Furniture.jsx";
 import RoomGrid from "./RoomGrid.jsx";
+import ArchitecturalOpening from "./ArchitecturalOpening.jsx";
+import ColorPicker from "../UI/ColorPicker.jsx";
 
 const WALL_HEIGHT = 2.5;
 const WALL_THICKNESS = 0.1;
+const WallFinishContext = createContext({});
+const FADED_OPACITY = 0.001;
+const ignoreRaycast = () => {};
+
+function setSurfacePicking(group, enabled) {
+  group.traverse((object) => {
+    if (!object.isMesh) return;
+    object.userData.surfaceRaycast ??= object.raycast;
+    object.raycast = enabled ? object.userData.surfaceRaycast : ignoreRaycast;
+  });
+}
+
+function CameraAwareRoof({ roomSize, color }) {
+  const roofRef = useRef();
+  const materialRef = useRef();
+  useFrame(({ camera }, delta) => {
+    // From above, the roof would obscure the workspace beneath it.
+    const obscuresRoom = camera.position.y >= WALL_HEIGHT;
+    const material = materialRef.current;
+    material.opacity = MathUtils.damp(material.opacity, obscuresRoom ? FADED_OPACITY : 1, 8, delta);
+    material.depthWrite = !obscuresRoom && material.opacity > 0.98;
+  });
+  return (
+    <mesh ref={roofRef} position={[0, WALL_HEIGHT + WALL_THICKNESS / 2, 0]} raycast={ignoreRaycast}>
+      <boxGeometry args={[roomSize.width * CELL + WALL_THICKNESS, WALL_THICKNESS, roomSize.depth * CELL + WALL_THICKNESS]} />
+      <meshStandardMaterial ref={materialRef} color={color} transparent opacity={FADED_OPACITY} depthWrite={false} roughness={0.9} />
+    </mesh>
+  );
+}
 
 function wallTransform(wall, roomSize) {
   const cornerX = -(roomSize.width * CELL) / 2;
@@ -43,7 +75,7 @@ function wallJunctionOffset(wall, other) {
     : (horizontalWall.startZ - Math.min(wall.startZ, wall.endZ)) * CELL;
 }
 
-function wallParts(wall, roomSize, openings) {
+function wallParts(wall, roomSize, openings, connectedWalls = []) {
   const alongX = wall.startZ === wall.endZ;
   const cornerX = -(roomSize.width * CELL) / 2;
   const cornerZ = -(roomSize.depth * CELL) / 2;
@@ -53,8 +85,17 @@ function wallParts(wall, roomSize, openings) {
   const startWorld = (alongX ? cornerX : cornerZ) + startCell * CELL;
   const fixedWorld = (alongX ? cornerZ : cornerX) + fixedCell * CELL;
   const length = (endCell - startCell) * CELL;
+  // Horizontal walls own the junction square; vertical walls meet its edge.
+  const junctions = connectedWalls.filter((other) => other.id !== wall.id)
+    .map((other) => wallJunctionOffset(wall, other));
+  const startJoined = junctions.some((offset) => offset === 0);
+  const endJoined = junctions.some((offset) => offset === length);
+  const startLimit = startJoined ? (alongX ? -WALL_THICKNESS / 2 : WALL_THICKNESS / 2 + 0.0005) : 0;
+  const endLimit = length + (endJoined ? (alongX ? WALL_THICKNESS / 2 : -WALL_THICKNESS / 2 - 0.0005) : 0);
   const parts = [];
   const addPart = (from, to, bottom = 0, height = WALL_HEIGHT) => {
+    from = from === 0 ? startLimit : Math.max(from, startLimit);
+    to = to === length ? endLimit : Math.min(to, endLimit);
     if (to - from <= 0.001 || height <= 0.001) return;
     const center = startWorld + (from + to) / 2;
     parts.push({
@@ -77,7 +118,14 @@ function wallParts(wall, roomSize, openings) {
   return { alongX, cornerX, cornerZ, startWorld, fixedWorld, length, parts };
 }
 
-function OpeningFixture({ opening, wall, roomSize, selected, onSelect, materialSet }) {
+function OpeningFixture({ opening, wall, roomSize, onSelect, materialSet }) {
+  const info = wallParts(wall, roomSize, []);
+  const along = info.startWorld + opening.offset;
+  const position = info.alongX ? [along, opening.sillHeight, info.fixedWorld] : [info.fixedWorld, opening.sillHeight, along];
+  return <Suspense fallback={null}><ArchitecturalOpening opening={opening} position={position} alongX={info.alongX} onSelect={onSelect} materialSet={materialSet} /></Suspense>;
+}
+
+function LegacyOpeningFixture({ opening, wall, roomSize, selected, onSelect, materialSet }) {
   const info = wallParts(wall, roomSize, []);
   const center = info.startWorld + opening.offset;
   const position = info.alongX
@@ -94,8 +142,8 @@ function OpeningFixture({ opening, wall, roomSize, selected, onSelect, materialS
     "Tall window": "window-tall",
     "Double window": "window-double",
   }[opening.name] ?? "";
-  const frameColor = selected ? "#60a5fa" : isWindow ? "#f8fafc" : "#6f5947";
-  const panelColor = selected ? "#93c5fd" : opening.color;
+  const frameColor = isWindow ? "#f8fafc" : "#6f5947";
+  const panelColor = opening.color;
   const registerMaterial = (material) => { if (material && materialSet) materialSet.current.add(material); };
   const materialProps = (baseOpacity = 1) => ({
     ref: registerMaterial,
@@ -120,6 +168,7 @@ function OpeningFixture({ opening, wall, roomSize, selected, onSelect, materialS
         <mesh key={`frame-${index}`} position={piece.position}>
           <boxGeometry args={piece.size} />
           <meshStandardMaterial color={frameColor} roughness={0.55} {...materialProps()} />
+          {selected && <Edges color="#e89b30" raycast={ignoreRaycast} />}
         </mesh>
       ))}
 
@@ -127,7 +176,7 @@ function OpeningFixture({ opening, wall, roomSize, selected, onSelect, materialS
         <>
           <mesh>
             <boxGeometry args={[innerWidth, innerHeight, 0.035]} />
-            <meshStandardMaterial color={selected ? "#7dd3fc" : opening.color} roughness={0.08} metalness={0.08} {...materialProps(0.48)} />
+            <meshStandardMaterial color={opening.color} roughness={0.08} metalness={0.08} {...materialProps(0.48)} />
           </mesh>
           {(variant === "window-wide" || variant === "window-double") && (
             <mesh position={[0, 0, 0.045]}>
@@ -199,18 +248,32 @@ function OpeningFixture({ opening, wall, roomSize, selected, onSelect, materialS
   );
 }
 
-function WallMeshes({ wall, roomSize, openings, color, selected, onWallPointerDown, onOpeningSelect, materialSet }) {
-  const { parts } = wallParts(wall, roomSize, openings);
+function WallMeshes({ wall, roomSize, openings, color, selected, onWallPointerDown, onOpeningSelect, materialSet, connectedWalls }) {
+  const { finishes, selectSurface } = useContext(WallFinishContext);
+  const info = wallParts(wall, roomSize, openings, connectedWalls);
+  const axis=info.alongX ? 0 : 2;
+  const cuts=[...new Set([0,...(connectedWalls ?? []).filter((other)=>other.id!==wall.id).map((other)=>wallJunctionOffset(wall,other)).filter((offset)=>offset>0 && offset<info.length),info.length])].sort((a,b)=>a-b);
+  const parts=info.parts.flatMap((part)=>{
+    const from=part.position[axis]-part.size[axis]/2-info.startWorld;
+    const to=from+part.size[axis];
+    return cuts.slice(0,-1).flatMap((cut,index)=>{
+      const low=Math.max(from,index===0?from:cut), high=Math.min(to,index===cuts.length-2?to:cuts[index+1]);
+      if(high-low<.00001)return [];
+      const position=[...part.position],size=[...part.size];position[axis]=info.startWorld+(low+high)/2;size[axis]=high-low;
+      return [{position,size,paintKey:`${wall.id}:${cut.toFixed(3)}:${cuts[index+1].toFixed(3)}`}];
+    });
+  });
   return (
     <>
       {parts.map((part, index) => (
-        <mesh key={index} position={part.position} onPointerDown={(event) => { event.stopPropagation(); onWallPointerDown(wall, event); }}>
+        <mesh key={index} position={part.position} onPointerDown={(event) => { event.stopPropagation(); selectSurface(`${part.paintKey}:${event.face?.materialIndex ?? 4}`,part.position); onWallPointerDown(wall, event); }}>
           <boxGeometry args={part.size} />
-          <meshStandardMaterial
+          {Array.from({length:6},(_,face)=><meshStandardMaterial key={face} attach={`material-${face}`}
             ref={(material) => { if (material && materialSet) materialSet.current.add(material); }}
-            color={selected ? "#94a3b8" : color}
+            color={finishes[`${part.paintKey}:${face}`] ?? color}
             transparent={Boolean(materialSet)}
-          />
+          />)}
+          {selected && <Edges color="#e89b30" raycast={ignoreRaycast} />}
         </mesh>
       ))}
       {openings.map((opening) => (
@@ -220,11 +283,11 @@ function WallMeshes({ wall, roomSize, openings, color, selected, onWallPointerDo
   );
 }
 
-function InteriorWall({ wall, roomSize, openings, color, selected, onWallPointerDown, onOpeningSelect }) {
-  return <WallMeshes wall={wall} roomSize={roomSize} openings={openings} color={color} selected={selected} onWallPointerDown={onWallPointerDown} onOpeningSelect={onOpeningSelect} />;
+function InteriorWall(props) {
+  return <WallMeshes {...props} />;
 }
 
-function CameraAwareWall({ wall, roomSize, openings, axis, side, color, onWallPointerDown, onOpeningSelect }) {
+function CameraAwareWall({ wall, roomSize, openings, axis, side, color, onWallPointerDown, onOpeningSelect, connectedWalls }) {
   const wallRef = useRef();
   const materialSet = useRef(new Set());
   const topDownRef = useRef(false);
@@ -249,29 +312,88 @@ function CameraAwareWall({ wall, roomSize, openings, axis, side, color, onWallPo
     }
 
     const isFrontWall = facingCameraRef.current && cameraPosition * side > 0;
-    const targetOpacity = topDownRef.current || !isFrontWall ? 1 : 0;
+    const faded = !topDownRef.current && isFrontWall;
+    const targetOpacity = faded ? FADED_OPACITY : 1;
     const wallGroup = wallRef.current;
-
-    if (targetOpacity > 0) wallGroup.visible = true;
-    let opacity = targetOpacity;
+    setSurfacePicking(wallGroup, !faded);
     for (const material of materialSet.current) {
       const materialTarget = targetOpacity * (material.userData.baseOpacity ?? 1);
       material.opacity = MathUtils.damp(material.opacity, materialTarget, 8, delta);
-      material.depthWrite = material.opacity > 0.98;
-      opacity = Math.max(opacity === targetOpacity ? 0 : opacity, material.opacity);
+      material.depthWrite = !faded && material.opacity > 0.98;
     }
-    if (targetOpacity === 0 && opacity < 0.01) wallGroup.visible = false;
   });
 
   return (
     <group ref={wallRef}>
-      <WallMeshes wall={wall} roomSize={roomSize} openings={openings} color={color} onWallPointerDown={onWallPointerDown} onOpeningSelect={onOpeningSelect} materialSet={materialSet} />
+      <WallMeshes wall={wall} roomSize={roomSize} openings={openings} color={color} onWallPointerDown={onWallPointerDown} onOpeningSelect={onOpeningSelect} materialSet={materialSet} connectedWalls={connectedWalls} />
     </group>
   );
 }
 
 export default function Room({ objects, setObjects, walls, setWalls, openings, setOpenings, roomSize, selectedId, setSelectedId, selectedWallId, setSelectedWallId, selectedOpeningId, setSelectedOpeningId, onDeleteSelected, tool, activeOpening, wallColor, floorColor }) {
   const [isDragging, setIsDragging] = useState(false);
+  const [libraryGhost, setLibraryGhost] = useState(null);
+  const [doorNotice, setDoorNotice] = useState('');
+  const [surface,setSurface]=useState(null);
+  const [wallFinishes,setWallFinishes]=useState(()=>{try{return JSON.parse(localStorage.getItem('home-designer-wall-finishes'))??{};}catch{return {};}});
+  useEffect(()=>{localStorage.setItem('home-designer-wall-finishes',JSON.stringify(wallFinishes));},[wallFinishes]);
+  useEffect(() => {
+    const toggle = (event) => document.getElementById(`door-toggle-${event.detail}`)?.click();
+    window.addEventListener('home-designer-door-toggle',toggle);
+    return () => window.removeEventListener('home-designer-door-toggle',toggle);
+  }, []);
+  const libraryItem = useRef(null);
+  const { camera, gl } = useThree();
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const start = (event) => { libraryItem.current = event.detail; if (!event.detail) setLibraryGhost(null); };
+    const clear = () => setLibraryGhost(null);
+    const over = (event) => {
+      event.preventDefault(); event.dataTransfer.dropEffect = "copy";
+      const item = libraryItem.current;
+      if (!item) return;
+      const rect = canvas.getBoundingClientRect();
+      const ray = new Raycaster();
+      ray.setFromCamera(new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
+      const point = ray.ray.intersectPlane(new Plane(new Vector3(0, 1, 0), 0), new Vector3());
+      if (!point) return clear();
+      const w = item.w * 2, d = item.d * 2;
+      setLibraryGhost({ ...item, id: "preview", w, d, height: 2, source: "/furniture.glb", turns: 0,
+        cellX: Math.round((point.x + roomSize.width * CELL / 2) / CELL - w / 2),
+        cellZ: Math.round((point.z + roomSize.depth * CELL / 2) / CELL - d / 2) });
+    };
+    const drop = (event) => {
+      event.preventDefault();
+      clear();
+      const item = FURNITURE_CATALOG.find((entry) => entry.id === event.dataTransfer.getData("application/home-designer"));
+      if (!item) return;
+      const rect = canvas.getBoundingClientRect();
+      const ray = new Raycaster();
+      ray.setFromCamera(new Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
+      const point = ray.ray.intersectPlane(new Plane(new Vector3(0, 1, 0), 0), new Vector3());
+      if (!point) return;
+      const w = item.w * 2, d = item.d * 2;
+      const cellX = Math.round((point.x + roomSize.width * CELL / 2) / CELL - w / 2);
+      const cellZ = Math.round((point.z + roomSize.depth * CELL / 2) / CELL - d / 2);
+      const candidate = { ...item, id: Math.max(0, ...objects.map((object) => object.id)) + 1, w, d, cellX, cellZ, turns: 0, height: 2, source: "/furniture.glb" };
+      if (!canPlace(buildGrid(objects, roomSize.width, roomSize.depth), cellX, cellZ, w, d, undefined, roomSize.width, roomSize.depth) || objectConflictsWithWalls(candidate, walls)) return;
+      setObjects((current) => [...current, candidate]);
+      setSelectedId(candidate.id);
+      setSelectedWallId(null);
+      setSelectedOpeningId(null);
+    };
+    canvas.addEventListener("dragover", over);
+    canvas.addEventListener("dragleave", clear);
+    window.addEventListener("home-designer-library-drag", start);
+    canvas.addEventListener("drop", drop);
+    return () => { canvas.removeEventListener("dragover", over); canvas.removeEventListener("drop", drop); canvas.removeEventListener("dragleave", clear); window.removeEventListener("home-designer-library-drag", start); };
+  }, [camera, gl, objects, walls, roomSize, setObjects, setSelectedId, setSelectedWallId, setSelectedOpeningId]);
+  const connectedWalls = [...walls,
+    { id: "outer-z-negative", startX: 0, startZ: 0, endX: roomSize.width, endZ: 0 },
+    { id: "outer-z-positive", startX: 0, startZ: roomSize.depth, endX: roomSize.width, endZ: roomSize.depth },
+    { id: "outer-x-negative", startX: 0, startZ: 0, endX: 0, endZ: roomSize.depth },
+    { id: "outer-x-positive", startX: roomSize.width, startZ: 0, endX: roomSize.width, endZ: roomSize.depth },
+  ];
   const [isDrawingWall, setIsDrawingWall] = useState(false);
   const [preview, setPreview] = useState(null);
   const [wallPreview, setWallPreview] = useState(null);
@@ -424,7 +546,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
       selectOpening(opening.id);
       return;
     }
-    if (!String(wall.id).startsWith("outer-")) {
+    {
       setSelectedId(null);
       setSelectedOpeningId(null);
       setSelectedWallId(wall.id);
@@ -544,8 +666,57 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
   };
 
   return (
-    <>
+    <WallFinishContext.Provider value={{finishes:wallFinishes,selectSurface:(key,position)=>setSurface({key,position})}}>
       <OrbitControls enabled={!isDragging && !isDrawingWall} minDistance={3} maxDistance={24} maxPolarAngle={Math.PI / 2 - 0.03} />
+      <CameraAwareRoof roomSize={roomSize} color={wallColor} />
+      {(selectedWallId != null || selectedOpeningId != null) && (() => {
+        const opening = openings.find((entry) => entry.id === selectedOpeningId);
+        const wall = connectedWalls.find((entry) => entry.id === (opening?.wallId ?? selectedWallId));
+        if (!wall) return null;
+        const info = wallParts(wall, roomSize, []);
+        const along = info.startWorld + (opening ? opening.offset : info.length / 2);
+        const position = info.alongX ? [along, opening ? opening.sillHeight + opening.height / 2 : WALL_HEIGHT / 2, info.fixedWorld] : [info.fixedWorld, opening ? opening.sillHeight + opening.height / 2 : WALL_HEIGHT / 2, along];
+        return <Html position={!opening && surface ? surface.position : position} zIndexRange={[30, 20]}>
+          <div className="selection-arc" onPointerDown={(event) => event.stopPropagation()}>
+            <span>{opening?.name ?? "Interior wall"}<small>Selected</small></span>
+            {!opening && surface && <ColorPicker value={wallFinishes[surface.key] ?? wallColor} onChange={(color)=>setWallFinishes((current)=>({...current,[surface.key]:color}))} />}
+            {opening?.type==='door' && !opening.variantId?.includes('sliding') && <button className="arc-flip" title="Reverse door swing" aria-label="Reverse door swing" onClick={()=>setOpenings((current)=>current.map((entry)=>entry.id===opening.id?{...entry,isOpen:false,swingDirection:entry.swingDirection===-1?1:-1}:entry))}>⇄</button>}
+            {opening && <ColorPicker value={opening.finishColor ?? opening.color} onChange={(finishColor)=>setOpenings((current)=>current.map((entry)=>entry.id===opening.id?{...entry,finishColor}:entry))} />}
+            {opening?.type === 'door' && <button id={`door-toggle-${opening.id}`} className="arc-open" title="Open or close door (double-click the door)" onClick={() => {
+              const depth = opening.width + .12;
+              const min = opening.offset - opening.width / 2 - .08;
+              const max = opening.offset + opening.width / 2 + .08;
+              const fixed = (info.fixedWorld + (info.alongX ? roomSize.depth : roomSize.width) * CELL / 2) / CELL;
+              const base = (info.startWorld + (info.alongX ? roomSize.width : roomSize.depth) * CELL / 2) / CELL;
+              const flipped=opening.swingDirection===-1;
+              const bounds = info.alongX ? { x: base + min / CELL, z: fixed + (flipped?0:-depth/CELL), w: (max-min)/CELL, d: depth/CELL + .2 } : { x: fixed + (flipped?-depth/CELL:0), z: base + min / CELL, w: depth/CELL + .2, d: (max-min)/CELL };
+              const blocked = objects.some((object) => {
+                const size = getFootprint(object.turns, object.w, object.d);
+                return object.cellX < bounds.x+bounds.w && object.cellX+size.w > bounds.x && object.cellZ < bounds.z+bounds.d && object.cellZ+size.d > bounds.z;
+              }) || walls.some((other) => other.id !== wall.id && wallConflictsWithObject(other, {cellX:bounds.x,cellZ:bounds.z,w:bounds.w,d:bounds.d,turns:0}));
+              if (!opening.isOpen && blocked) { setDoorNotice('Move nearby furniture or walls to open this door.'); return; }
+              setDoorNotice('');
+              setOpenings((current) => current.map((entry) => entry.id === opening.id ? {...entry,isOpen:!entry.isOpen} : entry));
+            }}>{opening.isOpen ? 'Close' : 'Open'}</button>}
+            {doorNotice && opening?.type === 'door' && <p role="status" style={{width:180,position:'absolute',top:140,background:'white',padding:8,fontSize:12}}>{doorNotice}</p>}
+            {!String(selectedWallId).startsWith('outer-') && <button aria-label={opening ? "Delete selected opening" : "Delete selected wall"} onClick={onDeleteSelected}>×</button>}
+          </div>
+        </Html>;
+      })()}
+      {libraryGhost && <Furniture obj={libraryGhost} roomSize={roomSize} ghost />}
+      {selectedId != null && !isDragging && (() => {
+        const item = objects.find((object) => object.id === selectedId);
+        if (!item) return null;
+        const footprint = getFootprint(item.turns, item.w, item.d);
+        const point = cellToWorld(item.cellX, item.cellZ, footprint.w, footprint.d, roomSize.width, roomSize.depth);
+        return <Html position={[point.x + footprint.w * CELL / 2, 0.8, point.z]} zIndexRange={[30, 20]}>
+          <div className="selection-arc" onPointerDown={(event) => event.stopPropagation()}>
+            <span>{item.name}<small>Selected</small></span>
+            <button aria-label="Rotate selected furniture" onClick={() => window.dispatchEvent(new Event("home-designer-rotate"))}>↻</button>
+            <button aria-label="Delete selected furniture" onClick={onDeleteSelected}>×</button>
+          </div>
+        </Html>;
+      })()}
 
       <mesh rotation-x={-Math.PI / 2} position-y={-0.015} onPointerMove={handleMove} onPointerDown={handleFloorPointerDown}>
         <planeGeometry args={[roomSize.width * CELL, roomSize.depth * CELL]} />
@@ -573,6 +744,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
 
       {walls.map((wall) => (
         <InteriorWall
+          connectedWalls={connectedWalls}
           key={wall.id}
           wall={wall}
           roomSize={roomSize}
@@ -591,6 +763,7 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
         { id: "outer-x-positive", axis: "x", side: 1, startX: roomSize.width, startZ: 0, endX: roomSize.width, endZ: roomSize.depth },
       ].map((wall) => (
         <CameraAwareWall
+          connectedWalls={connectedWalls}
           key={wall.id}
           wall={wall}
           roomSize={roomSize}
@@ -612,6 +785,6 @@ export default function Room({ objects, setObjects, walls, setWalls, openings, s
           roomSize={roomSize}
         />
       ))}
-    </>
+    </WallFinishContext.Provider>
   );
 }

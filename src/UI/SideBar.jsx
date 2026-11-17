@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
 import { FURNITURE_CATALOG, FURNITURE_MATERIALS } from "../data/FurnitureCatalog.js";
 import { OPENING_CATALOG } from "../data/OpeningCatalog.js";
+import { COLOR_PALETTE } from "../data/ColorPalette.js";
+import { Palette } from './ColorPicker.jsx';
 
 const CATEGORIES = [
   "All",
@@ -11,8 +13,8 @@ const CATEGORIES = [
   "Bathroom",
 ];
 
-const WALL_COLORS = ["#ded8cf", "#f2efe9", "#d7ddd8", "#c8d2dc", "#d8c8bd", "#b8b2aa"];
-const FLOOR_COLORS = ["#e8e2d9", "#d9d0c3", "#c9b79c", "#b7aaa0", "#d8d7d1", "#bfc8c2"];
+const WALL_COLORS = COLOR_PALETTE.map(({hex})=>hex);
+const FLOOR_COLORS = WALL_COLORS;
 
 const ICON_PATHS = {
   panelL: (
@@ -119,7 +121,7 @@ function Thumb({ item, hex }) {
   );
 }
 export default function SideBar({ onAddObject, onDeleteSelected, selectedId, selectedName, selectedIsWall, onRoomSizeChange, roomSize, tool, onToolChange, activeOpeningId, onOpeningChange, wallColor, onWallColorChange, floorColor, onFloorColorChange }) {
-  const [leftOpen, setLeftOpen] = useState(true);
+  const [leftOpen, setLeftOpen] = useState(() => window.innerWidth >= 768);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All");
 
@@ -186,7 +188,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               <Icon name="opening" /> Openings
             </button>
           </div>
-          <div className="space-y-3 border-b border-slate-200/70 px-4 py-3 sm:px-5 sm:py-4">
+          <div className="room-dimensions grid grid-cols-2 gap-4 border-b border-slate-200/70 px-4 py-2">
             <label className="block">
               <span className="flex items-center justify-between text-[11px] font-medium text-slate-500">
                 <span>Room width</span>
@@ -238,12 +240,21 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
             {filteredLibrary.map((item) => (
               <button
                 key={item.id}
-                onClick={() => onAddObject(item)}
+                draggable
+                onDragStart={(event) => {
+                  event.dataTransfer.setData("application/home-designer", item.id);
+                  event.dataTransfer.effectAllowed = "copy";
+                  const image = document.createElement("canvas"); image.width = 1; image.height = 1;
+                  event.dataTransfer.setDragImage(image, 0, 0);
+                  window.dispatchEvent(new CustomEvent("home-designer-library-drag", { detail: item }));
+                }}
+                onDragEnd={() => window.dispatchEvent(new CustomEvent("home-designer-library-drag", { detail: null }))}
+                onClick={() => { onAddObject(item); if (window.innerWidth < 768) setLeftOpen(false); }}
                 title={`Add ${item.name}`}
                 className="group flex min-h-[76px] items-center gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-2 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_25px_rgba(50,55,65,0.09)]"
               >
                 <div className="h-[60px] w-[76px] shrink-0 rounded-xl bg-[#f5f4f1] p-2 transition-colors group-hover:bg-[#f0efeb]">
-                  <Thumb item={item} hex={matOf(item.materialId).hex} />
+                  <img src={`/thumbnails/${item.node}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
                 </div>
                 <div className="min-w-0 flex-1 pr-2">
                   <div className="truncate text-[13px] font-semibold leading-5 text-slate-800">
@@ -264,14 +275,12 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
           </div>
           </> : tool === "wall" ? (
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-                <p className="text-xs font-semibold text-blue-900">Draw an interior wall</p>
-                <p className="mt-1 text-[11px] leading-relaxed text-blue-700">Drag across the floor grid. Walls snap horizontally or vertically. Select a wall and press Delete to remove it.</p>
-              </div>
+              <details className="text-xs text-slate-500"><summary className="cursor-pointer py-2">How to draw walls</summary><p className="py-2">Drag across the grid to draw. Select a wall to delete it. Close the library for more space.</p></details>
               <div className="mt-6">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Wall color</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {WALL_COLORS.map((color) => (
+                  <Palette value={wallColor} onChange={onWallColorChange} />
+                  {WALL_COLORS.slice(0,0).map((color) => (
                     <button key={color} onClick={() => onWallColorChange(color)} className={`size-9 rounded-full border-2 shadow-sm transition hover:scale-105 ${wallColor === color ? "border-slate-900 ring-2 ring-slate-900/10" : "border-white"}`} style={{ backgroundColor: color }} aria-label={`Use wall color ${color}`} />
                   ))}
                 </div>
@@ -279,7 +288,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               <div className="mt-6">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Floor color</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {FLOOR_COLORS.map((color) => (
+                  <Palette value={floorColor} onChange={onFloorColorChange} />
+                  {FLOOR_COLORS.slice(0,0).map((color) => (
                     <button key={color} onClick={() => onFloorColorChange(color)} className={`size-9 rounded-full border-2 shadow-sm transition hover:scale-105 ${floorColor === color ? "border-slate-900 ring-2 ring-slate-900/10" : "border-white"}`} style={{ backgroundColor: color }} aria-label={`Use floor color ${color}`} />
                   ))}
                 </div>
@@ -287,10 +297,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
             </div>
           ) : (
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
-              <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
-                <p className="text-xs font-semibold text-amber-900">Place an opening</p>
-                <p className="mt-1 text-[11px] leading-relaxed text-amber-700">Choose a variation, then click an interior or exterior wall. Openings keep a safe distance from edges and each other.</p>
-              </div>
+              <details className="text-xs text-slate-500"><summary className="cursor-pointer py-2">How to place openings</summary><p className="py-2">Choose a style, then tap a wall. Leave space from corners and other openings.</p></details>
               {[
                 ["Doors", OPENING_CATALOG.filter((item) => item.type === "door")],
                 ["Windows", OPENING_CATALOG.filter((item) => item.type === "window")],
@@ -301,11 +308,12 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                     {items.map((item) => (
                       <button key={item.id} onClick={() => onOpeningChange(item.id)} className={`rounded-2xl border p-2 text-left transition ${activeOpeningId === item.id ? "border-slate-900 bg-slate-900 text-white shadow-md" : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"}`}>
                         <div className={`grid h-16 place-items-center rounded-xl ${activeOpeningId === item.id ? "bg-white/10" : "bg-[#f5f4f1]"}`}>
-                          {item.type === "door" ? (
+                          <img src={`/thumbnails/${item.id}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
+                          {false && (item.type === "door" ? (
                             <div className="relative h-12 w-8 rounded-t-sm border-2 border-current" style={{ backgroundColor: item.color }}><span className="absolute right-1.5 top-1/2 size-1 rounded-full bg-current" /></div>
                           ) : (
                             <div className="grid h-9 w-14 grid-cols-2 border-[3px] border-current bg-sky-100/70"><span className="border-r border-current" /><span /></div>
-                          )}
+                          ))}
                         </div>
                         <p className="mt-2 truncate text-[11px] font-semibold">{item.name}</p>
                         <p className={`mt-0.5 text-[9px] ${activeOpeningId === item.id ? "text-white/55" : "text-slate-400"}`}>{item.width} × {item.height} m</p>
@@ -318,7 +326,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
           )}
         </aside>
       )}
-      {selectedId != null && (
+      {false && selectedId != null && selectedIsWall && (
         <div className={`absolute left-1/2 z-20 flex max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 shadow-[0_14px_45px_rgba(30,35,45,0.14)] backdrop-blur-xl ${leftOpen ? "bottom-5 max-sm:bottom-[calc(62dvh+0.75rem)]" : "bottom-5 max-sm:bottom-2"}`}>
           <span className="max-w-44 truncate px-3 text-xs font-semibold text-slate-700">{selectedName ?? "Selected item"}</span>
           <div className="h-6 w-px bg-slate-200" />
