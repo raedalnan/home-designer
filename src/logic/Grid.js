@@ -3,8 +3,14 @@ import { CELL, GRID_SUBDIVISIONS } from "../data/Constants.js";
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 export const snapCoordinate = (value) => Math.round(value * GRID_SUBDIVISIONS) / GRID_SUBDIVISIONS;
 
-export const getFootprint = (turns = 0, w, d) =>
-  turns % 2 === 1 ? { w: d, d: w } : { w, d };
+export function getFootprint(turns = 0, w, d) {
+  if (Number.isInteger(turns)) return Math.abs(turns % 2) === 1 ? { w: d, d: w } : { w, d };
+
+  const radians = turns * Math.PI / 2;
+  const cosine = Math.abs(Math.cos(radians));
+  const sine = Math.abs(Math.sin(radians));
+  return { w: w * cosine + d * sine, d: w * sine + d * cosine };
+}
 
 export const snap = (eX, eZ, w, d, roomWidth, roomDepth) => {
   const cornerX = -(roomWidth * CELL) / 2;
@@ -28,7 +34,7 @@ const createGrid = (roomWidth, roomDepth) =>
   Array.from({ length: roomDepth * GRID_SUBDIVISIONS }, () => Array(roomWidth * GRID_SUBDIVISIONS).fill(0));
 
 // Convert footprints to fine occupancy cells, avoiding rounding at shared edges.
-const occupancyBounds = (x, z, w, d) => ({
+export const occupancyBounds = (x, z, w, d) => ({
   left: Math.floor(x * GRID_SUBDIVISIONS + 1e-9),
   right: Math.ceil((x + w) * GRID_SUBDIVISIONS - 1e-9),
   top: Math.floor(z * GRID_SUBDIVISIONS + 1e-9),

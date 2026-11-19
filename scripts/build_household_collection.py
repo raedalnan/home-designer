@@ -81,7 +81,9 @@ def bed(name):
 def table(w=1.4,d=.8,h=.75,round_top=False,pedestal=False):
     if round_top:
         rod((0,0,h-.055),(0,0,h),w/2,'legs')
-    else:box((0,0,h-.03),(w,.06,d),'legs',.016)
+    else:
+        # Blender uses Z for height, so the tabletop thickness belongs on Z.
+        box((0,0,h-.03),(w,d,.06),'legs',.016)
     if pedestal:
         rod((0,0,.05),(0,0,h-.07),.075,'metal',.055)
         rod((0,0,.015),(0,0,.055),w*.3,'metal')
@@ -173,5 +175,6 @@ for index,name in enumerate(all_names[27:83]):
 (ROOT/'src'/'data'/'HouseholdCatalog.js').write_text('// Generated original Blender models.\nexport const HOUSEHOLD_CATALOG = '+json.dumps(manifest,indent=2)+';\n')
 bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/'household-collection.blend'))
 thumbnail_block=seating.split("scene=bpy.context.scene;scene.render.engine='BLENDER_WORKBENCH'")[1].split("print('SEATING COLLECTION COMPLETE")[0]
+thumbnail_block=thumbnail_block.replace('resolution_x=320','resolution_x=192').replace('resolution_y=320','resolution_y=192')
 exec(compile("scene=bpy.context.scene;scene.render.engine='BLENDER_WORKBENCH'"+thumbnail_block,'thumbnails','exec'))
 print('HOUSEHOLD COMPLETE: '+str(len(manifest)))

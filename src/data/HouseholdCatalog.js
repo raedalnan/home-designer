@@ -738,8 +738,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.1,
-        "depth": 0.406,
-        "height": 0.624
+        "depth": 0.5,
+        "height": 0.404
       }
     ],
     "defaultSizeId": "standard"
@@ -760,8 +760,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 0.6,
-        "depth": 0.406,
-        "height": 0.753
+        "depth": 0.5,
+        "height": 0.533
       }
     ],
     "defaultSizeId": "standard"
@@ -782,8 +782,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 0.6,
-        "depth": 0.406,
-        "height": 0.753
+        "depth": 0.5,
+        "height": 0.533
       }
     ],
     "defaultSizeId": "standard"
@@ -826,8 +826,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.47,
-        "height": 0.977
+        "depth": 0.55,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -848,8 +848,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -893,8 +893,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -917,7 +917,7 @@ export const HOUSEHOLD_CATALOG = [
         "label": "Standard",
         "width": 1.8,
         "depth": 0.8,
-        "height": 1.102
+        "height": 0.736
       }
     ],
     "defaultSizeId": "standard"
@@ -938,8 +938,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -984,8 +984,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.456,
-        "height": 1.276
+        "depth": 0.55,
+        "height": 1.031
       }
     ],
     "defaultSizeId": "standard"
@@ -1006,8 +1006,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.478,
-        "height": 1.276
+        "depth": 0.55,
+        "height": 1.056
       }
     ],
     "defaultSizeId": "standard"
@@ -1029,8 +1029,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.716,
-        "height": 1.112
+        "depth": 0.8,
+        "height": 0.742
       }
     ],
     "defaultSizeId": "standard"
@@ -1052,8 +1052,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.716,
-        "height": 1.112
+        "depth": 0.8,
+        "height": 0.874
       }
     ],
     "defaultSizeId": "standard"
@@ -1075,8 +1075,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.716,
-        "height": 1.112
+        "depth": 0.8,
+        "height": 0.742
       }
     ],
     "defaultSizeId": "standard"
@@ -1098,8 +1098,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.706,
-        "height": 1.41
+        "depth": 0.8,
+        "height": 1.04
       }
     ],
     "defaultSizeId": "standard"
@@ -1120,8 +1120,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -1142,8 +1142,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.6,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -1164,8 +1164,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.8,
-        "depth": 0.706,
-        "height": 1.102
+        "depth": 0.8,
+        "height": 0.732
       }
     ],
     "defaultSizeId": "standard"
@@ -1209,8 +1209,8 @@ export const HOUSEHOLD_CATALOG = [
         "id": "standard",
         "label": "Standard",
         "width": 1.25,
-        "depth": 0.406,
-        "height": 0.756
+        "depth": 0.5,
+        "height": 0.536
       }
     ],
     "defaultSizeId": "standard"
@@ -1232,7 +1232,7 @@ export const HOUSEHOLD_CATALOG = [
         "label": "Standard",
         "width": 1.8,
         "depth": 1.55,
-        "height": 1.15
+        "height": 0.78
       }
     ],
     "defaultSizeId": "standard"
@@ -1254,7 +1254,7 @@ export const HOUSEHOLD_CATALOG = [
         "label": "Standard",
         "width": 1.8,
         "depth": 1.55,
-        "height": 1.15
+        "height": 0.78
       }
     ],
     "defaultSizeId": "standard"

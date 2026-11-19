@@ -3,6 +3,22 @@ import PerformanceProbe from './PerformanceProbe.jsx';
 import { Environment, Lightformer } from '@react-three/drei';
 
 export default function Experience({
+  gridVisible,
+  tileGridVisible,
+  historyRevision,
+  settingsHost,
+  optionsOpen,
+  onToggleOptions,
+  panelOpen,
+  walking,
+  walkInput,
+  onWalkExit,
+  onWalkHint,
+  floorTiles,
+  floorKeys,
+  onFloorSelect,
+  onFloorEdit,
+  onSelectMode,
   objects,
   setObjects,
   walls,
@@ -21,6 +37,8 @@ export default function Experience({
   activeOpening,
   wallColor,
   floorColor,
+  wallFinishes,
+  setWallFinishes,
 }) {
   return (
     <>
@@ -33,6 +51,22 @@ export default function Experience({
       </Environment>
       <directionalLight position={[20, 30, 20]} intensity={2} />
       <Room
+        gridVisible={gridVisible}
+        tileGridVisible={tileGridVisible}
+        historyRevision={historyRevision}
+        settingsHost={settingsHost}
+        optionsOpen={optionsOpen}
+        onToggleOptions={onToggleOptions}
+        panelOpen={panelOpen}
+        walking={walking}
+        walkInput={walkInput}
+        onWalkExit={onWalkExit}
+        onWalkHint={onWalkHint}
+        floorTiles={floorTiles}
+        floorKeys={floorKeys}
+        onFloorSelect={onFloorSelect}
+        onFloorEdit={onFloorEdit}
+        onSelectMode={onSelectMode}
         objects={objects}
         setObjects={setObjects}
         walls={walls}
@@ -51,6 +85,8 @@ export default function Experience({
         activeOpening={activeOpening}
         wallColor={wallColor}
         floorColor={floorColor}
+        wallFinishes={wallFinishes}
+        setWallFinishes={setWallFinishes}
       />
     </>
   );

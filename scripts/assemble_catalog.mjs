@@ -10,10 +10,19 @@ const missing=requested.filter((name)=>!items.some((item)=>item.name===name));
 if(missing.length)throw Error(`Catalog incomplete: ${missing.join(', ')}`);
 if(items.length!==480||new Set(items.map((item)=>item.id)).size!==480)throw Error('Catalog coverage or ID collision');
 const toHex=(v)=>'#'+v.slice(0,3).map((c)=>Math.round(255*(c<=.0031308?12.92*c:1.055*Math.pow(c,1/2.4)-.055)).toString(16).padStart(2,'0')).join('');
+const household = JSON.parse(fs.readFileSync(root+'household-manifest.json'));
+const unaffectedTableStyles = new Set(['Accent table', 'Round dining table', 'Pedestal table',
+  'Kitchen island', 'Bedside tray', 'Serving trolley']);
+const correctedTabletops = new Set(household.filter((item) =>
+  item.name === 'Vanity table' || (item.category === 'Tables' && !unaffectedTableStyles.has(item.name))
+).map((item) => item.id));
 let bytes=0;
 for(const item of items){
  const buffer=fs.readFileSync('public'+item.modelSource);bytes+=buffer.length;
  item.assetVersion=createHash('sha256').update(buffer).digest('hex').slice(0,10);
+ if (correctedTabletops.has(item.id)) {
+   item.correctedTabletop = true;
+ }
  const gltf=JSON.parse(buffer.subarray(20,20+buffer.readUInt32LE(12)).toString());
  if(!fs.existsSync('public'+item.thumbnail))throw Error('Missing thumbnail '+item.id);
  item.defaultFinishes={};

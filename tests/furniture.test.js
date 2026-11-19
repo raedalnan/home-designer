@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {definitionOf,configureInstance} from '../src/data/FurnitureRegistry.js';
-import {resizeFurniture} from '../src/logic/FurnitureCommands.js';
+import { resizeFurniture, rotateFurniture, rotationDegrees } from '../src/logic/FurnitureCommands.js';
+import { getFootprint } from '../src/logic/Grid.js';
 import {readLayout} from '../src/logic/LayoutPersistence.js';
 const bed=definitionOf({id:'studio-bed'});
 test('blocked size changes do not modify the original instance',()=>{
@@ -30,4 +31,33 @@ test('loading preserves transforms, new metadata, unknown objects and walls',()=
  const values=new Map([['home-designer-layout',JSON.stringify(saved)]]);const storage={getItem:(key)=>values.get(key),setItem:(key,value)=>values.set(key,value)};
  const loaded=readLayout(storage);assert.deepEqual(loaded.walls,saved.walls);assert.equal(loaded.objects[0].cellX,5);assert.equal(loaded.objects[0].custom,'retain');assert.equal(values.get('home-designer-layout-before-studio'),JSON.stringify(saved));
  storage.setItem=()=>{throw Error('quota');};values.delete('home-designer-layout-before-studio');assert.equal(readLayout(storage).objects[0].node,'unknown');
+});
+
+
+test('fine rotation preserves the center, wraps across zero, and returns to the original position', () => {
+  const item = { id: 1, cellX: 4, cellZ: 3, w: 2, d: 4, turns: 0 };
+  const room = { width: 15, depth: 10 };
+  const result = rotateFurniture(item, -5, [item], [], room);
+  assert.equal(result.ok, true);
+  assert.equal(rotationDegrees(result.item.turns), 355);
+  const bounds = getFootprint(result.item.turns, item.w, item.d);
+  assert.ok(Math.abs(result.item.cellX + bounds.w / 2 - 5) < 1e-10);
+  assert.ok(Math.abs(result.item.cellZ + bounds.d / 2 - 5) < 1e-10);
+  assert.deepEqual(rotateFurniture(result.item, 5, [result.item], [], room).item, item);
+});
+
+test('fine rotation checks room edges, walls, other furniture, and supports', () => {
+  const item = { id: 1, cellX: 4, cellZ: 3, w: 2, d: 4, turns: 0 };
+  const room = { width: 15, depth: 10 };
+  const wall = { startX: 4, endX: 4, startZ: 0, endZ: 10 };
+  const neighbor = { id: 2, cellX: 6, cellZ: 3, w: 1, d: 4 };
+  assert.equal(rotateFurniture({ ...item, cellX: 0 }, 5, [], [], room).ok, false);
+  assert.equal(rotateFurniture(item, 5, [], [wall], room).ok, false);
+  assert.equal(rotateFurniture(item, 5, [neighbor], [], room).ok, false);
+  assert.equal(rotateFurniture({ ...item, collisionLayer: 'rug' }, 5, [neighbor], [], room).ok, true);
+
+  const ornament = { id: 3, w: 1, d: 1, anchor: { type: 'surface', parentId: 1, x: 0.25, z: 0 } };
+  assert.equal(rotateFurniture(ornament, 5, [item], [], room).ok, false);
+  assert.equal(rotateFurniture({ ...ornament, anchor: { ...ornament.anchor, x: 0 } }, 5, [item], [], room).ok, true);
+  assert.equal(rotateFurniture({ ...ornament, anchor: { type: 'wall' } }, 5, [item], [], room).ok, false);
 });

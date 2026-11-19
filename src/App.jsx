@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useProgress } from "@react-three/drei";
 import Experience from "./components/Experience.jsx";
@@ -6,7 +6,11 @@ import SideBar from "./UI/SideBar.jsx";
 import { CELL, DEPTH_CELLS, WIDTH_CELLS, GRID_SUBDIVISIONS } from "./data/Constants.js";
 import { OPENING_CATALOG } from "./data/OpeningCatalog.js";
 import {configureInstance,definitionOf} from './data/FurnitureRegistry.js';
-import {readLayout} from './logic/LayoutPersistence.js';
+import {readDesignLibrary, writeDesignLibrary, createDesign} from './logic/LayoutPersistence.js';
+import { editFloorTiles } from './logic/Floor.js';
+import { createLayoutHistory, recordLayout, undoLayout, redoLayout } from './logic/LayoutHistory.js';
+import WalkthroughControls from './UI/WalkthroughControls.jsx';
+import DesignMenu from './UI/DesignMenu.jsx';
 import {removeWithDependents} from './logic/Attachments.js';
 import { buildGrid, canPlace, findFreeSpot, getFootprint } from "./logic/Grid.js";
 import { objectConflictsWithWalls, wallConflictsWithObject, wallsConflict } from "./logic/Walls.js";
@@ -45,22 +49,22 @@ function sanitizeWalls(objects, walls = []) {
 }
 
 function LoadingScreen() {
-  const { active, progress } = useProgress();
+  const { active, progress, total } = useProgress();
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     if (!visible) return undefined;
-    if (active || progress < 100) {
+    if (active || (total > 0 && progress < 100)) {
       setVisible(true);
       return undefined;
     }
     const timeout = window.setTimeout(() => setVisible(false), 350);
     return () => window.clearTimeout(timeout);
-  }, [active, progress, visible]);
+  }, [active, progress, total, visible]);
 
   if (!visible) return null;
   return (
-    <div className="absolute inset-0 z-50 grid place-items-center bg-[#f2f1ed] px-6 transition-opacity">
+    <div className="absolute inset-0 z-50 grid place-items-center bg-[var(--editor-background)] px-6 transition-opacity">
       <div className="w-full max-w-xs text-center">
         <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-slate-900 text-lg font-semibold text-white shadow-xl">H</div>
         <h1 className="mt-5 text-xl font-semibold tracking-tight text-slate-900">Home Designer</h1>
@@ -74,16 +78,61 @@ function LoadingScreen() {
   );
 }
 
-function loadSavedState() {
-  try {
-    const saved=readLayout(localStorage);
-    if(saved)return saved;
-  } catch { /* Start with the demo layout if saved data is unavailable. */ }
-  return { objects: INITIAL_OBJECTS, roomSize: DEFAULT_ROOM, walls: [], ...DEFAULT_FINISHES };
-}
+const EMPTY_LAYOUT = { objects: [], roomSize: DEFAULT_ROOM, walls: [], openings: [], wallFinishes: {}, floorTiles: {}, ...DEFAULT_FINISHES };
+const STARTER_LAYOUT = { ...EMPTY_LAYOUT, objects: INITIAL_OBJECTS };
 
 export default function App() {
-  const [saved] = useState(loadSavedState);
+  const [library, setLibrary] = useState(() => readDesignLibrary(localStorage, STARTER_LAYOUT));
+  const latest = useRef(library);
+  const [saveError, setSaveError] = useState(false);
+  const active = library.designs.find((design) => design.id === library.activeId);
+
+  function commit(next) {
+    latest.current = next;
+    setLibrary(next);
+    try {
+      writeDesignLibrary(localStorage, next);
+      setSaveError(false);
+    } catch {
+      setSaveError(true);
+    }
+  }
+
+  const saveLayout = useCallback((id, layout) => {
+    const current = latest.current;
+    if (current.activeId !== id) return;
+    commit({
+      ...current,
+      designs: current.designs.map((design) => design.id === id ? { ...design, layout } : design),
+    });
+  }, []);
+
+  function manageDesign(action, id, name) {
+    const current = latest.current;
+    const target = current.designs.find((design) => design.id === id);
+    if (action === 'new' || action === 'duplicate') {
+      const design = action === 'new'
+        ? createDesign('Untitled design', EMPTY_LAYOUT)
+        : createDesign(`${target.name} copy`, target.layout);
+      commit({ activeId: design.id, designs: [...current.designs, design] });
+    } else if (action === 'open') {
+      if (target) commit({ ...current, activeId: id });
+    } else if (action === 'rename') {
+      commit({ ...current, designs: current.designs.map((design) => design.id === id ? { ...design, name } : design) });
+    } else if (action === 'delete') {
+      const remaining = current.designs.filter((design) => design.id !== id);
+      const designs = remaining.length ? remaining : [createDesign('Untitled design', EMPTY_LAYOUT)];
+      commit({ designs, activeId: current.activeId === id ? designs[0].id : current.activeId });
+    }
+  }
+
+  return <DesignEditor key={active.id} design={active} onSave={saveLayout}>
+    <DesignMenu library={library} onAction={manageDesign} saveError={saveError} onRetry={() => commit(latest.current)} />
+  </DesignEditor>;
+}
+
+function DesignEditor({ design, onSave, children }) {
+  const saved = design.layout;
   const [objects, setObjects] = useState(saved.objects);
   const [roomSize, setRoomSize] = useState(saved.roomSize);
   const [selectedId, setSelectedId] = useState(null);
@@ -91,14 +140,107 @@ export default function App() {
   const [selectedWallId, setSelectedWallId] = useState(null);
   const [openings, setOpenings] = useState(saved.openings ?? []);
   const [selectedOpeningId, setSelectedOpeningId] = useState(null);
-  const [activeOpeningId, setActiveOpeningId] = useState(OPENING_CATALOG[0].id);
+  const [activeOpeningId, setActiveOpeningId] = useState(null);
   const [tool, setTool] = useState("furniture");
+  const [gridPreference, setGridPreference] = useState(null);
   const [wallColor, setWallColor] = useState(saved.wallColor ?? DEFAULT_FINISHES.wallColor);
   const [floorColor, setFloorColor] = useState(saved.floorColor ?? DEFAULT_FINISHES.floorColor);
 
+  const [wallFinishes, setWallFinishes] = useState(saved.wallFinishes ?? {});
+
+  const [floorTiles, setFloorTiles] = useState(saved.floorTiles ?? {});
+  const [floorSelection, setFloorSelection] = useState(null);
+  const floorKeys = floorSelection ?? [];
+  const [panelHeight, setPanelHeight] = useState(34);
+  const [settingsHost, setSettingsHost] = useState(null);
+  const [openOptionsKey, setOpenOptionsKey] = useState(null);
+  const [toolsOpen, setToolsOpen] = useState(() => window.innerWidth >= 768);
+  const settingsKey = selectedId ?? selectedOpeningId ?? selectedWallId ?? (floorSelection?.length ? floorSelection : null);
+  const optionsOpen = settingsKey != null && openOptionsKey === settingsKey;
+  const panelOpen = (toolsOpen || optionsOpen);
+
+  if (openOptionsKey != null && openOptionsKey !== settingsKey) setOpenOptionsKey(null);
+
+  function toggleItemOptions() {
+    setOpenOptionsKey((current) => current === settingsKey ? null : settingsKey);
+  }
+
+  function toggleToolsPanel() {
+    if (optionsOpen) setOpenOptionsKey(null);
+    else setToolsOpen((open) => !open);
+  }
+  const onFloorEdit = (edit) => setFloorTiles((tiles) => editFloorTiles(tiles, floorKeys, edit));
+
+  const [walking, setWalking] = useState(false);
+  const gridVisible = !walking && (gridPreference ?? (tool !== "furniture" || selectedId != null));
+  const [walkHint, setWalkHint] = useState('');
+  const [walkError, setWalkError] = useState('');
+  const walkInput = useRef({ x: 0, z: 0, interact: false, mouseLook: null });
+
+  function startWalk() {
+    clearSelection();
+    setWalkHint('');
+    setWalkError('');
+    setWalking(true);
+  }
+
+  function endWalk(message = '') {
+    setWalking(false);
+    setWalkError(message);
+  }
+
+  function clearSelection() {
+    setFloorSelection(null);
+    setSelectedId(null);
+    setSelectedWallId(null);
+    setSelectedOpeningId(null);
+  }
+
+  function changeMode(mode) {
+    clearSelection();
+    setActiveOpeningId(null);
+    setTool(mode);
+  }
+
+  const layout = { objects, roomSize, walls, openings, wallColor, floorColor, wallFinishes, floorTiles };
+  const [history, setHistory] = useState(() => createLayoutHistory(layout));
+  const [historyRevision, setHistoryRevision] = useState(0);
+  const historyGesture = useRef(null);
+
   useEffect(() => {
-    localStorage.setItem("home-designer-layout", JSON.stringify({ layoutVersion: LAYOUT_VERSION, objects, roomSize, walls, openings, wallColor, floorColor }));
-  }, [objects, roomSize, walls, openings, wallColor, floorColor]);
+    const endGesture = () => { historyGesture.current = null; };
+    window.addEventListener('pointerup', endGesture);
+    window.addEventListener('pointercancel', endGesture);
+    window.addEventListener('blur', endGesture);
+    return () => {
+      window.removeEventListener('pointerup', endGesture);
+      window.removeEventListener('pointercancel', endGesture);
+      window.removeEventListener('blur', endGesture);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    const group = historyGesture.current;
+    setHistory((current) => recordLayout(current, layout, group));
+    onSave(design.id, { ...saved, layoutVersion: LAYOUT_VERSION, ...layout });
+  }, [design.id, onSave, objects, roomSize, walls, openings, wallColor, floorColor, wallFinishes, floorTiles]);
+
+  function restoreHistory(next) {
+    if (next === history) return;
+    historyGesture.current = null;
+    setHistory(next);
+    const previous = next.present;
+    setObjects(previous.objects);
+    setRoomSize(previous.roomSize);
+    setWalls(previous.walls);
+    setOpenings(previous.openings);
+    setWallColor(previous.wallColor);
+    setFloorColor(previous.floorColor);
+    setWallFinishes(previous.wallFinishes);
+    setFloorTiles(previous.floorTiles);
+    setHistoryRevision((revision) => revision + 1);
+    clearSelection();
+  }
 
   const addObject = useCallback((item) => {
     const definition=definitionOf(item);
@@ -154,6 +296,11 @@ export default function App() {
 
   const resizeRoom = (nextSize) => {
     setRoomSize(nextSize);
+    setFloorSelection(null);
+    setFloorTiles((tiles) => Object.fromEntries(Object.entries(tiles).filter(([key]) => {
+      const [x, z] = key.split(',').map(Number);
+      return x < nextSize.width * GRID_SUBDIVISIONS && z < nextSize.depth * GRID_SUBDIVISIONS;
+    })));
     const nextObjects = objects.filter((obj) => {
       if(obj.anchor)return true;
       const footprint = getFootprint(obj.turns, obj.w, obj.d);
@@ -206,13 +353,19 @@ export default function App() {
   };
 
   return (
-    <main className="relative h-dvh w-screen overflow-hidden bg-[#f2f1ed]">
-      <Canvas className="w-full h-full" camera={{ position: [10, 13, 14], fov: 48 }} dpr={[1, 1.5]} shadows={false}>
+    <main style={{ "--tools-height": `${panelHeight}dvh` }} onPointerDownCapture={(event) => {
+        if (event.target.matches?.("input[data-layout-history]")) historyGesture.current = Symbol();
+      }} className={`relative h-dvh w-screen overflow-hidden bg-[var(--editor-background)] ${walking ? 'walkthrough-active' : ''}`}>
+      <Canvas onPointerMissed={(event) => { if (event.button === 0) clearSelection(); }} className="w-full h-full" camera={{ position: [10, 13, 14], fov: 48 }} dpr={[1, 1.5]} shadows={false}>
         <Suspense fallback={null}>
-        <Experience objects={objects} setObjects={setObjects} walls={walls} setWalls={setWalls} openings={openings} setOpenings={setOpenings} roomSize={roomSize} selectedId={selectedId} setSelectedId={setSelectedId} selectedWallId={selectedWallId} setSelectedWallId={setSelectedWallId} selectedOpeningId={selectedOpeningId} setSelectedOpeningId={setSelectedOpeningId} onDeleteSelected={deleteSelected} tool={tool} activeOpening={OPENING_CATALOG.find((item) => item.id === activeOpeningId)} wallColor={wallColor} floorColor={floorColor} />
+        <Experience gridVisible={gridVisible} tileGridVisible={gridVisible && (tool === "floor" || gridPreference === true)} historyRevision={historyRevision} settingsHost={settingsHost} optionsOpen={optionsOpen} onToggleOptions={toggleItemOptions} panelOpen={panelOpen} walking={walking} walkInput={walkInput} onWalkExit={endWalk} onWalkHint={setWalkHint} floorTiles={floorTiles} floorKeys={floorKeys} onFloorSelect={setFloorSelection}
+          onFloorEdit={onFloorEdit} onSelectMode={changeMode} objects={objects} setObjects={setObjects} walls={walls} setWalls={setWalls} openings={openings} setOpenings={setOpenings} roomSize={roomSize} selectedId={selectedId} setSelectedId={setSelectedId} selectedWallId={selectedWallId} setSelectedWallId={setSelectedWallId} selectedOpeningId={selectedOpeningId} setSelectedOpeningId={setSelectedOpeningId} onDeleteSelected={deleteSelected} tool={walking ? "walkthrough" : tool} activeOpening={OPENING_CATALOG.find((item) => item.id === activeOpeningId)} wallColor={wallColor} floorColor={floorColor} wallFinishes={wallFinishes} setWallFinishes={setWallFinishes} />
         </Suspense>
       </Canvas>
-      <SideBar onAddObject={addObject} onDeleteSelected={deleteSelected} selectedId={selectedId ?? selectedWallId ?? selectedOpeningId} selectedName={selectedOpeningId != null ? openings.find((opening) => opening.id === selectedOpeningId)?.name : selectedWallId != null ? "Interior wall" : objects.find((obj) => obj.id === selectedId)?.name} selectedIsWall={selectedWallId != null || selectedOpeningId != null} onRoomSizeChange={resizeRoom} roomSize={roomSize} tool={tool} onToolChange={setTool} activeOpeningId={activeOpeningId} onOpeningChange={setActiveOpeningId} wallColor={wallColor} onWallColorChange={setWallColor} floorColor={floorColor} onFloorColorChange={setFloorColor} />
+      {walking && <WalkthroughControls input={walkInput} hint={walkHint} onExit={endWalk} />}
+      <SideBar gridVisible={gridVisible} onToggleGrid={() => setGridPreference(!gridVisible)} canUndo={history.past.length > 0} canRedo={history.future.length > 0}
+        onUndo={() => restoreHistory(undoLayout(history))} onRedo={() => restoreHistory(redoLayout(history))} panelHeight={panelHeight} onPanelHeightChange={setPanelHeight} optionsOpen={optionsOpen} panelOpen={panelOpen} onTogglePanel={toggleToolsPanel} settingsRef={setSettingsHost} hidden={walking} designMenu={children} onWalkthrough={startWalk} onAddObject={addObject} onDeleteSelected={deleteSelected} selectedId={selectedId ?? selectedWallId ?? selectedOpeningId} selectedName={selectedOpeningId != null ? openings.find((opening) => opening.id === selectedOpeningId)?.name : selectedWallId != null ? "Interior wall" : objects.find((obj) => obj.id === selectedId)?.name} selectedIsWall={selectedWallId != null || selectedOpeningId != null} onRoomSizeChange={resizeRoom} roomSize={roomSize} tool={tool} onToolChange={changeMode} activeOpeningId={activeOpeningId} onOpeningChange={setActiveOpeningId} wallColor={wallColor} onWallColorChange={setWallColor} floorColor={floorColor} onFloorColorChange={setFloorColor} />
+      {walkError && <div className="walk-error" role="alert">{walkError}</div>}
       <LoadingScreen />
     </main>
   );

@@ -18,7 +18,6 @@ const CATEGORIES = [
 ];
 
 const WALL_COLORS = COLOR_PALETTE.map(({hex})=>hex);
-const FLOOR_COLORS = WALL_COLORS;
 
 const ICON_PATHS = {
   panelL: (
@@ -27,12 +26,19 @@ const ICON_PATHS = {
       <path d="M9 4v16" />
     </>
   ),
+  collapsePanel: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M9 4v16m7-11-3 3 3 3" /></>,
+  sheetChevron: <path d="m6 9 6 6 6-6" />,
+  walk: <><circle cx="13" cy="4.5" r="1.75" /><path d="m5 13 3-3 4-1 2 4 4 1m-6-5-2 6 4 3v3m-4-6-2 4-4 2" /></>,
   search: <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></>,
+  grid: <><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9.33 4v16m5.34-16v16M4 9.33h16M4 14.67h16" /></>,
+  undo: <path d="M9 5 4 10l5 5M4 10h10a5 5 0 0 1 0 10h-3" />,
+  redo: <path d="m15 5 5 5-5 5m5-5H10a5 5 0 0 0 0 10h3" />,
   rotate: <><path d="M20 7v5h-5" /><path d="M18.2 16a8 8 0 1 1 .7-8.7L20 12" /></>,
   trash: <><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13" /><path d="M10 11v5M14 11v5" /></>,
   close: <path d="m7 7 10 10M17 7 7 17" />,
   wall: <><path d="M4 5h16v14H4z" /><path d="M4 10h16M9 5v5M15 10v4M4 14h16M10 14v5" /></>,
   chair: <><path d="M7 13V8a5 5 0 0 1 10 0v5M5 13h14v4H5z" /><path d="M7 17v3M17 17v3" /></>,
+  floor: <><rect x="4" y="5" width="16" height="14" rx="1" /><path d="M4 12h16M12 5v14" /></>,
   opening: <><path d="M5 20V4h14v16" /><path d="M9 20V8h7v12M14 14h.01" /></>,
 };
 
@@ -124,8 +130,7 @@ function Thumb({ item, hex }) {
     </svg>
   );
 }
-export default function SideBar({ onAddObject, onDeleteSelected, selectedId, selectedName, selectedIsWall, onRoomSizeChange, roomSize, tool, onToolChange, activeOpeningId, onOpeningChange, wallColor, onWallColorChange, floorColor, onFloorColorChange }) {
-  const [leftOpen, setLeftOpen] = useState(() => window.innerWidth >= 768);
+export default function SideBar({ gridVisible, onToggleGrid, canUndo, canRedo, onUndo, onRedo, panelHeight, onPanelHeightChange, optionsOpen, panelOpen, onTogglePanel, settingsRef, hidden, onWalkthrough, designMenu, onAddObject, onDeleteSelected, selectedId, selectedName, selectedIsWall, onRoomSizeChange, roomSize, tool, onToolChange, activeOpeningId, onOpeningChange, wallColor, onWallColorChange, floorColor, onFloorColorChange }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("All");
   const [visibleCount,setVisibleCount]=useState(24);
@@ -142,35 +147,81 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
   );
 
 
+
+  if (hidden) return null;
+
+  const toggle = (
+    <button type="button" className={`editor-button ${panelOpen ? "tools-close" : "tools-toggle"}`}
+      aria-label={optionsOpen ? "Close item options" : panelOpen ? "Close design tools" : "Open design tools"}
+      aria-expanded={panelOpen} aria-controls={panelOpen ? "design-tools" : undefined}
+      onClick={onTogglePanel}>
+      <Icon name={panelOpen ? "collapsePanel" : "panelL"} className="editor-icon tools-desktop-icon" />
+      <Icon name="sheetChevron" className="editor-icon tools-mobile-icon" />
+      {!panelOpen && "Design tools"}
+    </button>
+  );
+
   return (
     <>
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between p-3 sm:p-5">
-        <div className="pointer-events-auto flex items-center gap-2.5 rounded-2xl border border-white/80 bg-white/85 px-2.5 py-2 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl sm:gap-3 sm:px-3">
-          <div className="grid size-8 place-items-center rounded-xl bg-slate-900 text-xs font-semibold text-white sm:size-9 sm:text-sm">H</div>
-          <div className="pr-1 sm:pr-2">
-            <p className="text-sm font-semibold tracking-tight text-slate-900">Home Designer</p>
-            <p className="hidden text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400 min-[380px]:block">3D room planner</p>
-          </div>
+      <header className="editor-header">
+        <div className="editor-brand">
+          <span className="editor-brand-icon" aria-hidden="true">H</span>
+          <span>Home Designer</span>
         </div>
-        <button
-          className="pointer-events-auto grid size-10 place-items-center rounded-2xl border border-white/80 bg-white/85 text-slate-600 shadow-[0_10px_35px_rgba(40,45,55,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:text-slate-950 sm:size-11"
-          aria-label={leftOpen ? "Close model library" : "Open model library"}
-          onClick={() => setLeftOpen((v) => !v)}
-        >
-          <Icon name={leftOpen ? "close" : "panelL"} className="size-5" />
-        </button>
-      </div>
-      {leftOpen && (
-        <aside className="absolute bottom-5 left-5 top-24 z-10 flex w-[320px] flex-col overflow-hidden rounded-[28px] border border-white/80 bg-white/88 shadow-[0_24px_80px_rgba(32,38,48,0.13)] backdrop-blur-2xl max-lg:w-[300px] max-sm:bottom-2 max-sm:left-2 max-sm:right-2 max-sm:top-auto max-sm:h-[62dvh] max-sm:w-auto max-sm:rounded-[24px]">
-          <div className="border-b border-slate-200/70 px-4 pb-3 pt-4 sm:px-5 sm:pb-4 sm:pt-5">
+        <div className="editor-history" role="group" aria-label="History and grid">
+          <button type="button" className="editor-button" disabled={!canUndo} onClick={onUndo}>
+            <Icon name="undo" className="editor-icon" /> Undo
+          </button>
+          <button type="button" className="editor-button" disabled={!canRedo} onClick={onRedo}>
+            <Icon name="redo" className="editor-icon" /> Redo
+          </button>
+          <button type="button" className="editor-button grid-toggle" data-grid-visible={gridVisible} onClick={onToggleGrid}>
+            <Icon name="grid" className="editor-icon" /> {gridVisible ? "Hide grid" : "Show grid"}
+          </button>
+        </div>
+        {designMenu}
+      </header>
+      <button type="button" className="editor-button editor-button-accent walkthrough-launch" onClick={onWalkthrough}>
+        <Icon name="walk" className="editor-icon" />
+        First-person view
+      </button>
+      {panelOpen ? (
+        <aside id="design-tools" aria-labelledby="tools-title" className="design-tools">
+          <div className="tools-toolbar">
+            <h1 id="tools-title" className="tools-title">{optionsOpen ? "Item options" : "Design tools"}</h1>
+            {toggle}
+            <div className="tools-resize">
+              <label htmlFor="tools-height">Panel height</label>
+              <input id="tools-height" type="range" min="24" max="46" value={panelHeight}
+                onChange={(event) => onPanelHeightChange(Number(event.target.value))} />
+            </div>
+          </div>
+          {optionsOpen ? (
+            <section id="item-options" className="tools-content overflow-y-auto p-3" aria-label="Item options" ref={settingsRef} />
+          ) : (
+          <div className="flex min-h-0 flex-1">
+            <nav aria-label="Design modes" className="tools-modes">
+              {[
+                ['furniture', 'Furniture', 'chair'],
+                ['wall', 'Walls', 'wall'],
+                ['openings', 'Openings', 'opening'],
+                ['floor', 'Floor', 'floor'],
+              ].map(([mode, label, icon]) => (
+                <button key={mode} type="button"
+                  aria-pressed={tool === mode} onClick={() => { if (mode !== tool) onToolChange(mode); }}>
+                  <Icon name={icon} className="size-5" />{label}
+                </button>
+              ))}
+            </nav>
+            <div className="tools-content">
+          <div className="tools-header shrink-0 border-b border-slate-200/70 px-3 py-2 sm:px-4 sm:py-3">
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Design tools</p>
-                <h1 className="mt-1 text-xl font-semibold tracking-tight text-slate-900">{tool === "wall" ? "Build rooms" : tool === "openings" ? "Doors & windows" : "Furniture"}</h1>
+                <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-900">{tool === "wall" ? "Build rooms" : tool === "openings" ? "Doors & windows" : tool === "floor" ? "Floor" : "Furniture"}</h2>
               </div>
               {tool === "furniture" && <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-500">{filteredLibrary.length} items</span>}
             </div>
-            {tool === "furniture" && <div className="relative mt-4">
+            {tool === "furniture" && <div className="relative mt-1.5">
               <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
               <input
                 type="search"
@@ -182,17 +233,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               />
             </div>}
           </div>
-          <div className="grid grid-cols-3 gap-1.5 border-b border-slate-200/70 px-4 py-2.5 sm:px-5 sm:py-3">
-            <button onClick={() => onToolChange("furniture")} className={`flex h-10 items-center justify-center gap-2 rounded-xl text-xs font-semibold transition ${tool === "furniture" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-500 hover:text-slate-900"}`}>
-              <Icon name="chair" /> Furniture
-            </button>
-            <button onClick={() => onToolChange("wall")} className={`flex h-10 items-center justify-center gap-2 rounded-xl text-xs font-semibold transition ${tool === "wall" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-500 hover:text-slate-900"}`}>
-              <Icon name="wall" /> Walls
-            </button>
-            <button onClick={() => onToolChange("openings")} className={`flex h-10 items-center justify-center gap-1.5 rounded-xl text-[11px] font-semibold transition ${tool === "openings" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-500 hover:text-slate-900"}`}>
-              <Icon name="opening" /> Openings
-            </button>
-          </div>
+          {tool === "floor" ? (
+            <div className="min-h-0 overflow-y-auto">
           <div className="room-dimensions grid grid-cols-2 gap-4 border-b border-slate-200/70 px-4 py-2">
             <label className="block">
               <span className="flex items-center justify-between text-[11px] font-medium text-slate-500">
@@ -201,6 +243,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               </span>
               <input
                 type="range"
+                data-layout-history
                 min="10"
                 max="50"
                 step="1"
@@ -216,6 +259,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               </span>
               <input
                 type="range"
+                data-layout-history
                 min="8"
                 max="30"
                 step="1"
@@ -225,7 +269,15 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               />
             </label>
           </div>
-          {tool === "furniture" ? <>
+              <div className="space-y-4 p-3">
+                <div>
+                  <h2 className="mb-2 text-sm font-semibold">Base floor color</h2>
+                  <Palette value={floorColor} onChange={onFloorColorChange} />
+                </div>
+                <p className="text-xs text-slate-600">Drag a box across the floor to select cells. Double-click a raised area to select its connected cells at the same height.</p>
+              </div>
+            </div>
+          ) : tool === "furniture" ? <>
           <div className="catalog-filter px-4 py-2">
             <label className="sr-only" htmlFor="furniture-category">Furniture category</label>
             <select id="furniture-category" aria-label="Furniture category" value={filter} onChange={(event)=>setFilter(event.target.value)} className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm">{['All',...new Set(FURNITURE_CATALOG.map((item)=>item.category))].map((category)=><option key={category} value={category}>{category==='All'?'All collections':category}</option>)}</select>
@@ -256,12 +308,12 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                   window.dispatchEvent(new CustomEvent("home-designer-library-drag", { detail: item }));
                 }}
                 onDragEnd={() => window.dispatchEvent(new CustomEvent("home-designer-library-drag", { detail: null }))}
-                onClick={() => { onAddObject(item); if (window.innerWidth < 768) setLeftOpen(false); }}
+                onClick={() => { onAddObject(item); if (window.innerWidth < 768) onTogglePanel(); }}
                 title={`Add ${item.name}`}
                 className="catalog-card group flex flex-col min-h-[156px] items-stretch gap-2 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-2 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_25px_rgba(50,55,65,0.09)]"
               >
                 <div className="h-[60px] w-[76px] shrink-0 rounded-xl bg-[#f5f4f1] p-2 transition-colors group-hover:bg-[#f0efeb]">
-                  <img src={item.thumbnail??`/thumbnails/${item.node ?? ({sofa:'Three-seaterSofa03',bed:'doubleBed02',table:'TVStand01',cabinet:'SmallCabinet01',lamp:'lamp01',plant:'lamp02'}[item.family])}.png`} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
+                  <img src={item.correctedTabletop ? `${item.thumbnail}?v=${item.assetVersion}` : (item.thumbnail ?? `/thumbnails/${item.node ?? ({sofa:'Three-seaterSofa03',bed:'doubleBed02',table:'TVStand01',cabinet:'SmallCabinet01',lamp:'lamp01',plant:'lamp02'}[item.family])}.png`)} alt={item.name} className="h-full w-full object-contain" loading="lazy" />
                 </div>
                 <div className="min-w-0 flex-1 pr-2">
                   <div className="truncate text-[13px] font-semibold leading-5 text-slate-800">
@@ -284,22 +336,13 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
           </div>
           </> : tool === "wall" ? (
             <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
-              <details className="text-xs text-slate-500"><summary className="cursor-pointer py-2">How to draw walls</summary><p className="py-2">Drag across the grid to draw. Select a wall to delete it. Close the library for more space.</p></details>
+              <details className="text-xs text-slate-500"><summary className="cursor-pointer py-2">How to edit walls</summary><p className="py-2">Drag across the grid to draw. Select an interior wall and choose Edit. Press and hold a move or length button to repeat it.</p></details>
               <div className="mt-6">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Wall color</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Palette value={wallColor} onChange={onWallColorChange} />
                   {WALL_COLORS.slice(0,0).map((color) => (
                     <button key={color} onClick={() => onWallColorChange(color)} className={`size-9 rounded-full border-2 shadow-sm transition hover:scale-105 ${wallColor === color ? "border-slate-900 ring-2 ring-slate-900/10" : "border-white"}`} style={{ backgroundColor: color }} aria-label={`Use wall color ${color}`} />
-                  ))}
-                </div>
-              </div>
-              <div className="mt-6">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">Floor color</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <Palette value={floorColor} onChange={onFloorColorChange} />
-                  {FLOOR_COLORS.slice(0,0).map((color) => (
-                    <button key={color} onClick={() => onFloorColorChange(color)} className={`size-9 rounded-full border-2 shadow-sm transition hover:scale-105 ${floorColor === color ? "border-slate-900 ring-2 ring-slate-900/10" : "border-white"}`} style={{ backgroundColor: color }} aria-label={`Use floor color ${color}`} />
                   ))}
                 </div>
               </div>
@@ -315,8 +358,8 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                   <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</p>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {items.map((item) => (
-                      <button key={item.id} onClick={() => onOpeningChange(item.id)} className={`opening-card flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border p-2 text-left transition ${activeOpeningId === item.id ? "border-slate-900 bg-slate-900 text-white shadow-md" : "border-slate-200 bg-white text-slate-700 hover:border-slate-400"}`}>
-                        <div className={`flex h-24 w-full min-w-0 shrink-0 items-center justify-center overflow-hidden rounded-xl p-2 ${activeOpeningId === item.id ? "bg-white/10" : "bg-[#f5f4f1]"}`}>
+                      <button key={item.id} onClick={() => onOpeningChange(item.id)} aria-pressed={activeOpeningId === item.id} className="opening-card flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border p-2 text-left transition">
+                        <div className={`flex h-24 w-full min-w-0 shrink-0 items-center justify-center overflow-hidden rounded-xl p-2 bg-[#f5f4f1]`}>
                           <img src={item.thumbnail??`/thumbnails/${item.id}.png`} alt={item.name} width="192" height="192" className="block h-full max-h-full w-full min-w-0 max-w-full object-contain" loading="lazy" />
                           {false && (item.type === "door" ? (
                             <div className="relative h-12 w-8 rounded-t-sm border-2 border-current" style={{ backgroundColor: item.color }}><span className="absolute right-1.5 top-1/2 size-1 rounded-full bg-current" /></div>
@@ -325,7 +368,7 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
                           ))}
                         </div>
                         <p className="mt-2 w-full truncate text-[11px] font-semibold">{item.name}</p>
-                        <p className={`mt-0.5 text-[9px] ${activeOpeningId === item.id ? "text-white/55" : "text-slate-400"}`}>{item.width} × {item.height} m</p>
+                        <p className={`mt-0.5 text-[9px] text-[var(--editor-muted)]`}>{item.width} × {item.height} m</p>
                       </button>
                     ))}
                   </div>
@@ -333,10 +376,13 @@ export default function SideBar({ onAddObject, onDeleteSelected, selectedId, sel
               ))}
             </div>
           )}
+            </div>
+          </div>
+          )}
         </aside>
-      )}
+      ) : toggle}
       {false && selectedId != null && selectedIsWall && (
-        <div className={`absolute left-1/2 z-20 flex max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 shadow-[0_14px_45px_rgba(30,35,45,0.14)] backdrop-blur-xl ${leftOpen ? "bottom-5 max-sm:bottom-[calc(62dvh+0.75rem)]" : "bottom-5 max-sm:bottom-2"}`}>
+        <div className={`absolute left-1/2 z-20 flex max-w-[calc(100vw-1rem)] -translate-x-1/2 items-center gap-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 shadow-[0_14px_45px_rgba(30,35,45,0.14)] backdrop-blur-xl ${panelOpen ? "bottom-5 max-sm:bottom-[calc(62dvh+0.75rem)]" : "bottom-5 max-sm:bottom-2"}`}>
           <span className="max-w-44 truncate px-3 text-xs font-semibold text-slate-700">{selectedName ?? "Selected item"}</span>
           <div className="h-6 w-px bg-slate-200" />
           {!selectedIsWall && <button className="flex h-9 items-center gap-2 rounded-xl px-3 text-xs font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950" onClick={() => window.dispatchEvent(new Event("home-designer-rotate"))}>
